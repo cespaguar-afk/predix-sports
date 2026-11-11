@@ -1,5 +1,6 @@
 import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadPlayerCards,mergeLive} from './data.js';
 import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} from './model.js';
+import {teamReport,headToHead} from './stats.js';
 import {loadCache,saveCache,loadSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
 const $=s=>document.querySelector(s);
@@ -14,28 +15,35 @@ let toastTimer;
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3000);}
 const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
 const leagueKeys=Object.keys(LEAGUES);
+const predictions=new Map();
+let gradedPredictions=[];
+let repaintTimer=null;
+function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(state.view==='inicio'||state.view==='partidos')renderNormal();},110);}
+function completeResults(m){
+  const rows=state.data[m.league]?.results||[];
+  return (m.league==='copadelrey'||m.league==='supercopa')
+    ?[...rows,...(state.data.laliga?.results||[]),...(state.data.hypermotion?.results||[])]:rows;
+}
 function allResults(){return leagueKeys.flatMap(k=>state.data[k]?.results||[]);}
 function allFixtures(){return leagueKeys.flatMap(k=>state.data[k]?.fixtures||[]);}
 function allEvents(){return [...allFixtures(),...allResults()];}
 function predFor(match){
   if(match.status!=='pre'&&match.status!=='in')return null;
-  let results=state.data[match.league]?.results||[];
-  // En los torneos españoles de eliminación, utilizar solo historiales
-  // previos verificables de clubes coincidentes en LaLiga/Hypermotion.
-  if(match.league==='copadelrey'||match.league==='supercopa'){
-    results=[...results,...(state.data.laliga?.results||[]),...(state.data.hypermotion?.results||[])];
-  }
+  if(predictions.has(match.id))return predictions.get(match.id);
+  const results=completeResults(match);
   const raw=match.sport==='nba'?predictNBA(match,results):predictFootball(match,results);
-  if(!raw)return null;
-  const evaluated=Object.values(loadSnapshots()).filter(x=>x.outcome);
-  const adjusted=calibrate(raw.probabilities,match.sport,evaluated);
+  if(!raw){predictions.set(match.id,null);return null;}
+  const adjusted=calibrate(raw.probabilities,match.sport,gradedPredictions);
   const cupEstimate=match.league==='copadelrey'||match.league==='supercopa';
-  return {...raw,confidence:cupEstimate?'baja':raw.confidence,
+  const result={...raw,confidence:cupEstimate?'baja':raw.confidence,
     explanation:raw.explanation+(cupEstimate?' Estimación con históricos de clubes de diferentes competiciones; mayor incertidumbre.':''),
     probabilities:adjusted.probabilities,calibrated:adjusted.calibrated};
+  predictions.set(match.id,result);return result;
 }
 function sealAndGrade(){
   gradePredictions(allResults());
+  gradedPredictions=Object.values(loadSnapshots()).filter(x=>x.outcome);
+  predictions.clear();
   const future=allFixtures().filter(m=>m.status==='pre'&&m.date>nowDate());
   capturePredictions(future.map(match=>({match,pred:predFor(match)})));
 }
@@ -64,6 +72,44 @@ function badgeText(m){
   return {label:'PRÓXIMO',class:''};
 }
 function initials(team){return team.split(' ').filter(x=>x.length>1).slice(0,2).map(x=>x[0]).join('').slice(0,2).toUpperCase();}
+function teamProfileHTML(m){
+  const rows=completeResults(m);
+  const end=m.status==='post'?null:m.date;
+  const teams=[m.home,m.away];
+  const fmtValue=(v,suffix='')=>v===null||v===undefined?'—':String(v)+suffix;
+  const cards=teams.map(team=>{
+    const x=teamReport(rows,team,m.sport,end);
+    if(!x.played)return '<article class="team-profile"><h4>'+escapeHTML(team)+'</h4><p class="source-note">No hay partidos anteriores disponibles en esta fuente.</p></article>';
+    const form=x.recent.map(v=>'<span class="form-dot '+v.result+'" title="'+escapeHTML(v.venue+' · '+v.for+'-'+v.against)+'">'+(v.result==='W'?'V':v.result==='D'?'E':'D')+'</span>').join('');
+    const lines=[
+      ['Partidos analizados',x.played],['Victorias / derrotas',x.wins+' / '+x.losses],
+      ...(m.sport==='soccer'?[['Empates',x.draws]]:[]),
+      ['Victorias (%)',fmtValue(x.winPct,'%')],
+      ['Puntos '+(m.sport==='nba'?'anotados':'goles a favor')+' / partido',fmtValue(x.scored.for)],
+      ['Puntos '+(m.sport==='nba'?'encajados':'goles en contra')+' / partido',fmtValue(x.scored.against)],
+      ['En casa (V-'+(m.sport==='nba'?'D':'E-D')+')',m.sport==='nba'?x.home.wins+'-'+x.home.losses:x.home.wins+'-'+x.home.draws+'-'+x.home.losses],
+      ['Fuera (V-'+(m.sport==='nba'?'D':'E-D')+')',m.sport==='nba'?x.away.wins+'-'+x.away.losses:x.away.wins+'-'+x.away.draws+'-'+x.away.losses],
+      ['Últimos 10 · victorias',x.last10.wins+' / '+x.last10.played]
+    ];
+    if(m.sport==='soccer'){
+      lines.push(['Porterías a cero',x.cleanSheets],['Ambos marcan',fmtValue(x.bothScore,'%')],['Más de 2,5 goles',fmtValue(x.over25,'%')]);
+      const labels={Shots:'Remates',Target:'Remates a puerta',Corners:'Córners',Fouls:'Faltas',Yellow:'Amarillas',Red:'Rojas'};
+      for(const [k,label] of Object.entries(labels)){
+        const v=x.metrics[k];if(v.sample>=1)lines.push([label+' propios / rival',fmtValue(v.for)+' / '+fmtValue(v.against)+' ('+v.sample+' pj)']);
+      }
+    }
+    return '<article class="team-profile"><h4>'+escapeHTML(team)+'</h4>'
+      +'<div class="source-note">Últimos resultados (más reciente primero)</div><div class="team-form">'+(form||'—')+'</div>'
+      +'<div class="team-stat-table">'+lines.map(([label,value])=>'<div><span>'+escapeHTML(label)+'</span><strong>'+escapeHTML(value)+'</strong></div>').join('')+'</div>'
+      +'</article>';
+  });
+  const h2h=headToHead(rows,m.home,m.away,end);
+  const meeting=h2h.length?'<div class="source-note">Últimos enfrentamientos directos disponibles</div>'
+    +'<div class="team-h2h">'+h2h.map(x=>'<div><span>'+escapeHTML(dateText(x.date))+'</span><b>'+escapeHTML(x.home)+' '+x.homeScore+'–'+x.awayScore+' '+escapeHTML(x.away)+'</b></div>').join('')+'</div>'
+    :'<p class="source-note">No hay enfrentamientos directos registrados en la fuente consultada.</p>';
+  return '<div class="detail-section"><h3>Radiografía de los equipos</h3><p class="source-note">Promedios calculados a partir de resultados anteriores disponibles; no son datos en vivo ni equivalen a estadísticas de toda la temporada si la fuente es incompleta.</p>'
+    +'<div class="team-profiles">'+cards.join('')+'</div>'+meeting+'</div>';
+}
 function matchResult(m){
   if(m.status==='in'&&m.liveScore)return `<div class="outcome-big lime">${escapeHTML(m.liveScore)}</div><div class="outcome-small">Marcador ESPN</div>`;
   if(m.status==='in'&&Number.isFinite(m.homeScore))return `<div class="outcome-big lime">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Marcador ESPN</div>`;
@@ -145,6 +191,7 @@ function detailed(m){
     <div class="detail-vs"><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.home))}</div><strong>${escapeHTML(m.home)}</strong></div><div class="vs">VS</div><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.away))}</div><strong>${escapeHTML(m.away)}</strong></div></div>
     <div class="detail-caption">${LEAGUES[m.league].icon} ${escapeHTML(LEAGUES[m.league].name)} · ${escapeHTML(when)} · <span class="tag-sub">${badge}</span></div>
     ${m.status==='post'?actual:forecastAnalysis(m,p)}
+    ${teamProfileHTML(m)}
     <div class="detail-section"><h3>Origen de los datos</h3><p class="source-note">${escapeHTML(m.source)}. ${m.liveSource?'Marcador en vivo: '+escapeHTML(m.liveSource)+'. ':''}${m.timeNote?escapeHTML(m.timeNote)+'. ':''}La fecha y el inicio pueden cambiar. Actualiza para consultar información reciente.</p></div>`;
 }
 function displayMetrics(){
@@ -165,6 +212,7 @@ function sourceNotice(){
   const loaded=leagueKeys.filter(k=>state.data[k]&&(state.data[k].fixtures?.length||state.data[k].results?.length));
   const partial=leagueKeys.filter(k=>state.data[k]?.warning);
   if(!loaded.length){
+    if(state.loading)return '<div class="notice ok">Buscando competiciones… Puedes navegar mientras se actualizan los datos.</div>';
     const detail=problems.map(([key,error])=>LEAGUES[key].name+': '+error).join(' | ');
     return '<div class="notice"><strong>No se han podido cargar partidos.</strong> '
       +'La web está abierta, pero no hemos obtenido un calendario válido. '
@@ -172,6 +220,7 @@ function sourceNotice(){
       +(detail?'<details><summary>Detalles técnicos</summary><small>'+escapeHTML(detail)+'</small></details>':'')
       +'</div>';
   }
+  if(state.loading)return '<div class="notice ok">Mostrando los datos disponibles. Se están actualizando las demás competiciones…</div>';
   if(problems.length||partial.length){
     const names=problems.map(([key])=>LEAGUES[key].name);
     const detail=problems.map(([key,error])=>LEAGUES[key].name+': '+error)
@@ -238,52 +287,51 @@ function stamp(){
   $('#last-update').textContent=vals.length?`Consulta: ${datetimeText(vals.at(-1))}`:'Sin consultar';
 }
 async function refresh(){
-  if(state.loading)return;state.loading=true;
+  if(state.loading)return;
+  state.loading=true;
+  state.errors={};
   $('#refresh-btn').disabled=true;$('#refresh-btn .refresh-icon').textContent='◌';
-  const output={...state.data};const problems={};
+  if(state.view==='inicio'||state.view==='partidos')$('#notice').innerHTML=sourceNotice();
+  // Cada competición se incorpora en cuanto su fuente responde, sin esperar al resto.
   const jobs=leagueKeys.map(async k=>{
     try{
       const fresh=k==='nba'?await loadNBA():LEAGUES[k].folder?await loadFootball(k):await loadInternationalOrCup(k);
-      output[k]=fresh;
-      // Fuentes de marcadores en directo: opcionales y nunca reemplazan el histórico oficial.
-      if(k!=='nba'){
-        try{const live=await loadEspn(k,{recentOnly:true});output[k]={...fresh,fixtures:mergeLive(fresh.fixtures,live.fixtures)};}
-        catch{ /* CSV diario sigue siendo válido sin marcador en directo */ }
+      state.data[k]=fresh;
+      state.errors[k]=null;
+      predictions.clear();
+      // Guardar progresivamente: si otra fuente falla, los datos disponibles se conservan.
+      saveCache(state.data);
+      scheduleRepaint();
+      // El marcador ESPN es optativo. No debe bloquear la primera renderización.
+      if(k!=='nba'&&LEAGUES[k].folder){
+        loadEspn(k,{recentOnly:true}).then(live=>{
+          if(state.data[k]!==fresh)return;
+          state.data[k]={...fresh,fixtures:mergeLive(fresh.fixtures,live.fixtures)};
+          saveCache(state.data);scheduleRepaint();
+        }).catch(()=>{});
       }
-      problems[k]=null;
-    }catch(error){problems[k]=error.message||'Error de conexión';}
+    }catch(error){
+      state.errors[k]=error.message||'Error de conexión';
+      scheduleRepaint();
+    }
   });
-  await Promise.all(jobs);
-  state.data=output;state.errors=problems;
-  try{
-    const players=await loadPlayerCards();
+  await Promise.allSettled(jobs);
+  sealAndGrade();saveCache(state.data);
+  state.loading=false;
+  $('#refresh-btn').disabled=false;$('#refresh-btn .refresh-icon').textContent='↻';
+  scheduleRepaint();
+  if(Object.values(state.errors).some(Boolean))toast('Algunas fuentes no respondieron; se mantienen los datos anteriores');
+  else toast('Datos actualizados');
+  // El historial de jugadores es secundario y puede ser lento; cargarlo DESPUÉS del calendario.
+  loadPlayerCards().then(players=>{
     state.playerHistory=players.matches;
     state.playerCoverage=players.coverage;
     state.playerIssue=null;
-    // Para partidos ESPN ya terminados, sumar sólo tarjetas realmente
-    // registradas en jugadores que participaron y cuyo lado está verificado.
-    const history=new Map(players.matches.map(m=>[m.league+':espn:'+m.id,m]));
-    for(const key of leagueKeys){
-      if(!output[key])continue;
-      output[key].results=(output[key].results||[]).map(match=>{
-        const recap=history.get(match.id);
-        if(!recap||Number.isFinite(match.homeYellow)&&Number.isFinite(match.awayYellow))return match;
-        const home=recap.players.filter(x=>x.appearance===true&&x.side==='home'&&Number.isInteger(x.yellow));
-        const away=recap.players.filter(x=>x.appearance===true&&x.side==='away'&&Number.isInteger(x.yellow));
-        // Una plantilla incompleta NO equivale a cero amarillas.
-        if(home.length<11||away.length<11)return match;
-        return {...match,homeYellow:home.reduce((n,x)=>n+x.yellow,0),
-          awayYellow:away.reduce((n,x)=>n+x.yellow,0)};
-      });
+    if($('#detail-panel')&&(state.view==='inicio'||state.view==='partidos')){
+      const match=allEvents().find(x=>x.id===state.selected);
+      if(match)$('#detail-panel').innerHTML=detailed(match);
     }
-  }catch(error){
-    state.playerIssue=error.message||'No hay histórico individual disponible';
-  }
-  saveCache(output);sealAndGrade();state.loading=false;
-  $('#refresh-btn').disabled=false;$('#refresh-btn .refresh-icon').textContent='↻';
-  stamp();render();
-  if(Object.values(problems).some(Boolean))toast('Algunas fuentes no respondieron; consulta el aviso');
-  else toast('Datos actualizados');
+  }).catch(error=>{state.playerIssue=error.message||'Datos individuales no disponibles';});
 }
 function bindEvents(){
   document.addEventListener('click',e=>{
@@ -308,6 +356,6 @@ async function init(){
   if('serviceWorker' in navigator&&location.protocol!=='file:'){
     navigator.serviceWorker.register('./sw.js').catch(()=>{});
   }
-  await refresh();
+  refresh();
 }
 init();
