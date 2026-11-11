@@ -260,6 +260,22 @@ async function refresh(){
     state.playerHistory=players.matches;
     state.playerCoverage=players.coverage;
     state.playerIssue=null;
+    // Para partidos ESPN ya terminados, sumar sólo tarjetas realmente
+    // registradas en jugadores que participaron y cuyo lado está verificado.
+    const history=new Map(players.matches.map(m=>[m.league+':espn:'+m.id,m]));
+    for(const key of leagueKeys){
+      if(!output[key])continue;
+      output[key].results=(output[key].results||[]).map(match=>{
+        const recap=history.get(match.id);
+        if(!recap||Number.isFinite(match.homeYellow)&&Number.isFinite(match.awayYellow))return match;
+        const home=recap.players.filter(x=>x.appearance===true&&x.side==='home'&&Number.isInteger(x.yellow));
+        const away=recap.players.filter(x=>x.appearance===true&&x.side==='away'&&Number.isInteger(x.yellow));
+        // Una plantilla incompleta NO equivale a cero amarillas.
+        if(home.length<11||away.length<11)return match;
+        return {...match,homeYellow:home.reduce((n,x)=>n+x.yellow,0),
+          awayYellow:away.reduce((n,x)=>n+x.yellow,0)};
+      });
+    }
   }catch(error){
     state.playerIssue=error.message||'No hay histórico individual disponible';
   }
