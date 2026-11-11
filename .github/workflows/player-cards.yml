@@ -35,5 +35,15 @@ jobs:
             echo 'Sin nuevos datos verificables de tarjetas.'
           else
             git commit -m 'Actualizar amonestaciones históricas de jugadores'
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then
+                echo 'Publicado histórico verificado de jugadores.'
+                exit 0
+              fi
+              echo "Otro proceso actualizó main; reintentando (${attempt})."
+              sleep 3
+            done
+            echo 'No se pudo sincronizar por conflictos de Git'
+            exit 1
           fi
