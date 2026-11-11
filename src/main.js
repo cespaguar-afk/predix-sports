@@ -1,6 +1,7 @@
 import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadPlayerCards,mergeLive} from './data.js';
 import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} from './model.js';
 import {teamReport,headToHead} from './stats.js';
+import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
 import {loadCache,saveCache,loadSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
 const $=s=>document.querySelector(s);
@@ -18,6 +19,8 @@ const leagueKeys=Object.keys(LEAGUES);
 const predictions=new Map();
 let gradedPredictions=[];
 let repaintTimer=null;
+const nbaReports=new Map();
+const nbaPending=new Set();
 function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(state.view==='inicio'||state.view==='partidos')renderNormal();},110);}
 function completeResults(m){
   const rows=state.data[m.league]?.results||[];
@@ -192,6 +195,7 @@ function detailed(m){
     <div class="detail-caption">${LEAGUES[m.league].icon} ${escapeHTML(LEAGUES[m.league].name)} · ${escapeHTML(when)} · <span class="tag-sub">${badge}</span></div>
     ${m.status==='post'?actual:forecastAnalysis(m,p)}
     ${teamProfileHTML(m)}
+    ${m.sport==='nba'?'<div class="detail-section" id="nba-details">'+(nbaReports.get(m.id)?.teams?renderNbaTeamDetails(nbaReports.get(m.id)):nbaReports.get(m.id)?.error?'<h3>Estadísticas individuales NBA</h3><p class="source-note">'+escapeHTML(nbaReports.get(m.id).error)+'</p>':'<h3>Estadísticas individuales NBA</h3><p class="source-note">'+(nbaPending.has(m.id)?'Consultando los últimos partidos y sus fichas individuales…':'Al seleccionar este partido se consultarán sus estadísticas históricas.')+'</p>')+'</div>':''}
     <div class="detail-section"><h3>Origen de los datos</h3><p class="source-note">${escapeHTML(m.source)}. ${m.liveSource?'Marcador en vivo: '+escapeHTML(m.liveSource)+'. ':''}${m.timeNote?escapeHTML(m.timeNote)+'. ':''}La fecha y el inicio pueden cambiar. Actualiza para consultar información reciente.</p></div>`;
 }
 function displayMetrics(){
@@ -243,6 +247,23 @@ function renderNormal(){
   $('#period-filter').value=state.period;$('#search-input').value=state.query;
   renderMatchArea();displayMetrics();$('#notice').innerHTML=sourceNotice();
 }
+async function hydrateNbaDetail(match){
+  if(!match||match.sport!=='nba'||match.status==='post')return;
+  if(nbaReports.has(match.id)||nbaPending.has(match.id))return;
+  nbaPending.add(match.id);
+  try{
+    const report=await loadNbaTeamDetails(match,state.data.nba?.results||[]);
+    nbaReports.set(match.id,report);
+  }catch(error){
+    nbaReports.set(match.id,{error:error.message||'Fuente no disponible'});
+  }finally{
+    nbaPending.delete(match.id);
+    if(match.id===state.selected&&$('#detail-panel')){
+      const current=allEvents().find(e=>e.id===match.id);
+      if(current)$('#detail-panel').innerHTML=detailed(current);
+    }
+  }
+}
 function renderMatchArea(){
   if(!$('#match-list'))return;
   const events=matchesFiltered();
@@ -253,6 +274,7 @@ function renderMatchArea(){
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
   const match=displayed.find(m=>m.id===state.selected);
   $('#detail-panel').innerHTML=detailed(match);
+  if(match?.sport==='nba')hydrateNbaDetail(match);
   if(state.view==='inicio'&&events.length>22)$('#match-list').insertAdjacentHTML('beforeend','<div class="empty-state">Mostrando los 22 encuentros más próximos. En «Partidos» puedes consultar más.</div>');
 }
 function renderHistory(){
@@ -273,6 +295,7 @@ function renderSources(){
   $('#content').innerHTML=`<div class="eyebrow"><span class="eyebrow-line"></span> TRANSPARENCIA</div><h1>Fuentes y <em>metodología.</em></h1>
     <section class="text-panel"><h3>Fútbol · open-matchday</h3><p>Fuente CSV pública para LaLiga, Hypermotion, Premier League, Copa del Rey y Champions. Actualización normalmente diaria. Incluye resultados, próximos partidos y, cuando los hay, remates, faltas, córners y tarjetas.</p><p><a target="_blank" rel="noopener noreferrer" href="https://github.com/oladeeayo/open-matchday">Ver fuente y condiciones de uso ↗</a></p><p>Licencia para uso informativo no comercial. No incluye alineaciones, lesiones confirmadas ni cuotas; las horas publicadas son aproximadas y algunas figuran como provisionales.</p></section>
     <section class="text-panel"><h3>NBA, Nations League y Supercopa · fuentes públicas</h3><p>Consulta mensual de marcadores de ESPN sin API key y alternativa de calendario NBA desde NBA CDN. Para Naciones y Supercopa se emplean los partidos que el proveedor publique. No garantizamos cobertura ni directo. Estos servicios pueden bloquear peticiones, retrasar resultados o cambiar su formato. Se muestran errores y se conserva un caché local si ya existía uno.</p><p><a target="_blank" rel="noopener noreferrer" href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">Ver endpoint NBA ↗</a></p><p><a target="_blank" rel="noopener noreferrer" href="https://www.boxscorelab.com/downloads/">Descargas adicionales NBA: BoxScore Lab ↗</a> (referencia complementaria, no conectada al modelo en esta versión).</p></section>
+    <section class="text-panel"><h3>Estadísticas individuales NBA</h3><p>Al abrir un encuentro NBA se consultan bajo demanda las fichas de hasta tres partidos anteriores por equipo, cuando existen. Se muestran promedios observados de puntos, rebotes, asistencias, robos, tapones, pérdidas y porcentajes de tiro. Fuente principal ESPN y alternativa NBA CDN. Las peticiones pueden bloquearse o carecer de datos, y las cifras no equivalen a estadísticas de temporada ni se incorporan por ahora al modelo predictivo.</p></section>
     <section class="text-panel"><h3>Tarjetas por jugadores</h3><p>El histórico individual recoge apariciones y amarillas documentadas en informes de partidos de ESPN; sólo se usan partidos ya finalizados. La probabilidad individual es una frecuencia suavizada y condicionada a participar, no predice convocatorias ni garantiza amonestaciones. Si faltan datos, se oculta el porcentaje.</p></section>
     <section class="text-panel"><h3>Modelo estadístico</h3><ul><li>Fútbol: distribuciones Poisson para goles, ataque y defensa de los últimos diez partidos, regularización hacia la media de la liga.</li><li>Córners, faltas, tarjetas y remates: medias suavizadas de los equipos con muestra mínima; las probabilidades de superar un umbral son aproximaciones Poisson.</li><li>NBA: medias recientes de puntos anotados y recibidos, con margen heurístico y una función logística <strong>no calibrada</strong>.</li><li>Aprendizaje: evaluación Brier y ajuste de calibración únicamente sobre predicciones guardadas antes de jugarse el partido. No hay entrenamiento neuronal ni garantía de mejora.</li><li>Partidos en directo: solo se actualiza el marcador bajo demanda. Las predicciones no se recalculan en función del juego en vivo.</li></ul><p class="disclaimer">Las probabilidades son estimaciones experimentales; no se han validado externamente. No hay cuotas ni recomendaciones de apuesta de valor, porque no podemos verificar el precio real del mercado.</p></section>
     <section class="text-panel"><h3>Privacidad y alojamiento</h3><p>Historial, caché y favoritos viven en <code>localStorage</code>. No existe cuenta ni servidor propio. Si borras datos del navegador o cambias de móvil, se perderán salvo que exportes tu historial.</p><p>En GitHub Pages el sitio y su código serían públicos, <strong>aunque tu historial local seguiría en tu dispositivo</strong>. No pongas información privada en los archivos que publiques.</p></section>`;
@@ -292,6 +315,7 @@ async function refresh(){
   state.errors={};
   $('#refresh-btn').disabled=true;$('#refresh-btn .refresh-icon').textContent='◌';
   if(state.view==='inicio'||state.view==='partidos')$('#notice').innerHTML=sourceNotice();
+  nbaReports.clear();
   // Cada competición se incorpora en cuanto su fuente responde, sin esperar al resto.
   const jobs=leagueKeys.map(async k=>{
     try{
