@@ -86,3 +86,9 @@ Los modelos no están calibrados ni han superado validación externa; la etiquet
 - **Copa del Rey:** prioridad al calendario archivado de ESPN frente al CSV complementario, con descarte de enfrentamientos contradictorios (un club con dos rivales distintos el mismo día), duplicados y partidos cuyo resultado final ya se ha confirmado. El calendario es parcial por rondas y depende de los proveedores.
 - **Bundesliga y Ligue 1:** añadidas a los filtros de fútbol y a la sincronización de CSV. Las estadísticas dependen de los campos realmente disponibles en open-matchday; no se inventan datos ausentes.
 - Nueva versión del service worker para que Android instale el código actualizado. Tras la primera actualización puede ser necesario cerrar y volver a abrir la PWA.
+
+## Vista por días — versión 1.4
+
+Los partidos se muestran **día a día**, con títulos como **Hoy** y **Mañana** según la zona horaria local del navegador. Dentro de cada día de **Fútbol**, los partidos están agrupados por competición (LaLiga, Bundesliga, Ligue 1, Copa del Rey, etc.). En **NBA**, los encuentros se agrupan por el día local, aunque ESPN publique la hora en UTC.
+
+La portada muestra separadamente un resumen de fútbol y otro de NBA para los primeros dos días con encuentros disponibles. Las secciones completas empiezan mostrando siete fechas y permiten pulsar **Mostrar 7 días más** sucesivamente, conservando los filtros de búsqueda, liga y periodo. Se mantiene la carga progresiva para móviles.
