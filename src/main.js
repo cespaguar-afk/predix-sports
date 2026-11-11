@@ -242,10 +242,11 @@ function sourceNotice(){
 function renderNormal(){
   $('#content').innerHTML=`<section class="intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> INTELIGENCIA DEPORTIVA</div><h1>Predicciones basadas <em>en datos.</em></h1><p>Analiza cada partido con estadísticas recientes, probabilidades transparentes y seguimiento de resultados.</p></div><div class="intro-graphic"><span class="glow-orbit orbit-one"></span><span class="glow-orbit orbit-two"></span><span class="graphic-p">P.</span></div></section>
     <section class="metrics" id="metrics"></section><section id="notice" aria-live="polite"></section>
-    <section class="section-heading"><div><div class="eyebrow small">${state.view==='inicio'?'EXPLORAR':'CALENDARIO'}</div><h2>${state.view==='inicio'?'Encuentros y pronósticos':'Todos los partidos'} <span class="accent-dot">.</span></h2></div><span class="small-muted" id="match-counter"></span></section>
+    <section class="sport-switch" role="group" aria-label="Deporte"><button type="button" class="sport-tab ${state.view==='futbol'?'active':''}" data-view="futbol">⚽ Fútbol</button><button type="button" class="sport-tab ${state.view==='nba'?'active':''}" data-view="nba">🏀 NBA</button></section>
+    <section class="section-heading"><div><div class="eyebrow small">${state.view==='inicio'?'EXPLORAR':state.view==='futbol'?'COMPETICIONES':'BALONCESTO'}</div><h2>${state.view==='inicio'?'Encuentros y pronósticos':state.view==='futbol'?'Partidos de fútbol':'Partidos de NBA'} <span class="accent-dot">.</span></h2></div><span class="small-muted" id="match-counter"></span></section>
     <div class="filter-bar"><div class="league-filters" id="league-filters"></div><div class="controls"><select id="period-filter" aria-label="Periodo"><option value="90">Próximos 90 días</option><option value="30">Próximos 30 días</option><option value="7">Próximos 7 días</option><option value="all">Todos</option><option value="fav">Favoritos</option></select><input type="search" id="search-input" placeholder="Buscar equipo..." aria-label="Buscar equipo" /></div></div>
     <div class="matches-grid"><div class="match-list" id="match-list"></div><section class="detail-panel" id="detail-panel" aria-live="polite"></section></div>`;
-  $('#league-filters').innerHTML=`<button type="button" class="filter-pill ${state.league==='all'?'active':''}" data-league="all">◈ Todas</button>`+leagueKeys.map(k=>`<button type="button" class="filter-pill ${state.league===k?'active':''}" data-league="${k}">${LEAGUES[k].icon} ${LEAGUES[k].name}</button>`).join('');
+  $('#league-filters').innerHTML=state.view==='futbol'?`<button type="button" class="filter-pill ${state.league==='all'?'active':''}" data-league="all">◈ Todas las ligas</button>`+leagueKeys.filter(k=>LEAGUES[k].sport==='soccer').map(k=>`<button type="button" class="filter-pill ${state.league===k?'active':''}" data-league="${k}">${LEAGUES[k].icon} ${LEAGUES[k].name}</button>`).join(''):'';
   $('#period-filter').value=state.period;$('#search-input').value=state.query;
   renderMatchArea();displayMetrics();$('#notice').innerHTML=sourceNotice();
 }
@@ -269,15 +270,17 @@ async function hydrateNbaDetail(match){
 function renderMatchArea(){
   if(!$('#match-list'))return;
   const events=matchesFiltered();
-  $('#match-counter').textContent=`${events.length} partidos`;
-  const displayed=state.view==='inicio'?events.slice(0,22):events.slice(0,150);
-  $('#match-list').innerHTML=displayed.length?displayed.map(eventCard).join(''):
+  const soccer=events.filter(x=>x.sport==='soccer'),basketball=events.filter(x=>x.sport==='nba');
+  $('#match-counter').textContent=state.view==='inicio'?`${soccer.length} fútbol · ${basketball.length} NBA`:`${events.length} partidos`;
+  const displayed=state.view==='inicio'?[...soccer.slice(0,12),...basketball.slice(0,10)]:events.slice(0,150);
+  const group=(title,icon,items,view,max)=>'<div class="sport-group"><div class="sport-group-head"><h3>'+icon+' '+title+'</h3><button type="button" class="simple-btn secondary" data-view="'+view+'">Ver '+title.toLowerCase()+' →</button></div>'+(items.length?items.slice(0,max).map(eventCard).join(''):'<div class="empty-state">Sin encuentros disponibles para este periodo.</div>')+'</div>';
+  $('#match-list').innerHTML=state.view==='inicio'?group('Fútbol','⚽',soccer,'futbol',12)+group('NBA','🏀',basketball,'nba',10):displayed.length?displayed.map(eventCard).join(''):
     `<div class="empty-state">No hay partidos dentro de este periodo o faltan datos de las fuentes.<br><button type="button" class="simple-btn" data-show-all>Ver todos los partidos disponibles</button></div>`;
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
   const match=displayed.find(m=>m.id===state.selected);
   $('#detail-panel').innerHTML=detailed(match);
   if(match?.sport==='nba')hydrateNbaDetail(match);
-  if(state.view==='inicio'&&events.length>22)$('#match-list').insertAdjacentHTML('beforeend','<div class="empty-state">Mostrando los 22 encuentros más próximos. En «Partidos» puedes consultar más.</div>');
+  if(state.view!=='inicio'&&events.length>150)$('#match-list').insertAdjacentHTML('beforeend','<div class="empty-state">Mostrando los primeros 150 encuentros.</div>');
 }
 function renderHistory(){
   const records=Object.values(loadSnapshots()).sort((a,b)=>b.date.localeCompare(a.date));
