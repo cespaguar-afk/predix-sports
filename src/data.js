@@ -1,8 +1,12 @@
 /* Fuentes: open-matchday (fútbol; CSV diario) y ESPN no oficial (NBA/live; puede fallar). */
 export const LEAGUES={
   laliga:{name:'LaLiga',icon:'🇪🇸',sport:'soccer',folder:'ESP_1_la-liga',espn:'soccer/esp.1'},
+  hypermotion:{name:'LaLiga Hypermotion',icon:'🇪🇸',sport:'soccer',folder:'ESP_2_segunda-division',espn:'soccer/esp.2'},
   premier:{name:'Premier League',icon:'🏴',sport:'soccer',folder:'ENG_1_premier-league',espn:'soccer/eng.1'},
   champions:{name:'Champions League',icon:'⭐',sport:'soccer',folder:'UEFA_1_champions-league',espn:'soccer/uefa.champions'},
+  copadelrey:{name:'Copa del Rey',icon:'🏆',sport:'soccer',folder:'ESP_CUP_copa-del-rey',espn:'soccer/esp.copa_del_rey'},
+  supercopa:{name:'Supercopa de España',icon:'🥇',sport:'soccer',espn:'soccer/esp.super_cup'},
+  nations:{name:'UEFA Nations League',icon:'🌍',sport:'soccer',espn:'soccer/uefa.nations'},
   nba:{name:'NBA',icon:'🏀',sport:'nba',espn:'basketball/nba'}
 };
 const ROOT='https://cdn.jsdelivr.net/gh/oladeeayo/open-matchday@master/data';
@@ -105,40 +109,115 @@ function espnEvent(e,league){
     statusText:e.status?.type?.shortDetail||'',
     homeScore:s==='pre'?null:score(h.score),awayScore:s==='pre'?null:score(a.score),source:'ESPN (no oficial)'};
 }
-export async function loadEspn(league,{nbaHistory=false}={}){
-  const path=LEAGUES[league].espn;
-  const now=new Date();
-  const ranges = nbaHistory?
-    [[utcDay(now,-45),utcDay(now,16)]] : [[utcDay(now,-1),utcDay(now,3)]];
-  const batches=await Promise.all(ranges.map(async([start,end])=>{
-    const url=`${ESPN}/${path}/scoreboard?dates=${compact(start)}-${compact(end)}&limit=500`;
-    const data=JSON.parse(await getText(url));
-    if(!Array.isArray(data.events))throw new Error('Respuesta ESPN inesperada');
-    return data.events.map(e=>espnEvent(e,league)).filter(Boolean);
-  }));
-  const unique=new Map(batches.flat().map(e=>[e.id,e]));
-  const all=[...unique.values()];
-  return {results:all.filter(x=>x.status==='post'),fixtures:all.filter(x=>x.status!=='post'),
-    source:'ESPN (no oficial)',updatedAt:new Date().toISOString()};
-}
-/** NBA: conexión directa opcional + copia pública sincronizada sin CORS. */
-export async function loadNBA(){
-  try{
-    return await loadEspn('nba',{nbaHistory:true});
-  }catch(directError){
-    try{
-      const snapshot=JSON.parse(await getText('./feeds/nba.json'));
-      if(!Array.isArray(snapshot.events))throw new Error('Archivo NBA incompleto');
-      const unique=new Map(snapshot.events.map(e=>espnEvent(e,'nba')).filter(Boolean).map(e=>[e.id,e]));
-      const events=[...unique.values()];
-      if(!events.length)throw new Error('Copia NBA sin encuentros');
-      return {results:events.filter(x=>x.status==='post'),fixtures:events.filter(x=>x.status!=='post'),
-        source:'ESPN (copia pública, sin directo)',updatedAt:snapshot.fetchedAt||null,
-        warning:'Copia NBA: los marcadores podrían estar desactualizados'};
-    }catch(localError){
-      throw new Error('ESPN: '+directError.message+'; copia NBA: '+localError.message);
-    }
+
+/** Un mes por petición. ESPN devuelve HTTP 400 para intervalos largos de fechas. */
+export function monthKeys(now=new Date(),monthsBack=2,monthsForward=3){
+  const keys=[];
+  for(let offset=-monthsBack;offset<=monthsForward;offset++){
+    const d=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth()+offset,1));
+    keys.push(String(d.getUTCFullYear())+String(d.getUTCMonth()+1).padStart(2,'0'));
   }
+  return keys;
+}
+function fromEspnEvents(events,league,source='ESPN (no oficial)',updatedAt=new Date().toISOString(),warning=null){
+  const unique=new Map(events.map(e=>espnEvent(e,league)).filter(Boolean).map(e=>[e.id,e]));
+  const all=[...unique.values()];
+  return {results:all.filter(x=>x.status==='post'),
+    fixtures:all.filter(x=>x.status!=='post'),source,updatedAt,warning};
+}
+async function loadPublishedSnapshot(league){
+  const raw=JSON.parse(await getText('./feeds/'+league+'.json'));
+  if(!Array.isArray(raw.events))throw new Error('Copia de '+league+' sin eventos');
+  return fromEspnEvents(raw.events,league,'ESPN (copia pública; puede estar retrasada)',raw.fetchedAt||null,
+    'Información guardada en la última sincronización; puede estar retrasada');
+}
+export async function loadEspn(league,{nbaHistory=false}={}){
+  const path=LEAGUES[league]?.espn;
+  if(!path)throw new Error('Liga sin identificador ESPN');
+  const keys=nbaHistory?monthKeys(new Date(),2,2):monthKeys(new Date(),2,4);
+  const responses=await Promise.allSettled(keys.map(async month=>{
+    const url=ESPN+'/'+path+'/scoreboard?dates='+month+'&limit=500';
+    const data=JSON.parse(await getText(url));
+    if(!Array.isArray(data.events))throw new Error('Respuesta ESPN inesperada ('+month+')');
+    return data.events;
+  }));
+  const good=responses.filter(r=>r.status==='fulfilled').map(r=>r.value);
+  if(!good.length)throw new Error('ESPN no respondió a ninguna consulta mensual');
+  const result=fromEspnEvents(good.flat(),league);
+  if(good.length<responses.length)result.warning='Algunos meses no respondieron; calendario posiblemente incompleto';
+  return result;
+}
+function nbaCdnEvent(g){
+  const home=g.homeTeam,away=g.awayTeam;
+  if(!home?.teamName||!away?.teamName||!g.gameId)return null;
+  const t=g.gameDateTimeUTC||g.gameDateUTC||g.gameDateTimeEst||g.gameDateEst;
+  if(!t)return null;
+  const date=new Date(t);
+  if(!Number.isFinite(date.getTime()))return null;
+  const isoTime=date.toISOString();
+  const s=Number(g.gameStatus)||1;
+  const h=score(home.score),a=score(away.score);
+  const status=s===2?'in':s===3&&h!==null&&a!==null?'post':'pre';
+  return {id:'nba:official:'+g.gameId,league:'nba',sport:'nba',
+    home:[home.teamCity,home.teamName].filter(Boolean).join(' '),
+    away:[away.teamCity,away.teamName].filter(Boolean).join(' '),
+    homeShort:home.teamTricode,awayShort:away.teamTricode,
+    date:isoTime.slice(0,10),isoTime,status,
+    homeScore:status==='pre'?null:h,awayScore:status==='pre'?null:a,
+    statusText:g.gameStatusText||'',source:'NBA CDN (público; no garantizado)'};
+}
+export function nbaCdnSchedule(data,now=new Date()){
+  const days=data?.leagueSchedule?.gameDates||[];
+  const events=days.flatMap(d=>d.games||[]).map(nbaCdnEvent).filter(Boolean);
+  const min=new Date(now.getTime()-65*86400000).toISOString().slice(0,10);
+  const max=new Date(now.getTime()+95*86400000).toISOString().slice(0,10);
+  const visible=events.filter(e=>e.date>=min&&e.date<=max);
+  return {results:visible.filter(x=>x.status==='post'),fixtures:visible.filter(x=>x.status!=='post'),
+    source:'NBA CDN (calendario público)',updatedAt:new Date().toISOString(),
+    warning:'Calendario de NBA; marcadores en vivo solo si el proveedor los incluye'};
+}
+async function loadOfficialNba(){
+  let lastError;
+  for(const url of [
+    'https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json',
+    'https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json'
+  ]){
+    try{
+      const data=JSON.parse(await getText(url));
+      const normalized=nbaCdnSchedule(data);
+      if(normalized.results.length+normalized.fixtures.length>0)return normalized;
+      throw new Error('Calendario oficial sin encuentros válidos');
+    }catch(err){lastError=err;}
+  }
+  throw lastError||new Error('No se pudo leer calendario de NBA');
+}
+/** NBA sin claves: ESPN mensual, copia sincronizada y calendario oficial alternativo. */
+export async function loadNBA(){
+  const errors=[];
+  for(const task of [
+    ()=>loadEspn('nba',{nbaHistory:true}),
+    ()=>loadPublishedSnapshot('nba'),
+    ()=>loadOfficialNba()
+  ]){
+    try{
+      const result=await task();
+      if(result.results.length+result.fixtures.length>0)return result;
+      errors.push('Fuente sin partidos');
+    }catch(error){errors.push(error.message||String(error));}
+  }
+  throw new Error('NBA no disponible: '+errors.join(' / '));
+}
+/** Copas y Nations League: ESPN directo y, cuando exista, copia sin conexión CORS. */
+export async function loadInternationalOrCup(league){
+  const errors=[];
+  for(const task of [()=>loadEspn(league),()=>loadPublishedSnapshot(league)]){
+    try{
+      const result=await task();
+      if(result.results.length+result.fixtures.length>0)return result;
+      errors.push('Sin encuentros en el intervalo consultado');
+    }catch(error){errors.push(error.message||String(error));}
+  }
+  throw new Error(errors.join(' / '));
 }
 const simpl=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
   .replace(/\b(fc|cf|club|football|de|la|el|the|united|city|atletico|real)\b/g,'').replace(/[^a-z0-9]/g,'');
