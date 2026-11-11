@@ -46,3 +46,17 @@
 .sport-group-head h3{font-size:17px;margin:0;color:#eef5fa}
 .sport-group-head .simple-btn{font-size:11px;white-space:nowrap}
 @media(max-width:700px){.sport-switch{margin:0 0 20px;gap:9px}.sport-tab{padding:12px 10px;font-size:13px}.bottom-nav button{font-size:9px}.bottom-nav button span{font-size:19px}.sport-group-head h3{font-size:15px}}
+
+/* Calendario diario (v1.4): fecha → competición → encuentros */
+.day-section{display:grid;gap:10px;margin-bottom:16px;padding:13px;border:1px solid #263a4d;border-radius:13px;background:#0c1928;min-width:0}
+.day-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:3px 2px 11px;border-bottom:1px solid #334659}
+.day-heading h4{font-size:15px;font-weight:800;color:#f2f8fa;line-height:1.35;margin:0}
+.day-count{font-size:10px;font-weight:800;color:#a4bac9;white-space:nowrap;flex-shrink:0}
+.competition-day{display:grid;gap:9px;padding:8px 0 12px;border-bottom:1px solid #293a4d;min-width:0}
+.competition-day:last-child{border-bottom:0;padding-bottom:0}
+.competition-day-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px;padding:4px 2px 5px}
+.competition-day-heading b{color:#badce7;font-size:12px;line-height:1.4}
+.competition-day-heading span{color:#869caf;font-size:10px;white-space:nowrap}
+.more-days{background:#152a35;border:1px solid #60826b;border-radius:11px;color:#d4f4d2;font-size:12px;font-weight:800;padding:16px;text-align:center;width:100%;cursor:pointer}
+.more-days:hover{border-color:#9cdc73;background:#213a32}
+@media(max-width:700px){.day-section{padding:10px;gap:8px}.day-heading h4{font-size:13px}.day-count{font-size:9px}.competition-day-heading b{font-size:11px}.match-list{gap:12px}.sport-group{gap:10px}}
