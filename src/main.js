@@ -1,4 +1,4 @@
-import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadPlayerCards,mergeLive} from './data.js';
+import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadCopaDelRey,loadPlayerCards,mergeLive} from './data.js';
 import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} from './model.js';
 import {teamReport,headToHead} from './stats.js';
 import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
@@ -21,7 +21,7 @@ let gradedPredictions=[];
 let repaintTimer=null;
 const nbaReports=new Map();
 const nbaPending=new Set();
-function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(state.view==='inicio'||state.view==='partidos')renderNormal();},110);}
+function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view)renderNormal();},110);}
 function completeResults(m){
   const rows=state.data[m.league]?.results||[];
   return (m.league==='copadelrey'||m.league==='supercopa')
@@ -52,7 +52,9 @@ function sealAndGrade(){
 }
 function matchesFiltered(){
   let events=allEvents();
-  if(state.league!=='all')events=events.filter(x=>x.league===state.league);
+  if(state.view==='futbol')events=events.filter(x=>x.sport==='soccer');
+  if(state.view==='nba')events=events.filter(x=>x.sport==='nba');
+  if(state.view==='futbol'&&state.league!=='all')events=events.filter(x=>x.league===state.league);
   if(state.query)events=events.filter(x=>`${x.home} ${x.away}`.toLowerCase().includes(state.query.toLowerCase()));
   const favs=getFavorites();
   if(state.period==='fav')events=events.filter(x=>favs.includes(x.id));
@@ -293,7 +295,7 @@ function renderHistory(){
 }
 function renderSources(){
   $('#content').innerHTML=`<div class="eyebrow"><span class="eyebrow-line"></span> TRANSPARENCIA</div><h1>Fuentes y <em>metodología.</em></h1>
-    <section class="text-panel"><h3>Fútbol · open-matchday</h3><p>Fuente CSV pública para LaLiga, Hypermotion, Premier League, Copa del Rey y Champions. Actualización normalmente diaria. Incluye resultados, próximos partidos y, cuando los hay, remates, faltas, córners y tarjetas.</p><p><a target="_blank" rel="noopener noreferrer" href="https://github.com/oladeeayo/open-matchday">Ver fuente y condiciones de uso ↗</a></p><p>Licencia para uso informativo no comercial. No incluye alineaciones, lesiones confirmadas ni cuotas; las horas publicadas son aproximadas y algunas figuran como provisionales.</p></section>
+    <section class="text-panel"><h3>Fútbol · open-matchday</h3><p>Fuente CSV pública para LaLiga, Hypermotion, Premier League, Bundesliga, Ligue 1, Copa del Rey y Champions. Actualización normalmente diaria. Incluye resultados, próximos partidos y, cuando los hay, remates, faltas, córners y tarjetas.</p><p><a target="_blank" rel="noopener noreferrer" href="https://github.com/oladeeayo/open-matchday">Ver fuente y condiciones de uso ↗</a></p><p>Licencia para uso informativo no comercial. No incluye alineaciones, lesiones confirmadas ni cuotas; las horas publicadas son aproximadas y algunas figuran como provisionales.</p></section>
     <section class="text-panel"><h3>NBA, Nations League y Supercopa · fuentes públicas</h3><p>Consulta mensual de marcadores de ESPN sin API key y alternativa de calendario NBA desde NBA CDN. Para Naciones y Supercopa se emplean los partidos que el proveedor publique. No garantizamos cobertura ni directo. Estos servicios pueden bloquear peticiones, retrasar resultados o cambiar su formato. Se muestran errores y se conserva un caché local si ya existía uno.</p><p><a target="_blank" rel="noopener noreferrer" href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">Ver endpoint NBA ↗</a></p><p><a target="_blank" rel="noopener noreferrer" href="https://www.boxscorelab.com/downloads/">Descargas adicionales NBA: BoxScore Lab ↗</a> (referencia complementaria, no conectada al modelo en esta versión).</p></section>
     <section class="text-panel"><h3>Estadísticas individuales NBA</h3><p>Al abrir un encuentro NBA se consultan bajo demanda las fichas de hasta tres partidos anteriores por equipo, cuando existen. Se muestran promedios observados de puntos, rebotes, asistencias, robos, tapones, pérdidas y porcentajes de tiro. Fuente principal ESPN y alternativa NBA CDN. Las peticiones pueden bloquearse o carecer de datos, y las cifras no equivalen a estadísticas de temporada ni se incorporan por ahora al modelo predictivo.</p></section>
     <section class="text-panel"><h3>Tarjetas por jugadores</h3><p>El histórico individual recoge apariciones y amarillas documentadas en informes de partidos de ESPN; sólo se usan partidos ya finalizados. La probabilidad individual es una frecuencia suavizada y condicionada a participar, no predice convocatorias ni garantiza amonestaciones. Si faltan datos, se oculta el porcentaje.</p></section>
@@ -302,7 +304,7 @@ function renderSources(){
 }
 function render(){
   document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===state.view));
-  $('#crumb-title').textContent={inicio:'Resumen',partidos:'Partidos',historial:'Historial',fuentes:'Fuentes y método'}[state.view];
+  $('#crumb-title').textContent={inicio:'Resumen',futbol:'Fútbol',nba:'NBA',historial:'Historial',fuentes:'Fuentes y método'}[state.view];
   if(state.view==='historial')renderHistory();else if(state.view==='fuentes')renderSources();else renderNormal();
 }
 function stamp(){
@@ -319,7 +321,7 @@ async function refresh(){
   // Cada competición se incorpora en cuanto su fuente responde, sin esperar al resto.
   const jobs=leagueKeys.map(async k=>{
     try{
-      const fresh=k==='nba'?await loadNBA():LEAGUES[k].folder?await loadFootball(k):await loadInternationalOrCup(k);
+      const fresh=k==='nba'?await loadNBA():k==='copadelrey'?await loadCopaDelRey():LEAGUES[k].folder?await loadFootball(k):await loadInternationalOrCup(k);
       state.data[k]=fresh;
       state.errors[k]=null;
       predictions.clear();
@@ -327,7 +329,7 @@ async function refresh(){
       saveCache(state.data);
       scheduleRepaint();
       // El marcador ESPN es optativo. No debe bloquear la primera renderización.
-      if(k!=='nba'&&LEAGUES[k].folder){
+      if(k!=='nba'&&k!=='copadelrey'&&LEAGUES[k].folder){
         loadEspn(k,{recentOnly:true}).then(live=>{
           if(state.data[k]!==fresh)return;
           state.data[k]={...fresh,fixtures:mergeLive(fresh.fixtures,live.fixtures)};
@@ -351,7 +353,7 @@ async function refresh(){
     state.playerHistory=players.matches;
     state.playerCoverage=players.coverage;
     state.playerIssue=null;
-    if($('#detail-panel')&&(state.view==='inicio'||state.view==='partidos')){
+    if($('#detail-panel')&&['inicio','futbol','nba'].includes(state.view)){
       const match=allEvents().find(x=>x.id===state.selected);
       if(match)$('#detail-panel').innerHTML=detailed(match);
     }
@@ -372,10 +374,11 @@ function bindEvents(){
   document.addEventListener('change',e=>{if(e.target.id==='period-filter'){state.period=e.target.value;renderMatchArea();}});
   document.addEventListener('input',e=>{if(e.target.id==='search-input'){state.query=e.target.value;renderMatchArea();}});
   $('#refresh-btn').addEventListener('click',refresh);
-  window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['inicio','partidos','historial','fuentes'].includes(h)&&h!==state.view){state.view=h;render();}});
+  window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['inicio','futbol','nba','historial','fuentes'].includes(h)&&h!==state.view){state.view=h;render();}});
 }
 async function init(){
-  const hash=location.hash.slice(1);if(['inicio','partidos','historial','fuentes'].includes(hash))state.view=hash;
+  const hash=location.hash.slice(1);if(['inicio','futbol','nba','historial','fuentes'].includes(hash))state.view=hash;
+  if(hash==='partidos'){state.view='futbol';history.replaceState(null,'','#futbol');}
   bindEvents();stamp();render();
   if('serviceWorker' in navigator&&location.protocol!=='file:'){
     navigator.serviceWorker.register('./sw.js').catch(()=>{});
