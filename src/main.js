@@ -1,5 +1,5 @@
-import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,mergeLive} from './data.js';
-import {predictFootball,predictNBA,brierScore,calibrate} from './model.js';
+import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadPlayerCards,mergeLive} from './data.js';
+import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} from './model.js';
 import {loadCache,saveCache,loadSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
 const $=s=>document.querySelector(s);
@@ -12,7 +12,7 @@ const nowDate=()=>new Date().toISOString().slice(0,10);
 const plusDays=n=>new Date(Date.now()+n*86400000).toISOString().slice(0,10);
 let toastTimer;
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3000);}
-const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,loading:false,errors:{},updatedAt:null};
+const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
 const leagueKeys=Object.keys(LEAGUES);
 function allResults(){return leagueKeys.flatMap(k=>state.data[k]?.results||[]);}
 function allFixtures(){return leagueKeys.flatMap(k=>state.data[k]?.fixtures||[]);}
@@ -96,12 +96,42 @@ function forecastAnalysis(m,p){
     `<div class="detail-section"><h3>Otros pronósticos</h3><div class="pred-list">
       <div class="pred-row"><div><div class="name">Más de 2,5 goles</div><div class="extra">Distribución Poisson</div></div><div class="value">${fmt(p.over25)}</div></div>
       <div class="pred-row"><div><div class="name">Ambos equipos marcan</div><div class="extra">Distribución Poisson</div></div><div class="value">${fmt(p.btts)}</div></div>
-      ${p.markets.map(x=>`<div class="pred-row"><div><div class="name">${escapeHTML(x.label)}</div><div class="extra">Media ${x.expected} · Más de ${x.threshold} (aprox.)</div></div><div class="value">${fmt(x.over)}</div></div>`).join('')}
+      ${p.markets.filter(x=>x.field!=='Yellow'||!p.yellowCards).map(x=>`<div class="pred-row"><div><div class="name">${escapeHTML(x.label)}</div><div class="extra">Media ${x.expected} · Más de ${x.threshold} (aprox.)</div></div><div class="value">${fmt(x.over)}</div></div>`).join('')}
       </div>${!p.markets.length?'<p class="source-note">Sin muestras suficientes de córners, faltas, tarjetas o remates; no se estiman.</p>':''}</div>`:
     `<div class="detail-section"><h3>Estimaciones NBA</h3><div class="detail-ministats"><div class="stat-cell"><span>Total de puntos</span><b>${p.total}</b></div><div class="stat-cell"><span>Diferencia local</span><b>${p.margin>0?'+':''}${p.margin}</b></div></div></div>`;
+  const cards=isSoccer?(()=>{
+    const c=p.yellowCards;
+    const totals=c?'<div class="detail-ministats">'
+      +'<div class="stat-cell"><span>Amarillas local</span><b>'+c.expectedHome+'</b></div>'
+      +'<div class="stat-cell"><span>Amarillas visitante</span><b>'+c.expectedAway+'</b></div>'
+      +'</div><div class="projected-score"><span>Amarillas totales esperadas</span><b>'+c.expectedTotal+'</b></div>'
+      +'<div class="pred-list">'
+      +[[2.5,c.over25],[3.5,c.over35],[4.5,c.over45],[5.5,c.over55]]
+        .map(([line,prob])=>'<div class="pred-row"><div><div class="name">Más de '+line+' amarillas</div>'
+        +'<div class="extra">Estimación Poisson · muestra '+c.sampleHome+'/'+c.sampleAway+' partidos</div></div>'
+        +'<div class="value">'+fmt(prob)+'</div></div>').join('')
+      +'</div><p class="source-note">'+escapeHTML(c.explanation)+'</p>'
+      :'<p class="source-note">Tarjetas esperadas no disponibles: no hay suficientes partidos anteriores con amarillas por equipo.</p>';
+    const all=predictPlayerBookings(m,state.playerHistory,40);
+    const players=[...all.filter(x=>x.side==='home').slice(0,4),...all.filter(x=>x.side==='away').slice(0,4)]
+      .sort((a,b)=>b.probability-a.probability);
+    const playerHtml=players.length?
+      '<div class="pred-list">'+players.map(x=>'<div class="pred-row"><div><div class="name">'
+        +escapeHTML(x.name)+'</div><div class="extra">'+escapeHTML(x.team)
+        +' · '+x.booked+' amonestaciones en '+x.played+' partidos observados'
+        +' · muestra '+(x.confidence==='media'?'media':'reducida')+'</div></div>'
+        +'<div class="value">'+fmt(x.probability)+'</div></div>').join('')+'</div>'
+      :'<p class="source-note">No hay todavía un historial individual suficiente para mostrar porcentajes fiables de jugadores de este partido.</p>';
+    return '<div class="detail-section"><h3>Tarjetas amarillas esperadas</h3>'+totals+'</div>'
+      +'<div class="detail-section"><h3>Jugadores con mayor riesgo de amarilla</h3>'+playerHtml
+      +'<p class="disclaimer">Probabilidades experimentales condicionadas a que el jugador participe. '
+      +'No se conoce la alineación de forma anticipada. Se calculan con tarjetas y apariciones verificadas '
+      +'de partidos anteriores, con suavizado; no son cuotas ni recomendaciones de apuesta.</p></div>';
+  })():'';
+
   return `<div class="detail-section"><h3>${isSoccer?'Probabilidades 1X2':'Probabilidades de victoria'} <span class="soft-tag low">${p.confidence==='baja'?'BAJA CONFIANZA':'CONFIANZA MEDIA'}</span></h3>${probs}${score}
       ${isSoccer?`<p class="source-note">Marcadores más probables: ${p.scorelines.map(x=>`${x.home}-${x.away} (${fmt(x.p)})`).join(' · ')}</p>`:''}
-    </div>${suggestions}
+    </div>${cards}${suggestions}
     <div class="detail-section"><h3>Cómo se calculó</h3><p class="source-note">${escapeHTML(p.explanation)}</p><p class="source-note">Partidos recientes considerados: <strong>${p.sampleHome}</strong> del local y <strong>${p.sampleAway}</strong> del visitante. ${p.calibrated?'Ajuste de calibración local activo.':'Sin calibración aprendida todavía (requiere al menos 20 predicciones evaluadas y muestras suficientes por rango).'}</p><div class="disclaimer">${m.status==='in'?'Marcador en directo, pero el pronóstico es PREPARTIDO: no reacciona a goles, faltas, lesiones ni posesiones en vivo. ':''}Estimaciones experimentales no contrastadas para decisiones económicas. No se calculan apuestas de valor sin cuotas fiables.</div></div>`;
 }
 function detailed(m){
@@ -194,6 +224,7 @@ function renderSources(){
   $('#content').innerHTML=`<div class="eyebrow"><span class="eyebrow-line"></span> TRANSPARENCIA</div><h1>Fuentes y <em>metodología.</em></h1>
     <section class="text-panel"><h3>Fútbol · open-matchday</h3><p>Fuente CSV pública para LaLiga, Hypermotion, Premier League, Copa del Rey y Champions. Actualización normalmente diaria. Incluye resultados, próximos partidos y, cuando los hay, remates, faltas, córners y tarjetas.</p><p><a target="_blank" rel="noopener noreferrer" href="https://github.com/oladeeayo/open-matchday">Ver fuente y condiciones de uso ↗</a></p><p>Licencia para uso informativo no comercial. No incluye alineaciones, lesiones confirmadas ni cuotas; las horas publicadas son aproximadas y algunas figuran como provisionales.</p></section>
     <section class="text-panel"><h3>NBA, Nations League y Supercopa · fuentes públicas</h3><p>Consulta mensual de marcadores de ESPN sin API key y alternativa de calendario NBA desde NBA CDN. Para Naciones y Supercopa se emplean los partidos que el proveedor publique. No garantizamos cobertura ni directo. Estos servicios pueden bloquear peticiones, retrasar resultados o cambiar su formato. Se muestran errores y se conserva un caché local si ya existía uno.</p><p><a target="_blank" rel="noopener noreferrer" href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">Ver endpoint NBA ↗</a></p><p><a target="_blank" rel="noopener noreferrer" href="https://www.boxscorelab.com/downloads/">Descargas adicionales NBA: BoxScore Lab ↗</a> (referencia complementaria, no conectada al modelo en esta versión).</p></section>
+    <section class="text-panel"><h3>Tarjetas por jugadores</h3><p>El histórico individual recoge apariciones y amarillas documentadas en informes de partidos de ESPN; sólo se usan partidos ya finalizados. La probabilidad individual es una frecuencia suavizada y condicionada a participar, no predice convocatorias ni garantiza amonestaciones. Si faltan datos, se oculta el porcentaje.</p></section>
     <section class="text-panel"><h3>Modelo estadístico</h3><ul><li>Fútbol: distribuciones Poisson para goles, ataque y defensa de los últimos diez partidos, regularización hacia la media de la liga.</li><li>Córners, faltas, tarjetas y remates: medias suavizadas de los equipos con muestra mínima; las probabilidades de superar un umbral son aproximaciones Poisson.</li><li>NBA: medias recientes de puntos anotados y recibidos, con margen heurístico y una función logística <strong>no calibrada</strong>.</li><li>Aprendizaje: evaluación Brier y ajuste de calibración únicamente sobre predicciones guardadas antes de jugarse el partido. No hay entrenamiento neuronal ni garantía de mejora.</li><li>Partidos en directo: solo se actualiza el marcador bajo demanda. Las predicciones no se recalculan en función del juego en vivo.</li></ul><p class="disclaimer">Las probabilidades son estimaciones experimentales; no se han validado externamente. No hay cuotas ni recomendaciones de apuesta de valor, porque no podemos verificar el precio real del mercado.</p></section>
     <section class="text-panel"><h3>Privacidad y alojamiento</h3><p>Historial, caché y favoritos viven en <code>localStorage</code>. No existe cuenta ni servidor propio. Si borras datos del navegador o cambias de móvil, se perderán salvo que exportes tu historial.</p><p>En GitHub Pages el sitio y su código serían públicos, <strong>aunque tu historial local seguiría en tu dispositivo</strong>. No pongas información privada en los archivos que publiques.</p></section>`;
 }
@@ -224,6 +255,14 @@ async function refresh(){
   });
   await Promise.all(jobs);
   state.data=output;state.errors=problems;
+  try{
+    const players=await loadPlayerCards();
+    state.playerHistory=players.matches;
+    state.playerCoverage=players.coverage;
+    state.playerIssue=null;
+  }catch(error){
+    state.playerIssue=error.message||'No hay histórico individual disponible';
+  }
   saveCache(output);sealAndGrade();state.loading=false;
   $('#refresh-btn').disabled=false;$('#refresh-btn .refresh-icon').textContent='↻';
   stamp();render();
