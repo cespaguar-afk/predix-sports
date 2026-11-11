@@ -15,7 +15,7 @@ const nowDate=()=>localDate();
 const plusDays=n=>plusCalendarDays(nowDate(),n);
 let toastTimer;
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3000);}
-const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,daysShown:7,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
+const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,daysShown:7,chosenDay:null,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
 if(state.data.copadelrey)state.data.copadelrey=reconcileCopaDelRey(state.data.copadelrey);
 const leagueKeys=Object.keys(LEAGUES);
 const predictions=new Map();
@@ -247,10 +247,12 @@ function renderNormal(){
     <section class="metrics" id="metrics"></section><section id="notice" aria-live="polite"></section>
     <section class="sport-switch" role="group" aria-label="Deporte"><button type="button" class="sport-tab ${state.view==='futbol'?'active':''}" data-view="futbol">⚽ Fútbol</button><button type="button" class="sport-tab ${state.view==='nba'?'active':''}" data-view="nba">🏀 NBA</button></section>
     <section class="section-heading"><div><div class="eyebrow small">${state.view==='inicio'?'EXPLORAR':state.view==='futbol'?'COMPETICIONES':'BALONCESTO'}</div><h2>${state.view==='inicio'?'Encuentros y pronósticos':state.view==='futbol'?'Partidos de fútbol':'Partidos de NBA'} <span class="accent-dot">.</span></h2></div><span class="small-muted" id="match-counter"></span></section>
-    <div class="filter-bar"><div class="league-filters" id="league-filters"></div><div class="controls"><select id="period-filter" aria-label="Periodo"><option value="90">Próximos 90 días</option><option value="30">Próximos 30 días</option><option value="7">Próximos 7 días</option><option value="all">Todos</option><option value="fav">Favoritos</option></select><input type="search" id="search-input" placeholder="Buscar equipo..." aria-label="Buscar equipo" /></div></div>
+    <section class="date-picker-bar" aria-label="Elegir fecha"><div class="date-picker-label"><strong>Partidos por fecha</strong><span>Elige un día para ver todos sus encuentros</span></div><div class="date-picker-actions"><button type="button" class="day-shortcut" data-day-shortcut="today">Hoy</button><button type="button" class="day-shortcut" data-day-shortcut="tomorrow">Mañana</button><label class="calendar-label" for="date-filter">📅 Fecha</label><input id="date-filter" type="date" aria-label="Seleccionar fecha de partidos" /><button type="button" class="day-shortcut" data-day-shortcut="all">Ver todos los días</button></div></section><div class="filter-bar"><div class="league-filters" id="league-filters"></div><div class="controls"><select id="period-filter" aria-label="Periodo"><option value="90">Próximos 90 días</option><option value="30">Próximos 30 días</option><option value="7">Próximos 7 días</option><option value="all">Todos</option><option value="fav">Favoritos</option></select><input type="search" id="search-input" placeholder="Buscar equipo..." aria-label="Buscar equipo" /></div></div>
     <div class="matches-grid"><div class="match-list" id="match-list"></div><section class="detail-panel" id="detail-panel" aria-live="polite"></section></div>`;
   $('#league-filters').innerHTML=state.view==='futbol'?`<button type="button" class="filter-pill ${state.league==='all'?'active':''}" data-league="all">◈ Todas las ligas</button>`+leagueKeys.filter(k=>LEAGUES[k].sport==='soccer').map(k=>`<button type="button" class="filter-pill ${state.league===k?'active':''}" data-league="${k}">${LEAGUES[k].icon} ${LEAGUES[k].name}</button>`).join(''):'';
   $('#period-filter').value=state.period;$('#search-input').value=state.query;
+  $('#date-filter').value=state.chosenDay||'';
+  document.querySelectorAll('[data-day-shortcut]').forEach(b=>b.classList.toggle('active',b.dataset.dayShortcut==='today'&&state.chosenDay===nowDate()||b.dataset.dayShortcut==='tomorrow'&&state.chosenDay===plusDays(1)||b.dataset.dayShortcut==='all'&&!state.chosenDay));
   renderMatchArea();displayMetrics();$('#notice').innerHTML=sourceNotice();
 }
 async function hydrateNbaDetail(match){
@@ -292,9 +294,9 @@ function renderMatchArea(){
     }).join('');
     return '<section class="day-section" data-date="'+escapeHTML(day.date)+'">'+head+comps+'</section>';
   };
-  const allDays=groupMatchesByDay(events);
-  const overview=state.view==='inicio';
-  const dayLimit=overview?2:state.daysShown;
+  const allDays=groupMatchesByDay(state.chosenDay?events.filter(x=>matchDay(x)===state.chosenDay):events);
+  const overview=state.view==='inicio'&&!state.chosenDay;
+  const dayLimit=state.chosenDay?1:overview?2:state.daysShown;
   const groups=overview?[
     {label:'Fútbol',icon:'⚽',view:'futbol',days:groupMatchesByDay(soccer).slice(0,dayLimit)},
     {label:'NBA',icon:'🏀',view:'nba',days:groupMatchesByDay(basketball).slice(0,dayLimit)}
@@ -312,7 +314,7 @@ function renderMatchArea(){
     $('#match-list').innerHTML=allDays.length
       ?allDays.slice(0,dayLimit).map(groupDay).join('')
         +(allDays.length>dayLimit?'<button type="button" class="more-days" data-more-days>Mostrar 7 días más ('+(allDays.length-dayLimit)+' fechas pendientes) ↓</button>':'')
-      :'<div class="empty-state">No hay partidos dentro de este periodo o faltan datos de las fuentes.'
+      :'<div class="empty-state">'+(state.chosenDay?'No hay encuentros registrados para '+escapeHTML(dayTitle(state.chosenDay))+' con estos filtros.':'No hay partidos dentro de este periodo o faltan datos de las fuentes.')
         +'<button type="button" class="simple-btn" data-show-all>Ver todos los partidos disponibles</button></div>';
   }
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
@@ -357,7 +359,7 @@ async function refresh(){
   state.loading=true;
   state.errors={};
   $('#refresh-btn').disabled=true;$('#refresh-btn .refresh-icon').textContent='◌';
-  if(state.view==='inicio'||state.view==='partidos')$('#notice').innerHTML=sourceNotice();
+  if(['inicio','futbol','nba'].includes(state.view)&&$('#notice'))$('#notice').innerHTML=sourceNotice();
   nbaReports.clear();
   // Cada competición se incorpora en cuanto su fuente responde, sin esperar al resto.
   const jobs=leagueKeys.map(async k=>{
@@ -406,6 +408,8 @@ function bindEvents(){
     if(nav){state.view=nav.dataset.view;state.daysShown=7;window.location.hash=state.view;render();window.scrollTo({top:0,behavior:'smooth'});return;}
     if(e.target.closest('[data-show-all]')){state.period='all';state.daysShown=7;renderNormal();return;}
     if(e.target.closest('[data-more-days]')){state.daysShown+=7;renderMatchArea();return;}
+    const dayShortcut=e.target.closest('[data-day-shortcut]');
+    if(dayShortcut){state.chosenDay=dayShortcut.dataset.dayShortcut==='today'?nowDate():dayShortcut.dataset.dayShortcut==='tomorrow'?plusDays(1):null;state.period='all';state.daysShown=7;renderNormal();return;}
     const league=e.target.closest('[data-league]');
     if(league){state.league=league.dataset.league;state.daysShown=7;renderNormal();return;}
     const match=e.target.closest('[data-match]');
@@ -413,7 +417,8 @@ function bindEvents(){
     const fav=e.target.closest('[data-favorite]');
     if(fav){toggleFavorite(fav.dataset.favorite);renderMatchArea();toast('Favoritos actualizados');}
   });
-  document.addEventListener('change',e=>{if(e.target.id==='period-filter'){state.period=e.target.value;state.daysShown=7;renderMatchArea();}});
+  document.addEventListener('change',e=>{if(e.target.id==='period-filter'){state.period=e.target.value;state.chosenDay=null;state.daysShown=7;renderNormal();}
+    if(e.target.id==='date-filter'){state.chosenDay=/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)?e.target.value:null;state.period='all';state.daysShown=7;renderNormal();}});
   document.addEventListener('input',e=>{if(e.target.id==='search-input'){state.query=e.target.value;state.daysShown=7;renderMatchArea();}});
   $('#refresh-btn').addEventListener('click',refresh);
   window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['inicio','futbol','nba','historial','fuentes'].includes(h)&&h!==state.view){state.view=h;render();}});
