@@ -69,6 +69,7 @@ def extract_roster_summary(payload, event, league):
                 'name': str(name),
                 'team': str(team),
                 'teamId': str(team_id),
+                'side': side.get('homeAway'),
                 'appearance': True,
                 'yellow': int(yellow),
             })
