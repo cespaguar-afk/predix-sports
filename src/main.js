@@ -1,4 +1,4 @@
-import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadCopaDelRey,loadPlayerCards,mergeLive} from './data.js';
+import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadCopaDelRey,reconcileCopaDelRey,loadPlayerCards,mergeLive} from './data.js';
 import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} from './model.js';
 import {teamReport,headToHead} from './stats.js';
 import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
@@ -16,6 +16,7 @@ const plusDays=n=>plusCalendarDays(nowDate(),n);
 let toastTimer;
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3000);}
 const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,daysShown:7,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
+if(state.data.copadelrey)state.data.copadelrey=reconcileCopaDelRey(state.data.copadelrey);
 const leagueKeys=Object.keys(LEAGUES);
 const predictions=new Map();
 let gradedPredictions=[];
