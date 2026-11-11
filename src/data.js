@@ -219,6 +219,14 @@ export async function loadInternationalOrCup(league){
   }
   throw new Error(errors.join(' / '));
 }
+/** Historial verificable de tarjetas por futbolista, guardado sin claves en GitHub Pages. */
+export async function loadPlayerCards(){
+  const raw=JSON.parse(await getText('./feeds/player_cards.json'));
+  if(!Array.isArray(raw.matches))throw new Error('Historial de jugadores no disponible');
+  return {matches:raw.matches.filter(m=>m&&m.date&&Array.isArray(m.players)),
+    fetchedAt:raw.fetchedAt||null,coverage:raw.coverage||{}};
+}
+
 const simpl=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
   .replace(/\b(fc|cf|club|football|de|la|el|the|united|city|atletico|real)\b/g,'').replace(/[^a-z0-9]/g,'');
 function similarName(x,y){const a=simpl(x),b=simpl(y);return a.length>=4 && b.length>=4 && (a===b || (Math.min(a.length,b.length)>=6 && (a.includes(b)||b.includes(a))));}
