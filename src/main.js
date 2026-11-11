@@ -248,7 +248,7 @@ function renderNormal(){
   renderMatchArea();displayMetrics();$('#notice').innerHTML=sourceNotice();
 }
 async function hydrateNbaDetail(match){
-  if(!match||match.sport!=='nba'||match.status==='post')return;
+  if(!match||match.sport!=='nba')return;
   if(nbaReports.has(match.id)||nbaPending.has(match.id))return;
   nbaPending.add(match.id);
   try{
