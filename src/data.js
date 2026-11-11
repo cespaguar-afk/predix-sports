@@ -3,6 +3,8 @@ export const LEAGUES={
   laliga:{name:'LaLiga',icon:'🇪🇸',sport:'soccer',folder:'ESP_1_la-liga',espn:'soccer/esp.1'},
   hypermotion:{name:'LaLiga Hypermotion',icon:'🇪🇸',sport:'soccer',folder:'ESP_2_segunda-division',espn:'soccer/esp.2'},
   premier:{name:'Premier League',icon:'🏴',sport:'soccer',folder:'ENG_1_premier-league',espn:'soccer/eng.1'},
+  bundesliga:{name:'Bundesliga',icon:'🇩🇪',sport:'soccer',folder:'GER_1_bundesliga',espn:'soccer/ger.1'},
+  ligue1:{name:'Ligue 1',icon:'🇫🇷',sport:'soccer',folder:'FRA_1_ligue-1',espn:'soccer/fra.1'},
   champions:{name:'Champions League',icon:'⭐',sport:'soccer',folder:'UEFA_1_champions-league',espn:'soccer/uefa.champions'},
   copadelrey:{name:'Copa del Rey',icon:'🏆',sport:'soccer',folder:'ESP_CUP_copa-del-rey',espn:'soccer/esp.copa_del_rey'},
   supercopa:{name:'Supercopa de España',icon:'🥇',sport:'soccer',espn:'soccer/esp.super_cup'},
@@ -147,6 +149,58 @@ export async function loadEspn(league,{nbaHistory=false,recentOnly=false}={}){
   if(good.length<responses.length)result.warning='Algunos meses no respondieron; calendario posiblemente incompleto';
   return result;
 }
+/**
+ * Reconciliar Copa del Rey: proveedores distintos pueden publicar dos equipos
+ * como rivales de un mismo club en la misma fecha (p.ej. Albacete 12/11).
+ * Preferimos partido finalizado, fuente ESPN y hora explícita; se evita
+ * mostrar dos encuentros incompatibles sin deducir un resultado.
+ */
+const cupTeamKey=name=>String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .toLowerCase().replace(/\b(fc|cf|cd|ud|sd|club|futbol|football|de|la|el)\b/g,'')
+  .replace(/[^a-z0-9]/g,'').trim();
+const cupPriority=m=>(m.status==='post'?100:0)
+  +(String(m.source||'').includes('ESPN')?20:0)
+  +(m.isoTime?5:0)+(m.time?2:0);
+export function reconcileCopaDelRey(data){
+  const rows=[...(data.results||[]),...(data.fixtures||[])].filter(x=>x?.date&&x?.home&&x?.away);
+  rows.sort((a,b)=>cupPriority(b)-cupPriority(a));
+  const kept=[],used=new Map(),conflicts=[];
+  for(const m of rows){
+    const names=[cupTeamKey(m.home),cupTeamKey(m.away)].filter(Boolean);
+    const sameDay=names.map(name=>used.get(m.date+':'+name)).find(Boolean);
+    if(sameDay){conflicts.push({dropped:m.id,kept:sameDay.id});continue;}
+    kept.push(m);
+    names.forEach(name=>used.set(m.date+':'+name,m));
+  }
+  return {...data,
+    results:kept.filter(m=>m.status==='post'),
+    fixtures:kept.filter(m=>m.status!=='post'),
+    warning:[data.warning,conflicts.length?'Se omitieron '+conflicts.length+' partidos duplicados o incompatibles de Copa del Rey.':null]
+      .filter(Boolean).join(' ')||null};
+}
+/**
+ * Copa del Rey tiene calendarios parciales y dos fuentes con nombres cambiantes.
+ * El calendario ESPN archivado es la fuente preferente, evitando el CSV
+ * de respaldo cuando indica dos rivales diferentes para un mismo club.
+ */
+export async function loadCopaDelRey(){
+  const errors=[];
+  for(const task of [
+    ()=>loadPublishedSnapshot('copadelrey'),
+    ()=>loadEspn('copadelrey',{recentOnly:true}),
+    ()=>loadFootball('copadelrey')
+  ]){
+    try{
+      const result=await task();
+      if((result.results?.length||0)+(result.fixtures?.length||0)>0){
+        return reconcileCopaDelRey(result);
+      }
+      errors.push('Fuente sin partidos');
+    }catch(error){errors.push(error.message||String(error));}
+  }
+  throw new Error('Copa del Rey sin datos válidos: '+errors.join(' / '));
+}
+
 function nbaCdnEvent(g){
   const home=g.homeTeam,away=g.awayTeam;
   if(!home?.teamName||!away?.teamName||!g.gameId)return null;
