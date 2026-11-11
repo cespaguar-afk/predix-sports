@@ -21,7 +21,7 @@ let gradedPredictions=[];
 let repaintTimer=null;
 const nbaReports=new Map();
 const nbaPending=new Set();
-function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view)renderNormal();},110);}
+function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view))renderNormal();},110);}
 function completeResults(m){
   const rows=state.data[m.league]?.results||[];
   return (m.league==='copadelrey'||m.league==='supercopa')
