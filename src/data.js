@@ -54,17 +54,42 @@ async function getText(url){
   if(!res.ok)throw new Error(`HTTP ${res.status}`);
   return res.text();
 }
+/**
+ * Primero usa el espejo CSV de GitHub Pages (mismo origen, sin bloqueo CORS).
+ * Si aún no se ha publicado, prueba el origen público y su respaldo.
+ * Resultados y calendario se solicitan por separado para evitar perder ambos
+ * cuando solo falla uno de ellos. No fabrica partidos.
+ */
 export async function loadFootball(league){
   const folder=LEAGUES[league].folder;
-  const base=`${ROOT}/${folder}`;
-  const urls=[`${base}/results_${SEASON}.csv`,`${base}/fixtures_${SEASON}.csv`];
-  const [resultsText,fixturesText]=await Promise.all(urls.map(async url=>{
-    try{return await getText(url);}catch{return getText(url.replace(ROOT,BACKUP));}
-  }));
-  const results=normalizeFootball(parseCSV(resultsText),league);
-  const fixtures=normalizeFootball(parseCSV(fixturesText),league,true);
-  if(!results.length&&!fixtures.length)throw new Error('Fuente sin partidos');
-  return {results,fixtures,source:'open-matchday',updatedAt:new Date().toISOString()};
+  async function getFeed(kind){
+    const candidates=[
+      './feeds/'+folder+'_'+kind+'.csv',
+      ROOT+'/'+folder+'/'+kind+'_'+SEASON+'.csv',
+      BACKUP+'/'+folder+'/'+kind+'_'+SEASON+'.csv'
+    ];
+    let lastError;
+    for(const url of candidates){
+      try{
+        const csv=await getText(url);
+        if(!csv.replace(/^\uFEFF/,'').startsWith('gw,date,time,home,away'))throw new Error('Cabecera CSV inesperada');
+        const parsed=parseCSV(csv);
+        if(!parsed.length)throw new Error('CSV sin encuentros');
+        return {rows:parsed,origin:url.startsWith('./')?'espejo en GitHub Pages':'origen remoto'};
+      }catch(error){lastError=error;}
+    }
+    throw new Error(kind+': '+(lastError?.message||'sin respuesta'));
+  }
+  const [history,calendar]=await Promise.allSettled([getFeed('results'),getFeed('fixtures')]);
+  const results=history.status==='fulfilled'?normalizeFootball(history.value.rows,league):[];
+  const fixtures=calendar.status==='fulfilled'?normalizeFootball(calendar.value.rows,league,true):[];
+  if(!results.length&&!fixtures.length){
+    throw new Error([history,calendar].filter(x=>x.status==='rejected').map(x=>x.reason?.message).join('; ')||'Sin partidos');
+  }
+  return {results,fixtures,
+    source:'open-matchday'+((history.status==='fulfilled'&&history.value.origin==='espejo en GitHub Pages')?' (copia alojada en esta web)':' (fuente pública)'),
+    updatedAt:new Date().toISOString(),
+    warning:history.status==='rejected'?'No se pudieron cargar resultados históricos':calendar.status==='rejected'?'No se pudo cargar el calendario':null};
 }
 function espnEvent(e,league){
   const c=e.competitions?.[0];if(!c)return null;
@@ -95,6 +120,25 @@ export async function loadEspn(league,{nbaHistory=false}={}){
   const all=[...unique.values()];
   return {results:all.filter(x=>x.status==='post'),fixtures:all.filter(x=>x.status!=='post'),
     source:'ESPN (no oficial)',updatedAt:new Date().toISOString()};
+}
+/** NBA: conexión directa opcional + copia pública sincronizada sin CORS. */
+export async function loadNBA(){
+  try{
+    return await loadEspn('nba',{nbaHistory:true});
+  }catch(directError){
+    try{
+      const snapshot=JSON.parse(await getText('./feeds/nba.json'));
+      if(!Array.isArray(snapshot.events))throw new Error('Archivo NBA incompleto');
+      const unique=new Map(snapshot.events.map(e=>espnEvent(e,'nba')).filter(Boolean).map(e=>[e.id,e]));
+      const events=[...unique.values()];
+      if(!events.length)throw new Error('Copia NBA sin encuentros');
+      return {results:events.filter(x=>x.status==='post'),fixtures:events.filter(x=>x.status!=='post'),
+        source:'ESPN (copia pública, sin directo)',updatedAt:snapshot.fetchedAt||null,
+        warning:'Copia NBA: los marcadores podrían estar desactualizados'};
+    }catch(localError){
+      throw new Error('ESPN: '+directError.message+'; copia NBA: '+localError.message);
+    }
+  }
 }
 const simpl=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
   .replace(/\b(fc|cf|club|football|de|la|el|the|united|city|atletico|real)\b/g,'').replace(/[^a-z0-9]/g,'');
