@@ -18,6 +18,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Check JavaScript models
         run: node --test tests/*.test.mjs
+      - name: Check JavaScript syntax before deploying
+        run: |
+          node --check src/main.js
+          node --check src/data.js
+          node --check src/model.js
+          node --check src/storage.js
       - name: Check live published site and PWA assets
         shell: bash
         run: |
