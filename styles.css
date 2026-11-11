@@ -60,3 +60,14 @@
 .more-days{background:#152a35;border:1px solid #60826b;border-radius:11px;color:#d4f4d2;font-size:12px;font-weight:800;padding:16px;text-align:center;width:100%;cursor:pointer}
 .more-days:hover{border-color:#9cdc73;background:#213a32}
 @media(max-width:700px){.day-section{padding:10px;gap:8px}.day-heading h4{font-size:13px}.day-count{font-size:9px}.competition-day-heading b{font-size:11px}.match-list{gap:12px}.sport-group{gap:10px}}
+
+/* v1.5: filtro de fecha claro y accesible en Android */
+.date-picker-bar{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 20px;padding:16px;border:1px solid #304357;border-radius:14px;background:#142339}
+.date-picker-label{display:flex;flex-direction:column;gap:5px}
+.date-picker-label strong{font-size:14px;color:#f1f8fb}
+.date-picker-label span{font-size:11px;color:#a5b6c7}
+.date-picker-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.day-shortcut,.calendar-label{background:#243649;color:#dceaf3;border:1px solid #42586b;border-radius:10px;cursor:pointer;padding:10px 13px;font-size:12px;font-weight:800}
+.day-shortcut.active{color:#d8ffc3;background:#2d5135;border-color:#a8ea68}
+.date-picker-actions input[type=date]{color-scheme:dark;background:#152b3e;color:#f2f7fa;border:1px solid #42586b;border-radius:10px;padding:9px;font-size:12px;max-width:155px;min-width:0}
+@media(max-width:700px){.date-picker-bar{padding:12px;gap:10px}.date-picker-label strong{font-size:13px}.date-picker-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.day-shortcut,.calendar-label{font-size:11px;padding:10px 8px;text-align:center}.date-picker-actions input[type=date]{width:100%;max-width:none;box-sizing:border-box}.calendar-label{display:none}}
