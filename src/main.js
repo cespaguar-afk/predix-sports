@@ -1,4 +1,4 @@
-import {LEAGUES,loadFootball,loadEspn,loadNBA,mergeLive} from './data.js';
+import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,mergeLive} from './data.js';
 import {predictFootball,predictNBA,brierScore,calibrate} from './model.js';
 import {loadCache,saveCache,loadSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
@@ -12,19 +12,27 @@ const nowDate=()=>new Date().toISOString().slice(0,10);
 const plusDays=n=>new Date(Date.now()+n*86400000).toISOString().slice(0,10);
 let toastTimer;
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3000);}
-const state={data:loadCache(),league:'all',period:'30',query:'',view:'inicio',selected:null,loading:false,errors:{},updatedAt:null};
+const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,loading:false,errors:{},updatedAt:null};
 const leagueKeys=Object.keys(LEAGUES);
 function allResults(){return leagueKeys.flatMap(k=>state.data[k]?.results||[]);}
 function allFixtures(){return leagueKeys.flatMap(k=>state.data[k]?.fixtures||[]);}
 function allEvents(){return [...allFixtures(),...allResults()];}
 function predFor(match){
   if(match.status!=='pre'&&match.status!=='in')return null;
-  const results=state.data[match.league]?.results||[];
+  let results=state.data[match.league]?.results||[];
+  // En los torneos españoles de eliminación, utilizar solo historiales
+  // previos verificables de clubes coincidentes en LaLiga/Hypermotion.
+  if(match.league==='copadelrey'||match.league==='supercopa'){
+    results=[...results,...(state.data.laliga?.results||[]),...(state.data.hypermotion?.results||[])];
+  }
   const raw=match.sport==='nba'?predictNBA(match,results):predictFootball(match,results);
   if(!raw)return null;
   const evaluated=Object.values(loadSnapshots()).filter(x=>x.outcome);
   const adjusted=calibrate(raw.probabilities,match.sport,evaluated);
-  return {...raw,probabilities:adjusted.probabilities,calibrated:adjusted.calibrated};
+  const cupEstimate=match.league==='copadelrey'||match.league==='supercopa';
+  return {...raw,confidence:cupEstimate?'baja':raw.confidence,
+    explanation:raw.explanation+(cupEstimate?' Estimación con históricos de clubes de diferentes competiciones; mayor incertidumbre.':''),
+    probabilities:adjusted.probabilities,calibrated:adjusted.calibrated};
 }
 function sealAndGrade(){
   gradePredictions(allResults());
@@ -150,7 +158,7 @@ function renderNormal(){
   $('#content').innerHTML=`<section class="intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> INTELIGENCIA DEPORTIVA</div><h1>Predicciones basadas <em>en datos.</em></h1><p>Analiza cada partido con estadísticas recientes, probabilidades transparentes y seguimiento de resultados.</p></div><div class="intro-graphic"><span class="glow-orbit orbit-one"></span><span class="glow-orbit orbit-two"></span><span class="graphic-p">P.</span></div></section>
     <section class="metrics" id="metrics"></section><section id="notice" aria-live="polite"></section>
     <section class="section-heading"><div><div class="eyebrow small">${state.view==='inicio'?'EXPLORAR':'CALENDARIO'}</div><h2>${state.view==='inicio'?'Encuentros y pronósticos':'Todos los partidos'} <span class="accent-dot">.</span></h2></div><span class="small-muted" id="match-counter"></span></section>
-    <div class="filter-bar"><div class="league-filters" id="league-filters"></div><div class="controls"><select id="period-filter" aria-label="Periodo"><option value="30">Próximos 30 días</option><option value="7">Próximos 7 días</option><option value="all">Todos</option><option value="fav">Favoritos</option></select><input type="search" id="search-input" placeholder="Buscar equipo..." aria-label="Buscar equipo" /></div></div>
+    <div class="filter-bar"><div class="league-filters" id="league-filters"></div><div class="controls"><select id="period-filter" aria-label="Periodo"><option value="90">Próximos 90 días</option><option value="30">Próximos 30 días</option><option value="7">Próximos 7 días</option><option value="all">Todos</option><option value="fav">Favoritos</option></select><input type="search" id="search-input" placeholder="Buscar equipo..." aria-label="Buscar equipo" /></div></div>
     <div class="matches-grid"><div class="match-list" id="match-list"></div><section class="detail-panel" id="detail-panel" aria-live="polite"></section></div>`;
   $('#league-filters').innerHTML=`<button type="button" class="filter-pill ${state.league==='all'?'active':''}" data-league="all">◈ Todas</button>`+leagueKeys.map(k=>`<button type="button" class="filter-pill ${state.league===k?'active':''}" data-league="${k}">${LEAGUES[k].icon} ${LEAGUES[k].name}</button>`).join('');
   $('#period-filter').value=state.period;$('#search-input').value=state.query;
@@ -184,8 +192,8 @@ function renderHistory(){
 }
 function renderSources(){
   $('#content').innerHTML=`<div class="eyebrow"><span class="eyebrow-line"></span> TRANSPARENCIA</div><h1>Fuentes y <em>metodología.</em></h1>
-    <section class="text-panel"><h3>Fútbol · open-matchday</h3><p>Fuente CSV pública para LaLiga, Premier League y Champions. Actualización normalmente diaria. Incluye resultados, próximos partidos y, cuando los hay, remates, faltas, córners y tarjetas.</p><p><a target="_blank" rel="noopener noreferrer" href="https://github.com/oladeeayo/open-matchday">Ver fuente y condiciones de uso ↗</a></p><p>Licencia para uso informativo no comercial. No incluye alineaciones, lesiones confirmadas ni cuotas; las horas publicadas son aproximadas y algunas figuran como provisionales.</p></section>
-    <section class="text-panel"><h3>NBA y marcadores · ESPN (no oficial)</h3><p>Consulta directa del marcador público de ESPN, sin API key. El servicio no tiene contrato público de estabilidad y puede bloquear peticiones o cambiar el formato. Se muestran errores y se conserva un caché local si ya existía uno.</p><p><a target="_blank" rel="noopener noreferrer" href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">Ver endpoint NBA ↗</a></p><p><a target="_blank" rel="noopener noreferrer" href="https://www.boxscorelab.com/downloads/">Descargas adicionales NBA: BoxScore Lab ↗</a> (referencia complementaria, no conectada al modelo en esta versión).</p></section>
+    <section class="text-panel"><h3>Fútbol · open-matchday</h3><p>Fuente CSV pública para LaLiga, Hypermotion, Premier League, Copa del Rey y Champions. Actualización normalmente diaria. Incluye resultados, próximos partidos y, cuando los hay, remates, faltas, córners y tarjetas.</p><p><a target="_blank" rel="noopener noreferrer" href="https://github.com/oladeeayo/open-matchday">Ver fuente y condiciones de uso ↗</a></p><p>Licencia para uso informativo no comercial. No incluye alineaciones, lesiones confirmadas ni cuotas; las horas publicadas son aproximadas y algunas figuran como provisionales.</p></section>
+    <section class="text-panel"><h3>NBA, Nations League y Supercopa · fuentes públicas</h3><p>Consulta mensual de marcadores de ESPN sin API key y alternativa de calendario NBA desde NBA CDN. Para Naciones y Supercopa se emplean los partidos que el proveedor publique. No garantizamos cobertura ni directo. Estos servicios pueden bloquear peticiones, retrasar resultados o cambiar su formato. Se muestran errores y se conserva un caché local si ya existía uno.</p><p><a target="_blank" rel="noopener noreferrer" href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard">Ver endpoint NBA ↗</a></p><p><a target="_blank" rel="noopener noreferrer" href="https://www.boxscorelab.com/downloads/">Descargas adicionales NBA: BoxScore Lab ↗</a> (referencia complementaria, no conectada al modelo en esta versión).</p></section>
     <section class="text-panel"><h3>Modelo estadístico</h3><ul><li>Fútbol: distribuciones Poisson para goles, ataque y defensa de los últimos diez partidos, regularización hacia la media de la liga.</li><li>Córners, faltas, tarjetas y remates: medias suavizadas de los equipos con muestra mínima; las probabilidades de superar un umbral son aproximaciones Poisson.</li><li>NBA: medias recientes de puntos anotados y recibidos, con margen heurístico y una función logística <strong>no calibrada</strong>.</li><li>Aprendizaje: evaluación Brier y ajuste de calibración únicamente sobre predicciones guardadas antes de jugarse el partido. No hay entrenamiento neuronal ni garantía de mejora.</li><li>Partidos en directo: solo se actualiza el marcador bajo demanda. Las predicciones no se recalculan en función del juego en vivo.</li></ul><p class="disclaimer">Las probabilidades son estimaciones experimentales; no se han validado externamente. No hay cuotas ni recomendaciones de apuesta de valor, porque no podemos verificar el precio real del mercado.</p></section>
     <section class="text-panel"><h3>Privacidad y alojamiento</h3><p>Historial, caché y favoritos viven en <code>localStorage</code>. No existe cuenta ni servidor propio. Si borras datos del navegador o cambias de móvil, se perderán salvo que exportes tu historial.</p><p>En GitHub Pages el sitio y su código serían públicos, <strong>aunque tu historial local seguiría en tu dispositivo</strong>. No pongas información privada en los archivos que publiques.</p></section>`;
 }
@@ -204,11 +212,11 @@ async function refresh(){
   const output={...state.data};const problems={};
   const jobs=leagueKeys.map(async k=>{
     try{
-      const fresh=k==='nba'?await loadNBA():await loadFootball(k);
+      const fresh=k==='nba'?await loadNBA():LEAGUES[k].folder?await loadFootball(k):await loadInternationalOrCup(k);
       output[k]=fresh;
       // Fuentes de marcadores en directo: opcionales y nunca reemplazan el histórico oficial.
       if(k!=='nba'){
-        try{const live=await loadEspn(k);output[k]={...fresh,fixtures:mergeLive(fresh.fixtures,live.fixtures)};}
+        try{const live=await loadEspn(k,{recentOnly:true});output[k]={...fresh,fixtures:mergeLive(fresh.fixtures,live.fixtures)};}
         catch{ /* CSV diario sigue siendo válido sin marcador en directo */ }
       }
       problems[k]=null;
