@@ -1,0 +1,78 @@
+name: Actualizar datos deportivos de Predix Sports
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/sync-feeds.yml'
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: predix-feeds
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar CSV públicos de fútbol
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p feeds
+          for league in ESP_1_la-liga ENG_1_premier-league UEFA_1_champions-league; do
+            for kind in results fixtures; do
+              url="https://raw.githubusercontent.com/oladeeayo/open-matchday/master/data/${league}/${kind}_2627.csv"
+              file="feeds/${league}_${kind}.csv"
+              tmp="$(mktemp)"
+              curl --fail --silent --show-error --location --retry 4 --retry-delay 2 --max-time 30 "$url" > "$tmp"
+              head -n 1 "$tmp" | grep -q '^gw,date,time,home,away'
+              test "$(wc -l < "$tmp")" -gt 1
+              mv "$tmp" "$file"
+              echo "OK: $file"
+            done
+          done
+      - name: Copia de marcador NBA (si responde)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import datetime, urllib.request, json
+          from pathlib import Path
+          now=datetime.datetime.now(datetime.timezone.utc)
+          a=(now-datetime.timedelta(days=45)).strftime('%Y%m%d')
+          b=(now+datetime.timedelta(days=16)).strftime('%Y%m%d')
+          url=f'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={a}-{b}&limit=500'
+          try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (PredixSports data updater)'})
+              with urllib.request.urlopen(req,timeout=24) as res:
+                  data=json.load(res)
+              if not isinstance(data.get('events'), list):
+                  raise ValueError('Respuesta sin lista de eventos')
+              output={'fetchedAt':now.isoformat(),'events':data['events']}
+              Path('feeds/nba.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+              print('OK: feeds/nba.json, eventos:', len(data['events']))
+          except Exception as error:
+              print('Fuente NBA no disponible: se conserva la copia anterior si existe.', str(error))
+          PY
+      - name: Comprobar datos, código y modelos
+        run: |
+          node --test tests/*.test.mjs
+      - name: Guardar feeds actualizados en main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add feeds/
+          if git diff --cached --quiet; then
+            echo 'Sin cambios en los datos.'
+          else
+            git commit -m 'Actualizar datos deportivos públicos'
+            git push origin HEAD:main
+          fi
