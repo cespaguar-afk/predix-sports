@@ -1,4 +1,4 @@
-import {LEAGUES,loadFootball,loadEspn,mergeLive} from './data.js';
+import {LEAGUES,loadFootball,loadEspn,loadNBA,mergeLive} from './data.js';
 import {predictFootball,predictNBA,brierScore,calibrate} from './model.js';
 import {loadCache,saveCache,loadSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
@@ -123,11 +123,28 @@ function displayMetrics(){
   $('#metrics').innerHTML=items.map(x=>`<div class="metric-box"><div class="metric-label">${x.label}<span class="metric-icon">${x.icon}</span></div><div class="metric-value">${x.value}</div><div class="metric-foot">${x.foot}</div></div>`).join('');
 }
 function sourceNotice(){
-  const problems=Object.entries(state.errors).filter(([,v])=>v).map(([key])=>LEAGUES[key].name);
-  const present=leagueKeys.filter(k=>state.data[k]);
-  if(!present.length)return `<div class="notice">No se pudo conectar con las fuentes y aún no hay datos guardados. Comprueba tu conexión y pulsa «Actualizar». La aplicación nunca rellenará partidos ficticios.</div>`;
-  if(problems.length)return `<div class="notice">Fuente temporalmente inaccesible: ${problems.join(', ')}. Se usarán datos guardados en el dispositivo cuando existan. <strong>Comprueba la fecha de actualización.</strong></div>`;
-  return `<div class="notice ok">Datos consultados desde fuentes públicas. Los marcadores en directo dependen de ESPN y solo se actualizan al pulsar «Actualizar».</div>`;
+  const problems=Object.entries(state.errors).filter(([,v])=>v);
+  const loaded=leagueKeys.filter(k=>state.data[k]&&(state.data[k].fixtures?.length||state.data[k].results?.length));
+  const partial=leagueKeys.filter(k=>state.data[k]?.warning);
+  if(!loaded.length){
+    const detail=problems.map(([key,error])=>LEAGUES[key].name+': '+error).join(' | ');
+    return '<div class="notice"><strong>No se han podido cargar partidos.</strong> '
+      +'La web está abierta, pero no hemos obtenido un calendario válido. '
+      +'Comprueba tu conexión y pulsa «Actualizar». '
+      +(detail?'<details><summary>Detalles técnicos</summary><small>'+escapeHTML(detail)+'</small></details>':'')
+      +'</div>';
+  }
+  if(problems.length||partial.length){
+    const names=problems.map(([key])=>LEAGUES[key].name);
+    const detail=problems.map(([key,error])=>LEAGUES[key].name+': '+error)
+      .concat(partial.map(key=>LEAGUES[key].name+': '+state.data[key].warning)).join(' | ');
+    return '<div class="notice">Se muestran '+loaded.length+' competiciones con datos. '
+      +(names.length?'No disponibles ahora: '+escapeHTML(names.join(', '))+'. ':'')
+      +'Los resultados pueden estar retrasados. '
+      +'<details><summary>Ver detalles de conexión</summary><small>'+escapeHTML(detail)+'</small></details></div>';
+  }
+  return '<div class="notice ok">Calendarios y resultados cargados desde fuentes públicas. '
+    +'Algunos datos se actualizan periódicamente y no son necesariamente en directo.</div>';
 }
 function renderNormal(){
   $('#content').innerHTML=`<section class="intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> INTELIGENCIA DEPORTIVA</div><h1>Predicciones basadas <em>en datos.</em></h1><p>Analiza cada partido con estadísticas recientes, probabilidades transparentes y seguimiento de resultados.</p></div><div class="intro-graphic"><span class="glow-orbit orbit-one"></span><span class="glow-orbit orbit-two"></span><span class="graphic-p">P.</span></div></section>
@@ -145,7 +162,7 @@ function renderMatchArea(){
   $('#match-counter').textContent=`${events.length} partidos`;
   const displayed=state.view==='inicio'?events.slice(0,22):events.slice(0,150);
   $('#match-list').innerHTML=displayed.length?displayed.map(eventCard).join(''):
-    `<div class="empty-state">No hay encuentros que cumplan el filtro, o todavía no se han podido cargar sus datos.<br>Prueba «Todos» o actualiza las fuentes.</div>`;
+    `<div class="empty-state">No hay partidos dentro de este periodo o faltan datos de las fuentes.<br><button type="button" class="simple-btn" data-show-all>Ver todos los partidos disponibles</button></div>`;
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
   const match=displayed.find(m=>m.id===state.selected);
   $('#detail-panel').innerHTML=detailed(match);
@@ -187,7 +204,7 @@ async function refresh(){
   const output={...state.data};const problems={};
   const jobs=leagueKeys.map(async k=>{
     try{
-      const fresh=k==='nba'?await loadEspn(k,{nbaHistory:true}):await loadFootball(k);
+      const fresh=k==='nba'?await loadNBA():await loadFootball(k);
       output[k]=fresh;
       // Fuentes de marcadores en directo: opcionales y nunca reemplazan el histórico oficial.
       if(k!=='nba'){
@@ -209,6 +226,7 @@ function bindEvents(){
   document.addEventListener('click',e=>{
     const nav=e.target.closest('[data-view]');
     if(nav){state.view=nav.dataset.view;window.location.hash=state.view;render();window.scrollTo({top:0,behavior:'smooth'});return;}
+    if(e.target.closest('[data-show-all]')){state.period='all';renderNormal();return;}
     const league=e.target.closest('[data-league]');
     if(league){state.league=league.dataset.league;renderNormal();return;}
     const match=e.target.closest('[data-match]');
