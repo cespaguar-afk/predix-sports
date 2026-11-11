@@ -3,3 +3,18 @@
 @media(max-width:1250px){.sidebar{width:210px;min-width:210px}.content{padding:28px}.topbar{padding:0 28px}.intro{padding:32px}.intro-graphic{margin-right:0}.metrics{gap:10px}.metric-box{padding:18px 13px}.matches-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.controls input{width:120px}}
 @media(max-width:940px){.sidebar{display:none}.content{padding:24px 23px 90px}.topbar{padding:0 24px;height:64px}.matches-grid{grid-template-columns:1fr 1fr}.detail-panel{padding:15px}.metrics{grid-template-columns:repeat(2,1fr)}.bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#0c1724f5;border-top:1px solid #2b3d4d;z-index:9;justify-content:space-around;padding:10px 0 max(10px,env(safe-area-inset-bottom))}.bottom-nav button{background:none;border:0;color:#8396a7;display:grid;gap:4px;justify-items:center;font-size:10px;font-weight:800;width:25%}.bottom-nav button.active{color:var(--lime)}.bottom-nav button span{font-size:20px}footer{padding-bottom:92px}}
 @media(max-width:700px){.intro{min-height:0;padding:27px 22px}.intro-graphic{display:none}.intro p{font-size:12px}.intro h1{font-size:28px}.metrics{gap:9px;margin:14px 0 30px}.metric-box{min-height:90px;padding:15px}.metric-value{font-size:22px}.metric-foot{font-size:9px}.matches-grid{grid-template-columns:1fr}.detail-panel{position:static;min-height:230px}.section-heading h2{font-size:22px}.last-update{display:none}.crumb span{display:none}.topbar{height:60px;padding:0 18px}.content{padding:18px 14px 84px}.filter-bar{display:block}.league-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}.league-filters::-webkit-scrollbar{display:none}.controls{display:grid;grid-template-columns:1fr 1fr;margin-bottom:4px}.controls input{width:100%}.filter-pill{font-size:10px;padding:10px}.section-heading{margin-top:0}.detail-vs{margin-top:14px}.match-card{padding:15px}.toast{left:15px;right:15px;bottom:79px;text-align:center}footer span{float:none;display:block;margin-top:5px}}
+
+/* Predix Sports · v3: radiografía de equipos, optimizada para móvil */
+.team-profiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:13px 0 17px}
+.team-profile{border:1px solid #304355;border-radius:12px;background:#162537;padding:13px;min-width:0}
+.team-profile h4{font-size:13px;color:#e8f1f9;margin:0 0 10px;overflow-wrap:anywhere}
+.team-form{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 15px}
+.form-dot{width:25px;height:25px;display:inline-grid;place-items:center;border-radius:6px;font-size:10px;font-weight:800;background:#35404a;color:#e5eaf0}
+.form-dot.W{background:#2d583e;color:#c0f6c6}.form-dot.L{background:#57312f;color:#ffd0c7}.form-dot.D{background:#545036;color:#f4e9b1}
+.team-stat-table{display:grid;gap:0}
+.team-stat-table>div{display:flex;gap:8px;align-items:start;justify-content:space-between;padding:8px 0;border-top:1px solid #2b3c4b}
+.team-stat-table span{font-size:10px;line-height:1.4;color:#9cadbf}
+.team-stat-table strong{flex-shrink:0;text-align:right;font-size:11px;color:#e5f1f9}
+.team-h2h{margin-top:8px;display:grid;gap:6px}.team-h2h>div{display:flex;justify-content:space-between;gap:10px;padding:9px;background:#192a3b;border-radius:7px}
+.team-h2h span{font-size:10px;white-space:nowrap;color:#9aabb9}.team-h2h b{font-size:10px;text-align:right;line-height:1.5}
+@media(max-width:700px){.team-profiles{grid-template-columns:1fr}.team-profile{padding:12px}.team-stat-table>div{padding:7px 0}.team-h2h>div{display:grid;gap:3px}.team-h2h b{text-align:left}}
