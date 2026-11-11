@@ -73,12 +73,27 @@ export function predictYellowCards(fixture,results){
  */
 export function predictPlayerBookings(fixture,playerMatches,limit=8){
   if(!fixture || !Array.isArray(playerMatches) || !fixture.date)return [];
-  const normalize=name=>String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
-    .replace(/\b(fc|cf|cd|ud|rc|rcd|s\.a\.d|club|de|del|el|la|the|real|atletico|atleti|city|united)\b/g,'')
-    .replace(/[^a-z0-9]/g,'');
+  const normalize=name=>{
+    let text=String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+      .replace(/\b(fc|cf|cd|ud|rc|rcd|s\.a\.d|club|de|del|el|la|the)\b/g,'')
+      .replace(/[^a-z0-9]/g,'');
+    // Explicit, non-ambiguous naming differences in free providers.
+    const aliases={
+      athletic:'athleticbilbao',athleticbilbao:'athleticbilbao',
+      manutd:'manchesterunited',manchesterutd:'manchesterunited',
+      manc:'manchestercity',mancity:'manchestercity',
+      manchestercity:'manchestercity',
+      espanyolbarcelona:'espanyol',espanyol:'espanyol',
+      racing:'racingsantander',racingsantander:'racingsantander',
+      atleti:'atleticomadrid',atleticodemadrid:'atleticomadrid',
+      atletimadrid:'atleticomadrid'
+    };
+    return aliases[text]||text;
+  };
   const matchesTeam=(x,y)=>{
     const a=normalize(x),b=normalize(y);
-    return a.length>=4&&b.length>=4&&(a===b||(Math.min(a.length,b.length)>=6&&(a.includes(b)||b.includes(a))));
+    if(a.length<4||b.length<4)return false;
+    return a===b||(Math.min(a.length,b.length)>=5&&(a.includes(b)||b.includes(a)));
   };
   const cutoff=new Date(fixture.date+'T12:00:00Z').getTime()-85*86400000;
   const data=new Map();
