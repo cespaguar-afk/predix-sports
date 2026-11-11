@@ -1,0 +1,45 @@
+name: Predix Sports - Web Health Check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/predix-health.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Check JavaScript models
+        run: node --test tests/model.test.mjs
+      - name: Check live published site and PWA assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://cespaguar-afk.github.io/predix-sports'
+          for file in '' 'index.html' 'styles.css' 'manifest.webmanifest' 'sw.js' 'src/main.js' 'src/data.js' 'src/model.js' 'src/storage.js' 'assets/favicon.svg' 'assets/icon-192.png' 'assets/icon-512.png'; do
+            echo "Checking URL: ${base}/${file}"
+            curl --fail --show-error --silent --location --retry 3 --retry-delay 3 --output /tmp/predix-response "${base}/${file}"
+            test -s /tmp/predix-response
+            echo "PASS ${file:-homepage}"
+          done
+          curl -fsSL "${base}/" | grep -q 'Predix Sports'
+          curl -fsSL "${base}/manifest.webmanifest" | node -e "let s='';process.stdin.on('data',x=>s+=x).on('end',()=>{const m=JSON.parse(s);if(m.name!=='Predix Sports'||m.display!=='standalone')process.exit(1);console.log('PWA manifest valid')})"
+      - name: Check football feed files (public endpoint existence)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for league in ESP_1_la-liga ENG_1_premier-league UEFA_1_champions-league; do
+            for kind in results fixtures; do
+              url="https://raw.githubusercontent.com/oladeeayo/open-matchday/master/data/${league}/${kind}_2627.csv"
+              curl --fail --silent --show-error --location --retry 3 --output /tmp/feed "$url"
+              head -n 1 /tmp/feed | grep -q 'gw,date,time,home,away'
+              echo "PASS ${league}/${kind}_2627.csv"
+            done
+          done
