@@ -25,7 +25,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p feeds
-          for league in ESP_1_la-liga ESP_2_segunda-division ENG_1_premier-league UEFA_1_champions-league ESP_CUP_copa-del-rey; do
+          for league in ESP_1_la-liga ESP_2_segunda-division ENG_1_premier-league GER_1_bundesliga FRA_1_ligue-1 UEFA_1_champions-league ESP_CUP_copa-del-rey; do
             for kind in results fixtures; do
               url="https://raw.githubusercontent.com/oladeeayo/open-matchday/master/data/${league}/${kind}_2627.csv"
               file="feeds/${league}_${kind}.csv"
