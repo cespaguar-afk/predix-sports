@@ -1,6 +1,6 @@
 # Predix Sports · Primera versión funcional
 
-PWA oscura de predicciones deportivas con datos abiertos, sin API keys y sin servidor propio. Proyecto **personal, no comercial**. Incluye LaLiga, LaLiga Hypermotion, Premier League, Champions League masculina, Copa del Rey, Supercopa de España, UEFA Nations League y NBA.
+PWA oscura de predicciones deportivas con datos abiertos, sin API keys y sin servidor propio. Proyecto **personal, no comercial**. Incluye LaLiga, LaLiga Hypermotion, Premier League, Bundesliga, Ligue 1, Champions League masculina, Copa del Rey, Supercopa de España, UEFA Nations League y NBA. La interfaz separa fútbol y NBA en secciones dedicadas.
 
 ## Ejecutar localmente
 
@@ -30,7 +30,8 @@ Para tests: `npm test` (Node.js 20+). Sin instalación de dependencias.
 
 | Función | Estado |
 |---|---|
-| LaLiga, Hypermotion, Premier, Champions y Copa del Rey | CSV públicos de open-matchday (espejo en feeds/) |
+| LaLiga, Hypermotion, Premier, Bundesliga, Ligue 1 y Champions | CSV públicos de open-matchday (espejo en feeds/) |
+| Copa del Rey | Calendario ESPN guardado con prioridad, verificación de duplicados/conflictos y CSV de respaldo |
 | Nations League y Supercopa de España | ESPN no oficial; instantáneas gratuitas cuando existan |
 | NBA | ESPN por meses, copia histórica en feeds/nba.json y respaldo de calendario NBA CDN |
 | Amarillas por equipo/partido | Media ponderada reciente y estimación Poisson si existen partidos suficientes |
@@ -58,7 +59,7 @@ Los modelos no están calibrados ni han superado validación externa; la etiquet
 
 - `index.html`: estructura de la interfaz
 - `styles.css`: diseño responsive oscuro
-- `src/data.js`: fuentes externas, parseo y normalización
+- `src/data.js`: fuentes externas, parseo, normalización y reconciliación de calendarios de Copa del Rey
 - `src/model.js`: modelos experimentales, Brier y calibración
 - `src/storage.js`: historial local y favoritos
 - `src/main.js`: interacciones, carga y visualización
@@ -66,7 +67,7 @@ Los modelos no están calibrados ni han superado validación externa; la etiquet
 - `tests/*.test.mjs`: pruebas sin dependencias, incluidas tarjetas, NBA y competiciones
 - `scripts/sync_player_cards.py`: obtiene datos por jugador con apariciones y amarillas verificadas
 - `.github/workflows/player-cards.yml`: sincroniza el histórico individual dos veces al día
-- `.github/workflows/sync-feeds.yml`: copia calendarios/resultados cada seis horas
+- `.github/workflows/sync-feeds.yml`: copia calendarios/resultados, incluidas Bundesliga y Ligue 1, cada seis horas
 
 ## Limitaciones importantes
 
@@ -78,3 +79,10 @@ Los modelos no están calibrados ni han superado validación externa; la etiquet
 - Al cambiar el proveedor, la localización de equipos y el código de partido podrían cambiar, impidiendo calificar históricos; no atribuye datos inciertos.
 - Guardar en `localStorage` no aporta sincronización ni protección criptográfica.
 - No hay actualizaciones automáticas ni procesos en segundo plano.
+
+## Actualización de noviembre 2026
+
+- Nuevas pestañas **Fútbol** y **NBA**, con secciones separadas también en Inicio. En Fútbol están los filtros de todas las ligas disponibles; los enlaces antiguos `#partidos` se abren en Fútbol.
+- **Copa del Rey:** prioridad al calendario archivado de ESPN frente al CSV complementario, con descarte de enfrentamientos contradictorios (un club con dos rivales distintos el mismo día), duplicados y partidos cuyo resultado final ya se ha confirmado. El calendario es parcial por rondas y depende de los proveedores.
+- **Bundesliga y Ligue 1:** añadidas a los filtros de fútbol y a la sincronización de CSV. Las estadísticas dependen de los campos realmente disponibles en open-matchday; no se inventan datos ausentes.
+- Nueva versión del service worker para que Android instale el código actualizado. Tras la primera actualización puede ser necesario cerrar y volver a abrir la PWA.
