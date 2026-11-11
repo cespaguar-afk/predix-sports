@@ -37,6 +37,75 @@ function pOver(threshold, lambda) {
 function backoff(measured, n, baseline, prior=6) {
   return (measured*n + baseline*prior)/(n+prior);
 }
+
+/** Amarillas de ambos equipos: sólo resultados anteriores con conteos reales. */
+export function predictYellowCards(fixture,results){
+  const past=results.filter(r=>r.date<fixture.date && valid(r.homeYellow) && valid(r.awayYellow));
+  if(past.length<10)return null;
+  const home=sample(past,fixture.home,fixture.date,12);
+  const away=sample(past,fixture.away,fixture.date,12);
+  if(home.length<4 || away.length<4)return null;
+  const hf=teammateValue(home,fixture.home,'Yellow');
+  const ha=teammateValue(home,fixture.home,'Yellow',true);
+  const af=teammateValue(away,fixture.away,'Yellow');
+  const aa=teammateValue(away,fixture.away,'Yellow',true);
+  if(Math.min(hf.count,ha.count,af.count,aa.count)<4)return null;
+  const baseline=mean(past.flatMap(r=>[r.homeYellow,r.awayYellow]));
+  if(!valid(baseline))return null;
+  const expHome=(backoff(hf.avg,hf.count,baseline,5)+backoff(aa.avg,aa.count,baseline,5))/2;
+  const expAway=(backoff(af.avg,af.count,baseline,5)+backoff(ha.avg,ha.count,baseline,5))/2;
+  const total=expHome+expAway;
+  return {
+    expectedHome:round(expHome,1),expectedAway:round(expAway,1),
+    expectedTotal:round(total,1),
+    over25:pOver(2.5,total),over35:pOver(3.5,total),
+    over45:pOver(4.5,total),over55:pOver(5.5,total),
+    sampleHome:hf.count,sampleAway:af.count,
+    confidence:Math.min(hf.count,af.count)>=9 && past.length>=80?'media':'baja',
+    explanation:'Sólo amarillas. Medias recientes del equipo y las recibidas por sus rivales, suavizadas hacia la media. No considera árbitro ni bajas.'
+  };
+}
+
+/**
+ * La estimación individual ES condicional a participar.
+ * Sólo se aceptan apariciones documentadas anteriores al partido, nunca
+ * jugadores inventados. Suavizado beta con prior débil (1 amarilla/8 partidos).
+ */
+export function predictPlayerBookings(fixture,playerMatches,limit=8){
+  if(!fixture || !Array.isArray(playerMatches) || !fixture.date)return [];
+  const normalize=name=>String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+    .replace(/\b(fc|cf|cd|ud|rc|rcd|s\.a\.d|club|de|del|el|la|the|real|atletico|atleti|city|united)\b/g,'')
+    .replace(/[^a-z0-9]/g,'');
+  const matchesTeam=(x,y)=>{
+    const a=normalize(x),b=normalize(y);
+    return a.length>=4&&b.length>=4&&(a===b||(Math.min(a.length,b.length)>=6&&(a.includes(b)||b.includes(a))));
+  };
+  const cutoff=new Date(fixture.date+'T12:00:00Z').getTime()-85*86400000;
+  const data=new Map();
+  for(const game of playerMatches){
+    const t=Date.parse((game.date||'')+'T12:00:00Z');
+    if(!Number.isFinite(t)||t>=Date.parse(fixture.date+'T12:00:00Z')||t<cutoff)continue;
+    for(const p of (game.players||[])){
+      if(!p||!p.id||!p.name||p.appearance!==true||!(p.yellow===0||p.yellow===1||p.yellow===2))continue;
+      const team=p.team||'';
+      const side=matchesTeam(team,fixture.home)?'home':matchesTeam(team,fixture.away)?'away':null;
+      if(!side)continue;
+      const key=side+':'+p.id;
+      const v=data.get(key)||{id:p.id,name:p.name,team,side,played:0,booked:0,lastSeen:''};
+      v.played++;v.booked+=p.yellow>0?1:0;
+      if(game.date>v.lastSeen)v.lastSeen=game.date;
+      data.set(key,v);
+    }
+  }
+  return [...data.values()]
+    .filter(x=>x.played>=4 && (Date.parse(fixture.date+'T12:00:00Z')-Date.parse(x.lastSeen+'T12:00:00Z'))<=42*86400000)
+    .map(x=>({...x,
+      probability:clamp((x.booked+1)/(x.played+8),0,1),
+      confidence:x.played>=9?'media':'baja'}))
+    .sort((a,b)=>b.probability-a.probability||b.played-a.played||a.name.localeCompare(b.name))
+    .slice(0,limit);
+}
+
 function poissonGrid(lH,lA) {
   let total=0,H=0,D=0,A=0,over25=0,btts=0;
   const scores=[];
@@ -92,10 +161,11 @@ export function predictFootball(fixture, results) {
     const expected=expectedHome+expectedAway;
     markets.push({field,label,expected:round(expected),threshold,over:pOver(threshold,expected),samples:Math.min(hFor.count,aFor.count)});
   }
+  const yellowCards=predictYellowCards(fixture,past);
   const n=Math.min(home.length,away.length);
   const confidence = n>=8 && past.length>=75 ? 'media' : 'baja';
   return {sport:'soccer',kind:'poisson',probabilities:grid.probabilities,over25:grid.over25,btts:grid.btts,
-    scorelines:grid.scorelines,expectedHome:round(lambdaH,2),expectedAway:round(lambdaA,2),markets,
+    scorelines:grid.scorelines,expectedHome:round(lambdaH,2),expectedAway:round(lambdaA,2),markets,yellowCards,
     sampleHome:home.length,sampleAway:away.length,confidence,explanation:'Poisson con forma reciente, goles a favor/en contra y suavizado hacia la media de la competición. No incluye lesiones ni alineaciones.'};
 }
 
