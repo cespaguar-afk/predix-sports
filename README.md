@@ -1,6 +1,6 @@
 # Predix Sports · Primera versión funcional
 
-PWA oscura de predicciones deportivas con datos abiertos, sin API keys y sin servidor propio. Proyecto **personal, no comercial**. Incluye LaLiga, Premier League, Champions League masculina y NBA.
+PWA oscura de predicciones deportivas con datos abiertos, sin API keys y sin servidor propio. Proyecto **personal, no comercial**. Incluye LaLiga, LaLiga Hypermotion, Premier League, Champions League masculina, Copa del Rey, Supercopa de España, UEFA Nations League y NBA.
 
 ## Ejecutar localmente
 
@@ -30,10 +30,13 @@ Para tests: `npm test` (Node.js 20+). Sin instalación de dependencias.
 
 | Función | Estado |
 |---|---|
-| LaLiga, Premier, Champions: calendario y resultados | Conectado a CSV de open-matchday 2026/27 |
+| LaLiga, Hypermotion, Premier, Champions y Copa del Rey | CSV públicos de open-matchday (espejo en feeds/) |
+| Nations League y Supercopa de España | ESPN no oficial; instantáneas gratuitas cuando existan |
+| NBA | ESPN por meses, copia histórica en feeds/nba.json y respaldo de calendario NBA CDN |
+| Amarillas por equipo/partido | Media ponderada reciente y estimación Poisson si existen partidos suficientes |
+| Jugadores con mayor riesgo de amonestación | Informes individuales ESPN archivados en feeds/player_cards.json; probabilidad experimental CONDICIONADA a que jueguen |
 | Pronósticos fútbol 1X2, marcador, más de 2,5, ambos marcan | Poisson experimental |
 | Córners, amarillas, faltas, remates | Estimaciones solo si hay suficientes valores no nulos |
-| NBA: partidos, resultados y modelo ganador/total | ESPN API no oficial (puede fallar) |
 | En directo | Marcador ESPN al pulsar actualizar (no hay pronóstico in-play) |
 | Apuestas de valor | No implementado, no hay cuotas fiables y el usuario no quiere introducirlas |
 | Aprendizaje | Brier + recalibración suave con historial local ya evaluado; no reentrena redes neuronales |
@@ -45,7 +48,7 @@ Para tests: `npm test` (Node.js 20+). Sin instalación de dependencias.
 
 Fútbol: [open-matchday](https://github.com/oladeeayo/open-matchday) (CSV 2026/27, edición diaria, no live). Su compilación permite uso personal informativo no comercial con atribución. No incluye cuotas, lesiones ni xG. Las horas están en una convención CET-1 fija (en verano puede diferir respecto al huso local) y se marcan como orientativas.
 
-NBA/marcadores: [ESPN scoreboard no oficial](https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard), JSON sin clave. Es un endpoint **no documentado ni garantizado**; depende de CORS y puede dejar de funcionar. La UI muestra una advertencia y conserva datos previos si falla. [BoxScore Lab](https://www.boxscorelab.com/downloads/) ofrece descargas NBA gratuitas, pero no está conectado todavía.
+NBA, Nations League, Supercopa y amonestaciones por jugador: [ESPN scoreboard no oficial](https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard), JSON sin clave. Es un endpoint **no documentado ni garantizado**; consultamos meses individuales y una copia pública para evitar CORS y HTTP 400 de intervalos largos; depende de CORS y puede dejar de funcionar. La UI muestra una advertencia y conserva datos previos si falla. [BoxScore Lab](https://www.boxscorelab.com/downloads/) ofrece descargas NBA gratuitas, pero no está conectado todavía.
 
 Los modelos no están calibrados ni han superado validación externa; la etiqueta de confianza indica solo volumen de muestra. Las métricas de error se computan contra registros guardados antes del encuentro, no contra datos filtrados a posteriori. No hay ingresos por apuestas, banca, rentabilidad ni promesas de acierto.
 
@@ -60,11 +63,17 @@ Los modelos no están calibrados ni han superado validación externa; la etiquet
 - `src/storage.js`: historial local y favoritos
 - `src/main.js`: interacciones, carga y visualización
 - `manifest.webmanifest`, `sw.js`, `assets/`: PWA e iconos
-- `tests/model.test.mjs`: pruebas sin dependencias
+- `tests/*.test.mjs`: pruebas sin dependencias, incluidas tarjetas, NBA y competiciones
+- `scripts/sync_player_cards.py`: obtiene datos por jugador con apariciones y amarillas verificadas
+- `.github/workflows/player-cards.yml`: sincroniza el histórico individual dos veces al día
+- `.github/workflows/sync-feeds.yml`: copia calendarios/resultados cada seis horas
 
 ## Limitaciones importantes
 
 - Estimar probabilidades no garantiza fiabilidad; no representan una recomendación financiera.
+- **Tarjetas de jugadores**: los porcentajes son heurísticos y condicionados a participar. Se calculan sólo con partidos finalizados que indican tanto aparición como amarillas verificables (mínimo cuatro apariciones en 85 días). No se conocen alineaciones futuras ni estado médico confirmado.
+- **Tarjetas por equipo**: se calculan únicamente cuando la fuente tiene conteos de amarillas en suficientes partidos previos. No se inventan valores ante huecos de datos.
+- La cobertura ESPN por jugador no está garantizada y puede variar mucho según la competición; algunas eliminatorias no tienen estadísticas individuales suficientes.
 - Las predicciones guardadas se sellan solo para partidos posteriores al día de consulta; evita fuga de resultados del mismo día con horas inciertas.
 - Al cambiar el proveedor, la localización de equipos y el código de partido podrían cambiar, impidiendo calificar históricos; no atribuye datos inciertos.
 - Guardar en `localStorage` no aporta sincronización ni protección criptográfica.
