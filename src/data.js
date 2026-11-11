@@ -131,10 +131,10 @@ async function loadPublishedSnapshot(league){
   return fromEspnEvents(raw.events,league,'ESPN (copia pública; puede estar retrasada)',raw.fetchedAt||null,
     'Información guardada en la última sincronización; puede estar retrasada');
 }
-export async function loadEspn(league,{nbaHistory=false}={}){
+export async function loadEspn(league,{nbaHistory=false,recentOnly=false}={}){
   const path=LEAGUES[league]?.espn;
   if(!path)throw new Error('Liga sin identificador ESPN');
-  const keys=nbaHistory?monthKeys(new Date(),2,2):monthKeys(new Date(),2,4);
+  const keys=recentOnly?monthKeys(new Date(),0,1):nbaHistory?monthKeys(new Date(),2,2):monthKeys(new Date(),2,4);
   const responses=await Promise.allSettled(keys.map(async month=>{
     const url=ESPN+'/'+path+'/scoreboard?dates='+month+'&limit=500';
     const data=JSON.parse(await getText(url));
