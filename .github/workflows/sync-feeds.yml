@@ -25,7 +25,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p feeds
-          for league in ESP_1_la-liga ENG_1_premier-league UEFA_1_champions-league; do
+          for league in ESP_1_la-liga ESP_2_segunda-division ENG_1_premier-league UEFA_1_champions-league ESP_CUP_copa-del-rey; do
             for kind in results fixtures; do
               url="https://raw.githubusercontent.com/oladeeayo/open-matchday/master/data/${league}/${kind}_2627.csv"
               file="feeds/${league}_${kind}.csv"
@@ -37,28 +37,54 @@ jobs:
               echo "OK: $file"
             done
           done
-      - name: Copia de marcador NBA (si responde)
+      - name: Guardar calendarios públicos ESPN (sin claves)
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import datetime, urllib.request, json
+          import datetime, urllib.request, json, time
           from pathlib import Path
           now=datetime.datetime.now(datetime.timezone.utc)
-          a=(now-datetime.timedelta(days=45)).strftime('%Y%m%d')
-          b=(now+datetime.timedelta(days=16)).strftime('%Y%m%d')
-          url=f'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={a}-{b}&limit=500'
-          try:
-              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (PredixSports data updater)'})
-              with urllib.request.urlopen(req,timeout=24) as res:
-                  data=json.load(res)
-              if not isinstance(data.get('events'), list):
-                  raise ValueError('Respuesta sin lista de eventos')
-              output={'fetchedAt':now.isoformat(),'events':data['events']}
-              Path('feeds/nba.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
-              print('OK: feeds/nba.json, eventos:', len(data['events']))
-          except Exception as error:
-              print('Fuente NBA no disponible: se conserva la copia anterior si existe.', str(error))
+          def month(offset):
+              n=now.year*12+(now.month-1)+offset
+              return f'{n//12:04d}{n%12+1:02d}'
+          leagues={
+              'nba':('basketball/nba',range(-2,3)),
+              'nations':('soccer/uefa.nations',range(-3,6)),
+              'supercopa':('soccer/esp.super_cup',range(-2,6)),
+              'copadelrey':('soccer/esp.copa_del_rey',range(-2,6)),
+          }
+          def minimal(e):
+              c=(e.get('competitions') or [{}])[0]
+              comp=[]
+              for entry in c.get('competitors',[]):
+                  team=entry.get('team') or {}
+                  comp.append({'homeAway':entry.get('homeAway'), 'score':entry.get('score'),
+                               'team':{k:team.get(k) for k in ('displayName','name','shortDisplayName','abbreviation')}})
+              st=((e.get('status') or {}).get('type') or {})
+              return {'id':e.get('id'),'date':e.get('date'),
+                      'status':{'type':{'state':st.get('state'),'shortDetail':st.get('shortDetail')}},
+                      'competitions':[{'competitors':comp}]}
+          for key,(league,months) in leagues.items():
+              events={}; ok=0
+              for offset in months:
+                  ym=month(offset)
+                  url=f'https://site.api.espn.com/apis/site/v2/sports/{league}/scoreboard?dates={ym}&limit=500'
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (PredixSports personal app)','Accept':'application/json'})
+                      with urllib.request.urlopen(req,timeout=15) as response: payload=json.load(response)
+                      if not isinstance(payload.get('events'),list): raise ValueError('Respuesta sin eventos')
+                      ok+=1
+                      for e in payload['events']:
+                          if e.get('id') and e.get('date'): events[str(e['id'])]=minimal(e)
+                  except Exception as exc:
+                      print(f'{key} {ym}: sin respuesta ({exc})')
+              if events:
+                  output={'fetchedAt':now.isoformat(),'events':list(events.values())}
+                  Path(f'feeds/{key}.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+                  print(f'OK {key}: {len(events)} encuentros, meses correctos: {ok}')
+              else:
+                  print(f'Sin nuevos encuentros para {key}; conservar copia previa (meses correctos: {ok})')
           PY
       - name: Comprobar datos, código y modelos
         run: |
