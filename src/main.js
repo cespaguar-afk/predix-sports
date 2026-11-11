@@ -406,7 +406,7 @@ function bindEvents(){
   document.addEventListener('click',e=>{
     const nav=e.target.closest('[data-view]');
     if(nav){state.view=nav.dataset.view;state.daysShown=7;window.location.hash=state.view;render();window.scrollTo({top:0,behavior:'smooth'});return;}
-    if(e.target.closest('[data-show-all]')){state.period='all';state.daysShown=7;renderNormal();return;}
+    if(e.target.closest('[data-show-all]')){state.period='all';state.chosenDay=null;state.daysShown=7;renderNormal();return;}
     if(e.target.closest('[data-more-days]')){state.daysShown+=7;renderMatchArea();return;}
     const dayShortcut=e.target.closest('[data-day-shortcut]');
     if(dayShortcut){state.chosenDay=dayShortcut.dataset.dayShortcut==='today'?nowDate():dayShortcut.dataset.dayShortcut==='tomorrow'?plusDays(1):null;state.period='all';state.daysShown=7;renderNormal();return;}
