@@ -105,3 +105,15 @@ La portada muestra separadamente un resumen de fútbol y otro de NBA para los pr
 - Rendimiento: copia local de calendarios NBA primero; el directo se consulta después sin bloquear la vista, los archivos alojados en la web aprovechan la caché del navegador, los guardados locales se agrupan y las fichas de jugadores requieren una acción explícita.
 - Privacidad: las predicciones guardadas siguen siendo **locales de este navegador/dispositivo**. El historial no se comparte automáticamente entre Android y un ordenador.
 - Limitación: fuentes ESPN/NBA CDN no garantizadas. Si no responden, se muestra la ausencia de datos; no hay precisión máxima garantizada ni reentrenamiento automático del modelo.
+
+## Versión 2.0 — interfaz renovada e historial visible tras el resultado
+
+- Interfaz visual clara, con colores azul/verde agua, tarjetas de partido más legibles y menos elementos secundarios.
+- **Partidos finalizados:** debajo del resultado se muestran *todos* los porcentajes guardados antes del inicio: local / empate / visitante para fútbol y local / visitante para NBA.
+- La ficha ampliada repite esas probabilidades sin recalcularlas, con fecha de registro, marcador estimado y otros mercados si se guardaron.
+- **Archivo compartido:** GitHub Actions ejecuta `scripts/archive_predictions.mjs` cada dos horas y tras actualizar los feeds; guarda en `feeds/predictions.json` los pronósticos creados *antes* del partido. La web prioriza el registro local y consulta la copia pública como respaldo.
+- Los partidos antiguos para los que no se conservó una predicción válida seguirán mostrando «Pronóstico anterior no registrado». Nunca se reconstruyen probabilidades después del resultado.
+- Los históricos personales del navegador siguen en cada dispositivo; el archivo compartido solo contiene datos deportivos y probabilidades, nunca datos personales.
+- Las actualizaciones automáticas dependen de que GitHub Actions esté habilitado y se ejecute correctamente. No pueden rellenar predicciones de partidos anteriores a su instalación.
+
+Las probabilidades son experimentales y no garantizan aciertos.
