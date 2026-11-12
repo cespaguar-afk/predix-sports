@@ -51,6 +51,8 @@ export function normalizeFootball(rows,league,isFixture=false){
     homeTarget:score(r.home_target),awayTarget:score(r.away_target),
     homeFouls:score(r.home_fouls),awayFouls:score(r.away_fouls),
     homeCorners:score(r.home_corners),awayCorners:score(r.away_corners),
+    homeCorners1H:score(r.home_corners_1h),awayCorners1H:score(r.away_corners_1h),
+    homeCorners2H:score(r.home_corners_2h),awayCorners2H:score(r.away_corners_2h),
     homeYellow:score(r.home_yellow),awayYellow:score(r.away_yellow),
     homeRed:score(r.home_red),awayRed:score(r.away_red)
   }));
