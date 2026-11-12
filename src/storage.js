@@ -4,7 +4,24 @@ const CACHE='predix-v1-data';
 const FAV='predix-v1-favorites';
 function read(key,defaultValue){try{return JSON.parse(localStorage.getItem(key))??defaultValue;}catch{return defaultValue;}}
 function write(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}}
+let publicSnapshots={};
 export const loadSnapshots=()=>read(KEY,{});
+export function getHistoricSnapshot(match){
+  // Priorizamos siempre la predicción local original si existe.
+  return findSnapshot(match,loadSnapshots())||findSnapshot(match,publicSnapshots);
+}
+export async function loadPublicSnapshots(){
+  try{
+    const res=await fetch('./feeds/predictions.json',{cache:'no-store',signal:AbortSignal.timeout(6500)});
+    if(!res.ok)throw Error('HTTP '+res.status);
+    const payload=await res.json();
+    if(payload?.snapshots&&typeof payload.snapshots==='object'){
+      publicSnapshots=payload.snapshots;
+      return Object.keys(publicSnapshots).length;
+    }
+  }catch{}
+  return Object.keys(publicSnapshots).length;
+}
 export const loadCache=()=>read(CACHE,{});
 export const saveCache=data=>write(CACHE,data);
 export const getFavorites=()=>read(FAV,[]);
