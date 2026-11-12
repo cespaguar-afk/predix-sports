@@ -141,10 +141,10 @@ function matchResult(m,prediction=null){
   const outcome=pick[0]==='H'?'1':pick[0]==='D'?'X':'2';
   return `<div class="outcome-big lime">${fmt(pick[1])}</div><div class="outcome-small">Pronóstico ${outcome}</div>`;
 }
-function eventCard(m){
+function eventCard(m,snapshots){
   const league=LEAGUES[m.league];const b=badgeText(m);
   const text=m.isoTime?new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date(m.isoTime)):m.time?m.time+'*':'Hora por confirmar';
-  const archived=m.status==='post'?getHistoricSnapshot(m):null;
+  const archived=m.status==='post'?getHistoricSnapshot(m,snapshots):null;
   const prediction=m.status==='post'?null:predFor(m);
   const confidence=confidenceHTML(m.status==='post'?archived:prediction,{compact:true});
   return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}" aria-label="${escapeHTML(m.home+' contra '+m.away)}">
@@ -392,6 +392,8 @@ async function hydrateNbaDetail(match){
 function renderMatchArea(){
   if(!$('#match-list'))return;
   const events=matchesFiltered();
+  const snapshots=loadSnapshots();
+  const renderEvent=m=>eventCard(m,snapshots);
   const soccer=events.filter(x=>x.sport==='soccer');
   const basketball=events.filter(x=>x.sport==='nba');
   $('#match-counter').textContent=state.view==='inicio'
@@ -407,7 +409,7 @@ function renderMatchArea(){
       return '<section class="competition-day"><div class="competition-day-heading"><b>'
         +escapeHTML(league.icon+' '+league.name)+'</b><span>'+group.matches.length
         +' '+(group.matches.length===1?'partido':'partidos')+'</span></div>'
-        +group.matches.map(eventCard).join('')+'</section>';
+        +group.matches.map(renderEvent).join('')+'</section>';
     }).join('');
     return '<section class="day-section" data-date="'+escapeHTML(day.date)+'">'+head+comps+'</section>';
   };
