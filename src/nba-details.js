@@ -6,7 +6,7 @@
  */
 const ESPN='https://site.api.espn.com/apis/site/v2/sports/basketball/nba';
 const NBA_CDN='https://cdn.nba.com/static/json/liveData/boxscore/boxscore_';
-const CACHE_PREFIX='predix.nba.box.v1.';
+const CACHE_PREFIX='predix.nba.box.v3.'; // Invalida los datos antiguos que ocultaban nombres.
 const FETCH_TIMEOUT=6500;
 const memory=new Map();
 const dateLookup=new Map();
@@ -43,14 +43,22 @@ const parseStatRow=(columns,values)=>{
   columns.forEach((name,i)=>{if(name)out[String(name).trim().toUpperCase()]=values[i];});
   return out;
 };
-const normalPlayer=(athlete,values)=>{
+const readableName=(person,row={})=>{
+  const full=[person?.firstName,person?.lastName||person?.familyName].filter(Boolean).join(' ');
+  const fromRow=[row?.athlete?.displayName,row?.player?.displayName,row?.displayName,row?.playerName,row?.name];
+  return [
+    person?.displayName,person?.fullName,full,person?.shortName,person?.name,
+    ...fromRow
+  ].find(v=>typeof v==='string'&&v.trim().length>1)?.trim()||'';
+};
+const normalPlayer=(athlete,values,row={})=>{
   const [fgMade,fgAttempted]=splitShooting(firstValue(values,['FG','FGM-FGA']));
   const [tpMade,tpAttempted]=splitShooting(firstValue(values,['3PT','3P','3PM-3PA']));
   const minutesRaw=firstValue(values,['MIN','MINUTES']);
   const minutes=number(minutesRaw)??(/^\d+:\d+$/.test(String(minutesRaw))?number(String(minutesRaw).split(':')[0]):null);
   return {
     id:String(athlete?.id||athlete?.uid||athlete?.displayName||''),
-    name:String(athlete?.displayName||athlete?.fullName||athlete?.shortName||'').trim(),
+    name:readableName(athlete,row),
     points:tableNumber(values,['PTS','POINTS']),
     rebounds:tableNumber(values,['REB','TRB','REBOUNDS']),
     assists:tableNumber(values,['AST','ASSISTS']),
@@ -94,7 +102,7 @@ export function parseEspnBoxscore(payload){
         if(row.didNotPlay===true||row.didNotDress===true)continue;
         const raw=Array.isArray(row.stats)?row.stats:null;
         if(!raw||!raw.length)continue;
-        const player=normalPlayer(row.athlete||{},parseStatRow(headers,raw));
+        const player=normalPlayer(row.athlete||row.player||{},parseStatRow(headers,raw),row);
         if(player.name&&player.points!==null)players.push(player);
       }
     }
@@ -113,7 +121,7 @@ const cdnPlayer=p=>{
   const s=p.statistics||{};
   const minutes=number(s.minutes)??number(String(s.minutes||'').split(':')[0]);
   return {
-    id:String(p.personId||p.name||''),name:String(p.name||[p.firstName,p.familyName].filter(Boolean).join(' ')).trim(),
+    id:String(p.personId||p.playerId||p.name||''),name:readableName(p,{displayName:p.nameI}),
     points:number(s.points),rebounds:number(s.reboundsTotal),assists:number(s.assists),
     turnovers:number(s.turnovers),steals:number(s.steals),blocks:number(s.blocks),
     minutes,fgMade:number(s.fieldGoalsMade),fgAttempted:number(s.fieldGoalsAttempted),
@@ -280,16 +288,25 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({
 }[c]));
 const fmt=value=>typeof value==='number'&&Number.isFinite(value)?String(value):'—';
 function playerTable(team){
-  const top=team.players.slice(0,8);
-  if(!top.length)return '<p class="source-note">Sin estadísticas individuales verificables en los partidos consultados.</p>';
-  const headers=['JUGADOR','PJ','MIN','PTS','REB','AST','ROB','TAP','PÉRD','TC%','3PT%'];
-  const data=top.map(p=>[p.name,p.games,p.minutes,p.points,p.rebounds,p.assists,p.steals,p.blocks,p.turnovers,p.fgPct===null?'—':p.fgPct+'%',p.tpPct===null?'—':p.tpPct+'%']);
-  return '<div class="nba-player-scroll"><table class="nba-player-table"><thead><tr>'
-    +headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'
-    +data.map(row=>'<tr>'+row.map((cell,i)=>i===0
-      ?'<th scope="row" class="player-name-cell">'+esc(cell||'Jugador sin identificar')+'</th>'
-      :'<td>'+esc(fmt(cell))+'</td>').join('')+'</tr>').join('')
-    +'</tbody></table></div>';
+  const top=(team.players||[]).filter(p=>typeof p.name==='string'&&p.name.trim()).slice(0,8);
+  if(!top.length)return '<p class="source-note">No se han recibido nombres y estadísticas individuales verificables.</p>';
+  const fields=[
+    ['MIN','minutes'],['PTS','points'],['REB','rebounds'],['AST','assists'],
+    ['ROB','steals'],['TAP','blocks'],['PÉRD','turnovers'],['TC%','fgPct'],['3PT%','tpPct']
+  ];
+  return '<div class="nba-player-cards" role="list" aria-label="Estadísticas de jugadores">'
+    +top.map((p,i)=>'<article class="nba-player-card" role="listitem">'
+      +'<div class="nba-player-card-head"><span class="nba-player-number">'+String(i+1).padStart(2,'0')+'</span>'
+      +'<h6 class="nba-player-name">'+esc(p.name)+'</h6>'
+      +'<span class="nba-player-games">'+esc(fmt(p.games))+' PJ</span></div>'
+      +'<div class="nba-player-metrics">'
+      +fields.map(([label,key])=>{
+        const value=p[key];
+        const shown=(key==='fgPct'||key==='tpPct')?typeof value==='number'?value+'%':'—':fmt(value);
+        return '<div class="nba-player-metric"><small>'+label+'</small><strong>'+esc(shown)+'</strong></div>';
+      }).join('')
+      +'</div></article>').join('')
+    +'</div>';
 }
 export function renderNbaTeamDetails(report){
   const visible=report.teams.some(t=>t.loaded>0);
