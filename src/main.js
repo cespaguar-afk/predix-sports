@@ -245,6 +245,10 @@ async function requestPlayerDetails(m){
   const panel=$('#detail-panel');
   if(panel)panel.innerHTML=detailed(m);
   try{
+    if(!nba&&!state.playerHistory.length&&!state.playerIssue){
+      try{const cards=await loadPlayerCards();state.playerHistory=cards.matches;state.playerCoverage=cards.coverage;}
+      catch(error){state.playerIssue=error.message||'Historial local no disponible';}
+    }
     reports.set(m.id,nba
       ?await loadNbaTeamDetails(m,state.data.nba?.results||[])
       :await getSoccerPlayers(m,state.playerHistory,LEAGUES[m.league]?.espn));
@@ -296,7 +300,7 @@ function sourceNotice(){
       +(detail?'<details><summary>Detalles técnicos</summary><small>'+escapeHTML(detail)+'</small></details>':'')
       +'</div>';
   }
-  if(state.loading)return '<div class="notice ok">Mostrando los datos disponibles. Se están actualizando las demás competiciones…</div>';
+  if(state.loading)return '';
   if(problems.length||partial.length){
     const names=problems.map(([key])=>LEAGUES[key].name);
     const detail=problems.map(([key,error])=>LEAGUES[key].name+': '+error)
@@ -306,8 +310,7 @@ function sourceNotice(){
       +'Los resultados pueden estar retrasados. '
       +'<details><summary>Ver detalles de conexión</summary><small>'+escapeHTML(detail)+'</small></details></div>';
   }
-  return '<div class="notice ok">Calendarios y resultados cargados desde fuentes públicas. '
-    +'Algunos datos se actualizan periódicamente y no son necesariamente en directo.</div>';
+  return '';
 }
 function renderNormal(){
   const isHome=state.view==='inicio';
@@ -483,7 +486,11 @@ async function refresh(){
   if(['inicio','futbol','nba'].includes(state.view)&&$('#notice'))$('#notice').innerHTML=sourceNotice();
   // Los detalles de jugadores ya consultados se mantienen en memoria.
   // Cada competición se incorpora en cuanto su fuente responde, sin esperar al resto.
-  const jobs=leagueKeys.map(async k=>{
+  // Las fuentes prioritarias aparecen primero. Tres conexiones simultáneas
+  // evitan saturar redes móviles cuando se consultan muchas competiciones.
+  const queue=['laliga','nba','copadelrey',...leagueKeys.filter(k=>!['laliga','nba','copadelrey'].includes(k))];
+  let cursor=0;
+  const loadOne=async k=>{
     try{
       const fresh=k==='nba'?await loadNBA():k==='copadelrey'?await loadCopaDelRey():LEAGUES[k].folder?await loadFootball(k):await loadInternationalOrCup(k);
       state.data[k]=fresh;
@@ -518,24 +525,18 @@ async function refresh(){
       state.errors[k]=error.message||'Error de conexión';
       scheduleRepaint();
     }
+  };
+  const workers=Array.from({length:3},async()=>{
+    while(cursor<queue.length)await loadOne(queue[cursor++]);
   });
-  await Promise.allSettled(jobs);
+  await Promise.all(workers);
   sealAndGrade();scheduleDataSave();
   state.loading=false;
   $('#refresh-btn').disabled=false;$('#refresh-btn .refresh-icon').textContent='↻';
   scheduleRepaint();
   if(Object.values(state.errors).some(Boolean))toast('Algunas fuentes no respondieron; se mantienen los datos anteriores');
   else toast('Datos actualizados');
-  // El historial de jugadores es secundario y puede ser lento; cargarlo DESPUÉS del calendario.
-  loadPlayerCards().then(players=>{
-    state.playerHistory=players.matches;
-    state.playerCoverage=players.coverage;
-    state.playerIssue=null;
-    if($('#detail-panel')&&['inicio','futbol','nba'].includes(state.view)){
-      const match=allEvents().find(x=>x.id===state.selected);
-      if(match)$('#detail-panel').innerHTML=detailed(match);
-    }
-  }).catch(error=>{state.playerIssue=error.message||'Datos individuales no disponibles';});
+  // Los datos individuales se consultan sólo cuando alguien pulsa «Jugadores».
 }
 function bindEvents(){
   document.addEventListener('click',e=>{
