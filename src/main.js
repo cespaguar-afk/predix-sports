@@ -5,7 +5,7 @@ import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
 import {getSoccerPlayers,renderSoccerPlayers} from './soccer-players.js';
 import {archivedOddsHTML} from './prediction-display.js';
 import {localDate,matchDay,plusCalendarDays,dayTitle,groupMatchesByDay} from './calendar.js';
-import {loadCache,saveCache,loadSnapshots,findSnapshot,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
+import {loadCache,saveCache,loadSnapshots,findSnapshot,getHistoricSnapshot,loadPublicSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
 const $=s=>document.querySelector(s);
 const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -140,7 +140,7 @@ function eventCard(m){
   return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}">
     <div class="match-card-top"><div class="comp-badge">${league.icon} ${escapeHTML(league.name)}</div><span class="date-text">${escapeHTML(text)}</span></div>
     <div class="match-line"><div class="teams"><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.home))}</span><b>${escapeHTML(m.home)}</b></div><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.away))}</span><b>${escapeHTML(m.away)}</b></div></div><div class="match-outcome">${matchResult(m)}</div></div>
-    ${m.status==='post'?archivedOddsHTML(m,findSnapshot(m),{compact:true}):''}
+    ${m.status==='post'?archivedOddsHTML(m,getHistoricSnapshot(m),{compact:true}):''}
     <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span><span class="linkish">${m.status==='post'?'Ver resultado y análisis →':'Ver pronóstico →'}</span></div>
   </button>`;
 }
@@ -197,7 +197,7 @@ function forecastAnalysis(m,p){
 }
 function finishedAnalysis(m,snap){
   const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
-  if(!snap?.probabilities)return result+archivedOddsHTML(m,null)+'</div>';
+  if(!snap?.probabilities)return result+archivedOddsHTML(m,null)+'<p class="source-note">No existe una predicción anterior verificable para este encuentro; nunca se recalculan probabilidades usando su resultado.</p></div>';
   const previouslySaved=archivedOddsHTML(m,snap);
   const expected=Number.isFinite(snap.expectedHome)&&Number.isFinite(snap.expectedAway)
     ?'<p class="source-note">Marcador estimado: '+snap.expectedHome+' – '+snap.expectedAway+'</p>':'';
@@ -250,7 +250,7 @@ function detailed(m){
   const p=predFor(m);const fav=getFavorites().includes(m.id);
   const when=m.isoTime?datetimeText(m.isoTime):`${dateText(m.date)}${m.time?' · '+m.time+'*':''}`;
   const badge=m.status==='in'?'EN DIRECTO':m.status==='post'?'FINALIZADO':'ANTES DEL PARTIDO';
-  const snapped=findSnapshot(m);
+  const snapped=getHistoricSnapshot(m);
   const actual=m.status==='post'?finishedAnalysis(m,snapped):'';
   return `<button class="detail-back-button" type="button" data-close-detail>← Volver al calendario</button><div class="detail-top"><div class="eyebrow"><span class="eyebrow-line"></span> INFORME DEL PARTIDO</div><button class="icon-button ${fav?'favorited':''}" data-favorite="${escapeHTML(m.id)}" type="button" title="Añadir a favoritos">${fav?'★':'☆'}</button></div>
     <div class="detail-vs"><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.home))}</div><strong>${escapeHTML(m.home)}</strong></div><div class="vs">VS</div><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.away))}</div><strong>${escapeHTML(m.away)}</strong></div></div>
@@ -555,6 +555,8 @@ async function init(){
   if('serviceWorker' in navigator&&location.protocol!=='file:'){
     navigator.serviceWorker.register('./sw.js').catch(()=>{});
   }
+  // El archivo de predicciones se carga sin bloquear el primer renderizado.
+  loadPublicSnapshots().then(()=>{if(['inicio','futbol','nba'].includes(state.view))scheduleRepaint();}).catch(()=>{});
   refresh();
 }
 init();
