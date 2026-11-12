@@ -8,10 +8,9 @@ let publicSnapshots={};
 let publicIndex=new Map();
 const matchKey=x=>[x?.league,x?.sport,x?.date,simplify(x?.home),simplify(x?.away)].join(':');
 export const loadSnapshots=()=>read(KEY,{});
-export function getHistoricSnapshot(match){
-  // Priorizamos el registro local; la copia pública está indexada para que
-  // cientos de resultados no hagan búsquedas lineales en cada renderizado.
-  return findSnapshot(match,loadSnapshots())||publicIndex.get(matchKey(match))||null;
+export function getHistoricSnapshot(match,localSnapshots=loadSnapshots()){
+  // El renderizador puede compartir el snapshot local ya leído entre tarjetas.
+  return findSnapshot(match,localSnapshots)||publicIndex.get(matchKey(match))||null;
 }
 export async function loadPublicSnapshots(){
   try{
