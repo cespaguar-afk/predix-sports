@@ -28,7 +28,7 @@ async function getJSON(url){
   if(!res.ok)throw Error('HTTP '+res.status);
   return res.json();
 }
-function readRoster(summary,league,date){
+export function parseSoccerRoster(summary,league,date){
   const out=[];
   for(const side of summary?.rosters||[]){
     const team=side.team?.displayName||side.team?.name;
@@ -115,7 +115,7 @@ export async function loadSoccerPlayers(match,history,espnSlug){
       const event=events[offset++];
       try{
         const summary=await getJSON(ROOT+espnSlug+'/summary?event='+encodeURIComponent(event.id));
-        observations.push(...readRoster(summary,match.league,event.date.slice(0,10)));
+        observations.push(...parseSoccerRoster(summary,match.league,event.date.slice(0,10)));
       }catch{}
     }
   }
