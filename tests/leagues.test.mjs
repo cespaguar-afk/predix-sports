@@ -4,7 +4,7 @@ import {LEAGUES,monthKeys,nbaCdnSchedule,parseCSV,normalizeFootball} from '../sr
 
 test('includes all requested free competitions and valid source slugs',()=>{
   assert.deepEqual(Object.keys(LEAGUES),[
-    'laliga','hypermotion','premier','champions','copadelrey','supercopa','nations','nba'
+    'laliga','hypermotion','premier','bundesliga','ligue1','champions','copadelrey','supercopa','nations','nba'
   ]);
   assert.equal(LEAGUES.hypermotion.folder,'ESP_2_segunda-division');
   assert.equal(LEAGUES.copadelrey.folder,'ESP_CUP_copa-del-rey');
