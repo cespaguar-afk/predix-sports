@@ -4,6 +4,7 @@ import {teamReport,headToHead} from './stats.js';
 import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
 import {getSoccerPlayers,renderSoccerPlayers} from './soccer-players.js';
 import {archivedOddsHTML} from './prediction-display.js';
+import {confidenceHTML} from './confidence.js';
 import {localDate,matchDay,plusCalendarDays,dayTitle,groupMatchesByDay} from './calendar.js';
 import {loadCache,saveCache,loadSnapshots,findSnapshot,getHistoricSnapshot,loadPublicSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
@@ -29,7 +30,12 @@ let dataSaveTimer=null;
 const scheduleDataSave=()=>{clearTimeout(dataSaveTimer);dataSaveTimer=setTimeout(()=>saveCache(state.data),500);};
 const soccerReports=new Map();
 const soccerPending=new Set();
-function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view))renderNormal();},240);}
+function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{
+  stamp();
+  if(['inicio','futbol','nba'].includes(state.view)&&$('#match-list')){
+    renderMatchArea();displayMetrics();if($('#notice'))$('#notice').innerHTML=sourceNotice();
+  }
+},200);}
 function completeResults(m){
   const rows=state.data[m.league]?.results||[];
   return (m.league==='copadelrey'||m.league==='supercopa')
@@ -125,11 +131,11 @@ function teamProfileHTML(m){
   return '<div class="detail-section"><h3>Radiografía de los equipos</h3><p class="source-note">Promedios calculados a partir de resultados anteriores disponibles; no son datos en vivo ni equivalen a estadísticas de toda la temporada si la fuente es incompleta.</p>'
     +'<div class="team-profiles">'+cards.join('')+'</div>'+meeting+'</div>';
 }
-function matchResult(m){
+function matchResult(m,prediction=null){
   if(m.status==='in'&&m.liveScore)return `<div class="outcome-big lime">${escapeHTML(m.liveScore)}</div><div class="outcome-small">Marcador ESPN</div>`;
   if(m.status==='in'&&Number.isFinite(m.homeScore))return `<div class="outcome-big lime">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Marcador ESPN</div>`;
   if(m.status==='post')return `<div class="outcome-big">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Resultado final</div>`;
-  const p=predFor(m);
+  const p=prediction||predFor(m);
   if(!p)return `<div class="outcome-big">—</div><div class="outcome-small">Sin predicción</div>`;
   const pick=Object.entries(p.probabilities).sort((a,b)=>b[1]-a[1])[0];
   const outcome=pick[0]==='H'?'1':pick[0]==='D'?'X':'2';
@@ -138,11 +144,14 @@ function matchResult(m){
 function eventCard(m){
   const league=LEAGUES[m.league];const b=badgeText(m);
   const text=m.isoTime?new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date(m.isoTime)):m.time?m.time+'*':'Hora por confirmar';
-  return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}">
+  const archived=m.status==='post'?getHistoricSnapshot(m):null;
+  const prediction=m.status==='post'?null:predFor(m);
+  const confidence=confidenceHTML(m.status==='post'?archived:prediction,{compact:true});
+  return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}" aria-label="${escapeHTML(m.home+' contra '+m.away)}">
     <div class="match-card-top"><div class="comp-badge">${league.icon} ${escapeHTML(league.name)}</div><span class="date-text">${escapeHTML(text)}</span></div>
-    <div class="match-line"><div class="teams"><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.home))}</span><b>${escapeHTML(m.home)}</b></div><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.away))}</span><b>${escapeHTML(m.away)}</b></div></div><div class="match-outcome">${matchResult(m)}</div></div>
-    ${m.status==='post'?archivedOddsHTML(m,getHistoricSnapshot(m),{compact:true}):''}
-    <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span><span class="linkish">${m.status==='post'?'Ver resultado y análisis →':'Ver pronóstico →'}</span></div>
+    <div class="match-line"><div class="teams"><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.home))}</span><b>${escapeHTML(m.home)}</b></div><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.away))}</span><b>${escapeHTML(m.away)}</b></div></div><div class="match-outcome">${matchResult(m,prediction)}</div></div>
+    ${m.status==='post'?archivedOddsHTML(m,archived,{compact:true}):''}
+    <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span>${confidence}<span class="linkish">${m.status==='post'?'Ver análisis →':'Analizar →'}</span></div>
   </button>`;
 }
 function forecastAnalysis(m,p){
@@ -191,14 +200,14 @@ function forecastAnalysis(m,p){
       +'de partidos anteriores, con suavizado; no son cuotas ni recomendaciones de apuesta.</p></div>';
   })():'';
 
-  return `<div class="detail-section"><h3>${isSoccer?'Probabilidades 1X2':'Probabilidades de victoria'} <span class="soft-tag low">${p.confidence==='baja'?'BAJA CONFIANZA':'CONFIANZA MEDIA'}</span></h3>${probs}${score}
+  return `<div class="detail-section"><h3>${isSoccer?'Probabilidades 1X2':'Probabilidades de victoria'} ${confidenceHTML(p)}</h3>${probs}${score}
       ${isSoccer?`<p class="source-note">Marcadores más probables: ${p.scorelines.map(x=>`${x.home}-${x.away} (${fmt(x.p)})`).join(' · ')}</p>`:''}
     </div><details class="analysis-disclosure"><summary>📋 Mercados y explicación del pronóstico</summary><div class="analysis-inner">${cards}${suggestions}
     <div class="detail-section"><h3>Cómo se calculó</h3><p class="source-note">${escapeHTML(p.explanation)}</p><p class="source-note">Partidos recientes considerados: <strong>${p.sampleHome}</strong> del local y <strong>${p.sampleAway}</strong> del visitante. ${p.calibrated?'Ajuste de calibración local activo.':'Sin calibración aprendida todavía (requiere al menos 20 predicciones evaluadas y muestras suficientes por rango).'}</p><div class="disclaimer">${m.status==='in'?'Marcador en directo, pero el pronóstico es PREPARTIDO: no reacciona a goles, faltas, lesiones ni posesiones en vivo. ':''}Estimaciones experimentales no contrastadas para decisiones económicas. No se calculan apuestas de valor sin cuotas fiables.</div></div></div></details>`;
 }
 function finishedAnalysis(m,snap){
   const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
-  if(!snap?.probabilities)return result+archivedOddsHTML(m,null)+'<p class="source-note">No existe una predicción anterior verificable para este encuentro; nunca se recalculan probabilidades usando su resultado.</p></div>';
+  if(!snap?.probabilities)return result+archivedOddsHTML(m,null)+confidenceHTML(null)+'<p class="source-note">No existe una predicción anterior verificable para este encuentro; nunca se recalculan probabilidades usando su resultado.</p></div>';
   const previouslySaved=archivedOddsHTML(m,snap);
   const expected=Number.isFinite(snap.expectedHome)&&Number.isFinite(snap.expectedAway)
     ?'<p class="source-note">Marcador estimado: '+snap.expectedHome+' – '+snap.expectedAway+'</p>':'';
@@ -209,7 +218,7 @@ function finishedAnalysis(m,snap){
   ];
   const secondary=markets.length?'<details class="analysis-disclosure"><summary>Otros pronósticos guardados</summary><div class="analysis-inner">'
     +markets.map(([title,value])=>'<div class="archive-prob"><span>'+escapeHTML(title)+'</span><b>'+fmt(value)+'</b></div>').join('')+'</div></details>':'';
-  return result+previouslySaved
+  return result+previouslySaved+'<div class="historic-confidence">'+confidenceHTML(snap)+'</div>'
     +expected+secondary+'<p class="source-note">Registrada: '+escapeHTML(datetimeText(snap.predictedAt))
     +(Number.isFinite(snap.brier)?' · Error Brier: '+snap.brier.toFixed(3):' · Pendiente de evaluación')
     +'</p></div>';
@@ -265,7 +274,7 @@ function displayMetrics(){
   const upcoming=allFixtures().filter(x=>x.date>=nowDate());
   const saved=Object.values(loadSnapshots());const graded=saved.filter(x=>x.outcome);
   const average=graded.length?graded.reduce((s,x)=>s+x.brier,0)/graded.length:null;
-  const predicted=upcoming.filter(x=>!!findSnapshot(x)).length;
+  const predicted=saved.filter(x=>!x.outcome&&x.date>=nowDate()).length;
   const items=[
     {label:'PRÓXIMOS PARTIDOS',value:upcoming.length,foot:'Calendarios disponibles',icon:'▦'},
     {label:'CON PRONÓSTICO GUARDADO',value:predicted,foot:'Registrados antes del inicio',icon:'◈'},
@@ -427,7 +436,7 @@ function renderMatchArea(){
   }
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
   const selected=displayed.find(m=>m.id===state.selected);
-  $('#detail-panel').innerHTML=detailed(selected);
+  $('#detail-panel').innerHTML=state.showDetail?detailed(selected):'<div class="detail-empty"><div class="detail-icon">⌕</div><h3>Abre un partido</h3><p>Verás el pronóstico, el nivel de confianza y las estadísticas sin salir del calendario.</p></div>';
   $('#detail-panel').classList.toggle('open',state.showDetail&&!!selected);
   document.body.classList.toggle('detail-open',state.showDetail&&!!selected);
   // Los datos individuales sólo se consultan al pulsar el botón de jugadores.
