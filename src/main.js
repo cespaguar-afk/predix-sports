@@ -66,12 +66,13 @@ function matchesFiltered(){
   if(state.query)events=events.filter(x=>`${x.home} ${x.away}`.toLowerCase().includes(state.query.toLowerCase()));
   const favs=getFavorites();
   if(state.period==='fav')events=events.filter(x=>favs.includes(x.id));
+  else if(state.period==='recent')events=events.filter(x=>x.status==='post'&&matchDay(x)>=plusDays(-7)&&matchDay(x)<=nowDate());
   else if(state.period!=='all'){
     const end=plusDays(Number(state.period));
     events=events.filter(x=>matchDay(x)>=nowDate()&&matchDay(x)<=end);
   }
   events.sort((a,b)=>matchDay(a).localeCompare(matchDay(b))||(a.isoTime||a.time||'').localeCompare(b.isoTime||b.time||''));
-  if(state.period==='all'){
+  if(state.period==='all'||state.period==='recent'){
     events.sort((a,b)=>{
       const f=x=>matchDay(x)>=nowDate()?0:1;
       const da=matchDay(a),db=matchDay(b);
@@ -320,6 +321,7 @@ function renderNormal(){
         <button type="button" class="day-shortcut" data-day-shortcut="tomorrow">Mañana</button>
         <input id="date-filter" type="date" aria-label="Seleccionar día" />
         <button type="button" class="day-shortcut" data-day-shortcut="all">Todos los días</button>
+        <button type="button" class="day-shortcut results-shortcut" data-day-shortcut="results">✓ Finalizados</button>
       </div>
     </section>
     <div class="simple-search-row">
@@ -332,6 +334,7 @@ function renderNormal(){
             <option value="30">Próximos 30 días</option>
             <option value="7">Próximos 7 días</option>
             <option value="all">Todos · resultados y próximos</option>
+            <option value="recent">Finalizados · 7 días</option>
             <option value="fav">Favoritos</option>
           </select></div>
         </div>
@@ -354,7 +357,7 @@ function renderNormal(){
   document.querySelectorAll('[data-day-shortcut]').forEach(b=>{
     const key=b.dataset.dayShortcut;
     b.classList.toggle('active',key==='today'&&state.chosenDay===nowDate()
-      ||key==='tomorrow'&&state.chosenDay===plusDays(1)||key==='all'&&!state.chosenDay);
+      ||key==='tomorrow'&&state.chosenDay===plusDays(1)||key==='results'&&state.period==='recent'||key==='all'&&!state.chosenDay&&state.period!=='recent');
   });
   renderMatchArea();
   displayMetrics();
@@ -533,7 +536,7 @@ function bindEvents(){
     const players=e.target.closest('[data-load-players]');
     if(players){const selected=allEvents().find(x=>x.id===players.dataset.loadPlayers);requestPlayerDetails(selected);return;}
     const dayShortcut=e.target.closest('[data-day-shortcut]');
-    if(dayShortcut){state.showDetail=false;state.chosenDay=dayShortcut.dataset.dayShortcut==='today'?nowDate():dayShortcut.dataset.dayShortcut==='tomorrow'?plusDays(1):null;state.period='all';state.daysShown=7;renderNormal();return;}
+    if(dayShortcut){state.showDetail=false;const mode=dayShortcut.dataset.dayShortcut;state.chosenDay=mode==='today'?nowDate():mode==='tomorrow'?plusDays(1):null;state.period=mode==='results'?'recent':'all';state.daysShown=7;renderNormal();return;}
     const league=e.target.closest('[data-league]');
     if(league){state.showDetail=false;state.league=league.dataset.league;state.daysShown=7;renderNormal();return;}
     const match=e.target.closest('[data-match]');
