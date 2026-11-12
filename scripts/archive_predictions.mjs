@@ -10,7 +10,7 @@ import {predictFootball,predictNBA,brierScore} from '../src/model.js';
 const ROOT='feeds/';
 const OUTPUT=ROOT+'predictions.json';
 const NOW=new Date();
-const TODAY=NOW.toISOString().slice(0,10);
+const TODAY=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).format(NOW);
 const SOCCER={
  laliga:'ESP_1_la-liga',hypermotion:'ESP_2_segunda-division',
  premier:'ENG_1_premier-league',bundesliga:'GER_1_bundesliga',
@@ -79,7 +79,7 @@ for(const [id,snap] of Object.entries(existing)){
 const nowTime=NOW.getTime();
 let added=0,scored=0;
 function safeToCapture(m){
- if(m.status!=='pre'||!m.date||m.date<TODAY)return false;
+ if(m.status!=='pre'||!m.date)return false;
  if(m.isoTime){
   const start=Date.parse(m.isoTime);
   return Number.isFinite(start)&&start>nowTime+5*60000;
