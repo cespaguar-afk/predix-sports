@@ -5,6 +5,7 @@ import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
 import {getSoccerPlayers,renderSoccerPlayers} from './soccer-players.js';
 import {archivedOddsHTML} from './prediction-display.js';
 import {confidenceHTML} from './confidence.js';
+import {renderMarketForecast,renderQuickMarkets} from './market-ui.js';
 import {localDate,matchDay,plusCalendarDays,dayTitle,groupMatchesByDay} from './calendar.js';
 import {loadCache,saveCache,loadSnapshots,findSnapshot,getHistoricSnapshot,loadPublicSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
@@ -150,60 +151,68 @@ function eventCard(m,snapshots){
   return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}" aria-label="${escapeHTML(m.home+' contra '+m.away)}">
     <div class="match-card-top"><div class="comp-badge">${league.icon} ${escapeHTML(league.name)}</div><span class="date-text">${escapeHTML(text)}</span></div>
     <div class="match-line"><div class="teams"><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.home))}</span><b>${escapeHTML(m.home)}</b></div><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.away))}</span><b>${escapeHTML(m.away)}</b></div></div><div class="match-outcome">${matchResult(m,prediction)}</div></div>
+    ${m.status==='pre'&&m.sport==='soccer'?renderQuickMarkets(prediction):''}
     ${m.status==='post'?archivedOddsHTML(m,archived,{compact:true}):''}
     <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span>${confidence}<span class="linkish">${m.status==='post'?'Ver análisis →':'Analizar →'}</span></div>
   </button>`;
 }
 function forecastAnalysis(m,p){
-  if(!p)return `<div class="disclaimer">No hay datos suficientes para generar un pronóstico, o los datos no se han actualizado. No se inventan probabilidades.</div>`;
-  const isSoccer=m.sport==='soccer';
-  const keys=isSoccer?['H','D','A']:['H','A'];
-  const labels=isSoccer?['LOCAL','EMPATE','VISITANTE']:['LOCAL','VISITANTE'];
-  const max=Math.max(...keys.map(k=>p.probabilities[k]));
-  const probs=`<div class="probs ${isSoccer?'':'two'}">${keys.map((k,i)=>`<div class="prob-box ${p.probabilities[k]===max?'emph':''}"><div class="prob-val">${fmt(p.probabilities[k])}</div><div class="prob-label">${labels[i]}</div></div>`).join('')}</div>
-    <div class="prob-track">${keys.map(k=>`<i style="width:${(p.probabilities[k]*100).toFixed(2)}%"></i>`).join('')}</div>`;
-  const score=`<div class="projected-score"><div><b>${p.expectedHome}</b></div><span>${isSoccer?'GOLES ESPERADOS':'PUNTOS ESTIMADOS'}</span><div><b>${p.expectedAway}</b></div></div>`;
-  const suggestions=isSoccer?
-    `<div class="detail-section"><h3>Otros pronósticos</h3><div class="pred-list">
-      <div class="pred-row"><div><div class="name">Más de 2,5 goles</div><div class="extra">Distribución Poisson</div></div><div class="value">${fmt(p.over25)}</div></div>
-      <div class="pred-row"><div><div class="name">Ambos equipos marcan</div><div class="extra">Distribución Poisson</div></div><div class="value">${fmt(p.btts)}</div></div>
-      ${p.markets.filter(x=>x.field!=='Yellow'||!p.yellowCards).map(x=>`<div class="pred-row"><div><div class="name">${escapeHTML(x.label)}</div><div class="extra">Media ${x.expected} · Más de ${x.threshold} (aprox.)</div></div><div class="value">${fmt(x.over)}</div></div>`).join('')}
-      </div>${!p.markets.length?'<p class="source-note">Sin muestras suficientes de córners, faltas, tarjetas o remates; no se estiman.</p>':''}</div>`:
-    `<div class="detail-section"><h3>Estimaciones NBA</h3><div class="detail-ministats"><div class="stat-cell"><span>Total de puntos</span><b>${p.total}</b></div><div class="stat-cell"><span>Diferencia local</span><b>${p.margin>0?'+':''}${p.margin}</b></div></div></div>`;
-  const cards=isSoccer?(()=>{
-    const c=p.yellowCards;
-    const totals=c?'<div class="detail-ministats">'
-      +'<div class="stat-cell"><span>Amarillas local</span><b>'+c.expectedHome+'</b></div>'
-      +'<div class="stat-cell"><span>Amarillas visitante</span><b>'+c.expectedAway+'</b></div>'
-      +'</div><div class="projected-score"><span>Amarillas totales esperadas</span><b>'+c.expectedTotal+'</b></div>'
-      +'<div class="pred-list">'
-      +[[2.5,c.over25],[3.5,c.over35],[4.5,c.over45],[5.5,c.over55]]
-        .map(([line,prob])=>'<div class="pred-row"><div><div class="name">Más de '+line+' amarillas</div>'
-        +'<div class="extra">Estimación Poisson · muestra '+c.sampleHome+'/'+c.sampleAway+' partidos</div></div>'
-        +'<div class="value">'+fmt(prob)+'</div></div>').join('')
-      +'</div><p class="source-note">'+escapeHTML(c.explanation)+'</p>'
-      :'<p class="source-note">Tarjetas esperadas no disponibles: no hay suficientes partidos anteriores con amarillas por equipo.</p>';
-    const all=predictPlayerBookings(m,state.playerHistory,40);
-    const players=[...all.filter(x=>x.side==='home').slice(0,4),...all.filter(x=>x.side==='away').slice(0,4)]
-      .sort((a,b)=>b.probability-a.probability);
-    const playerHtml=players.length?
-      '<div class="pred-list">'+players.map(x=>'<div class="pred-row"><div><div class="name">'
-        +escapeHTML(x.name)+'</div><div class="extra">'+escapeHTML(x.team)
-        +' · '+x.booked+' amonestaciones en '+x.played+' partidos observados'
-        +' · muestra '+(x.confidence==='media'?'media':'reducida')+'</div></div>'
-        +'<div class="value">'+fmt(x.probability)+'</div></div>').join('')+'</div>'
-      :'<p class="source-note">No hay todavía un historial individual suficiente para mostrar porcentajes fiables de jugadores de este partido.</p>';
-    return '<div class="detail-section"><h3>Tarjetas amarillas esperadas</h3>'+totals+'</div>'
-      +'<div class="detail-section"><h3>Jugadores con mayor riesgo de amarilla</h3>'+playerHtml
-      +'<p class="disclaimer">Probabilidades experimentales condicionadas a que el jugador participe. '
-      +'No se conoce la alineación de forma anticipada. Se calculan con tarjetas y apariciones verificadas '
-      +'de partidos anteriores, con suavizado; no son cuotas ni recomendaciones de apuesta.</p></div>';
-  })():'';
-
-  return `<div class="detail-section"><h3>${isSoccer?'Probabilidades 1X2':'Probabilidades de victoria'} ${confidenceHTML(p)}</h3>${probs}${score}
-      ${isSoccer?`<p class="source-note">Marcadores más probables: ${p.scorelines.map(x=>`${x.home}-${x.away} (${fmt(x.p)})`).join(' · ')}</p>`:''}
-    </div><details class="analysis-disclosure"><summary>📋 Mercados y explicación del pronóstico</summary><div class="analysis-inner">${cards}${suggestions}
-    <div class="detail-section"><h3>Cómo se calculó</h3><p class="source-note">${escapeHTML(p.explanation)}</p><p class="source-note">Partidos recientes considerados: <strong>${p.sampleHome}</strong> del local y <strong>${p.sampleAway}</strong> del visitante. ${p.calibrated?'Ajuste de calibración local activo.':'Sin calibración aprendida todavía (requiere al menos 20 predicciones evaluadas y muestras suficientes por rango).'}</p><div class="disclaimer">${m.status==='in'?'Marcador en directo, pero el pronóstico es PREPARTIDO: no reacciona a goles, faltas, lesiones ni posesiones en vivo. ':''}Estimaciones experimentales no contrastadas para decisiones económicas. No se calculan apuestas de valor sin cuotas fiables.</div></div></div></details>`;
+  if(!p)return '<section class="detail-section"><h3>Pronóstico no disponible</h3>'
+    +'<p class="source-note">Todavía no hay suficientes partidos anteriores para estimar este encuentro sin inventar cifras.</p>'
+    +'<div class="market-empty-panel">Córners, tarjetas, faltas y remates: datos históricos insuficientes.</div></section>';
+  const soccer=m.sport==='soccer';
+  const keys=soccer?['H','D','A']:['H','A'];
+  const labels=soccer?['LOCAL','EMPATE','VISITANTE']:['LOCAL','VISITANTE'];
+  const maximum=Math.max(...keys.map(k=>p.probabilities[k]));
+  const prob='<div class="probs '+(soccer?'':'two')+'">'+keys.map((k,i)=>
+    '<div class="prob-box '+(p.probabilities[k]===maximum?'emph':'')+'"><div class="prob-val">'
+    +fmt(p.probabilities[k])+'</div><div class="prob-label">'+labels[i]+'</div></div>').join('')+'</div>'
+    +'<div class="prob-track">'+keys.map(k=>'<i style="width:'+(p.probabilities[k]*100).toFixed(2)+'%"></i>').join('')+'</div>';
+  const score='<div class="projected-score"><div><b>'+p.expectedHome+'</b></div><span>'
+    +(soccer?'GOLES ESPERADOS':'PUNTOS ESPERADOS')+'</span><div><b>'+p.expectedAway+'</b></div></div>';
+  const top='<section class="detail-section forecast-principal"><div class="section-topline"><h3>'
+    +(soccer?'Resultado probable · 1X2':'Probabilidades de victoria')+'</h3>'+confidenceHTML(p)+'</div>'
+    +prob+score+(soccer?'<p class="source-note">Marcadores más probables: '
+      +(p.scorelines||[]).map(x=>x.home+'-'+x.away+' ('+fmt(x.p)+')').join(' · ')+'</p>':'')
+    +'</section>';
+  if(!soccer){
+    const more='<section class="detail-section"><h3>Proyección NBA</h3><div class="detail-ministats">'
+      +'<div class="stat-cell"><span>Puntos totales</span><b>'+p.total+'</b></div>'
+      +'<div class="stat-cell"><span>Diferencia local</span><b>'+(p.margin>0?'+':'')+p.margin+'</b></div>'
+      +'</div></section>';
+    return top+more+'<details class="analysis-disclosure"><summary>Cómo se calculó</summary>'
+      +'<div class="analysis-inner"><p class="source-note">'+escapeHTML(p.explanation)+'</p>'
+      +'<p class="source-note">Muestra: '+p.sampleHome+' partidos del local y '+p.sampleAway+' del visitante.</p></div></details>';
+  }
+  const goals='<div class="extra-goal-grid"><div class="extra-goal"><span>Más de 2,5 goles</span><strong>'+fmt(p.over25)+'</strong></div>'
+    +'<div class="extra-goal"><span>Ambos marcan</span><strong>'+fmt(p.btts)+'</strong></div></div>';
+  const yellow=p.yellowCards;
+  const yellowLines=yellow?'<div class="booking-lines"><div class="market-sides">'
+    +'<span>Local <strong>'+yellow.expectedHome+'</strong></span>'
+    +'<span>Visitante <strong>'+yellow.expectedAway+'</strong></span></div>'
+    +'<div class="pred-list">'+[[2.5,yellow.over25],[3.5,yellow.over35],[4.5,yellow.over45],[5.5,yellow.over55]]
+      .map(([line,probability])=>'<div class="pred-row"><div class="name">Más de '+line+' amarillas</div>'
+        +'<div class="value">'+fmt(probability)+'</div></div>').join('')+'</div></div>'
+    :'<p class="source-note">No hay una muestra suficiente para calcular diferentes líneas de amarillas.</p>';
+  const all=predictPlayerBookings(m,state.playerHistory,20);
+  const playerRisks=all.length?'<div class="pred-list">'+all.slice(0,6).map(x=>
+    '<div class="pred-row"><div><div class="name">'+escapeHTML(x.name)+'</div>'
+    +'<div class="extra">'+escapeHTML(x.team)+' · '+x.booked+' amarillas en '+x.played+' apariciones</div></div>'
+    +'<div class="value">'+fmt(x.probability)+'</div></div>').join('')+'</div>'
+    :'<p class="source-note">Sin historial individual suficiente para pronosticar tarjetas de jugadores.</p>';
+  const additional='<details class="analysis-disclosure"><summary>Más pronósticos · goles y tarjetas individuales</summary>'
+    +'<div class="analysis-inner"><h4 class="subsection-title">Goles</h4>'+goals
+    +'<h4 class="subsection-title">Líneas de tarjetas amarillas</h4>'+yellowLines
+    +'<h4 class="subsection-title">Jugadores · riesgo de amonestación</h4>'+playerRisks
+    +'<p class="source-note">El riesgo individual es condicional a que el jugador participe; las alineaciones no están confirmadas.</p>'
+    +'</div></details>';
+  const expl='<details class="analysis-disclosure"><summary>Modelo, cobertura y limitaciones</summary>'
+    +'<div class="analysis-inner"><p class="source-note">'+escapeHTML(p.explanation)+'</p>'
+    +'<p class="source-note">Partidos anteriores: <strong>'+p.sampleHome+'</strong> local y <strong>'+p.sampleAway+'</strong> visitante. '
+    +(p.calibrated?'Calibración histórica aplicada.':'Sin calibración suficiente de resultados previos.')+'</p>'
+    +'<p class="disclaimer">Las probabilidades son experimentales y las estimaciones de córners, faltas y remates son aproximaciones. '
+    +'No incluyen árbitros, lesiones ni alineaciones confirmadas. No son garantías de acierto.</p></div></details>';
+  return top+renderMarketForecast(p)+additional+expl;
 }
 function finishedAnalysis(m,snap){
   const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
@@ -219,7 +228,7 @@ function finishedAnalysis(m,snap){
   const secondary=markets.length?'<details class="analysis-disclosure"><summary>Otros pronósticos guardados</summary><div class="analysis-inner">'
     +markets.map(([title,value])=>'<div class="archive-prob"><span>'+escapeHTML(title)+'</span><b>'+fmt(value)+'</b></div>').join('')+'</div></details>':'';
   return result+previouslySaved+'<div class="historic-confidence">'+confidenceHTML(snap)+'</div>'
-    +expected+secondary+'<p class="source-note">Registrada: '+escapeHTML(datetimeText(snap.predictedAt))
+    +expected+(m.sport==='soccer'&&snap.markets?.length?'<details class="analysis-disclosure"><summary>Mercados pronosticados antes del partido</summary><div class="analysis-inner">'+renderMarketForecast({...snap,sport:'soccer'})+'</div></details>':'')+secondary+'<p class="source-note">Registrada: '+escapeHTML(datetimeText(snap.predictedAt))
     +(Number.isFinite(snap.brier)?' · Error Brier: '+snap.brier.toFixed(3):' · Pendiente de evaluación')
     +'</p></div>';
 }
