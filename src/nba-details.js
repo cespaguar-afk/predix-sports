@@ -286,7 +286,9 @@ function playerTable(team){
   const data=top.map(p=>[p.name,p.games,p.minutes,p.points,p.rebounds,p.assists,p.steals,p.blocks,p.turnovers,p.fgPct===null?'—':p.fgPct+'%',p.tpPct===null?'—':p.tpPct+'%']);
   return '<div class="nba-player-scroll"><table class="nba-player-table"><thead><tr>'
     +headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'
-    +data.map(row=>'<tr>'+row.map((cell,i)=>'<td>'+esc(fmt(cell))+'</td>').join('')+'</tr>').join('')
+    +data.map(row=>'<tr>'+row.map((cell,i)=>i===0
+      ?'<th scope="row" class="player-name-cell">'+esc(cell||'Jugador sin identificar')+'</th>'
+      :'<td>'+esc(fmt(cell))+'</td>').join('')+'</tr>').join('')
     +'</tbody></table></div>';
 }
 export function renderNbaTeamDetails(report){
