@@ -135,3 +135,13 @@ Las probabilidades son experimentales y no garantizan aciertos.
 - Añadidas comprobaciones de nombres visibles y de escape de HTML malicioso, sin alterar los cálculos de puntos, rebotes o asistencias.
 - Nuevo tema más oscuro, con fondo grafito, tarjetas azul noche, bordes suaves, estados claros y mejor contraste en las tablas NBA.
 - Caché de la PWA incrementada a `predix-shell-v12` para distribuir los cambios a la aplicación instalada.
+
+## Versión 2.4 — panel de pronósticos por mercado
+
+- Nuevo diseño Aurora Dashboard: jerarquía clara con pronóstico 1X2 y goles primero, y tarjetas visuales de mercados inmediatamente debajo.
+- Cada partido de fútbol con datos suficientes incluye pronóstico de córners, tarjetas amarillas, faltas, remates y remates a puerta; se añaden córners de primera/segunda parte cuando existe historial.
+- Cada tarjeta muestra **total esperado**, **desglose local/visitante**, **línea de referencia y probabilidad aproximada de superarla**, y **cobertura histórica mínima**. Las cifras son estimaciones, no eventos confirmados.
+- En el calendario se muestra un resumen compacto de córners, tarjetas y faltas para próximos partidos; el detalle conserva el resto de estadísticas y la información de equipos y jugadores.
+- Cuando faltan datos (especialmente en eliminatorias de Copa del Rey), la tarjeta muestra «Datos insuficientes» en vez de inventar valores. Las probabilidades de faltas y remates mediante Poisson son aproximaciones no calibradas.
+- Se preservan en los nuevos pronósticos históricos los desgloses y la cobertura de mercados, además del marcador, probabilidades 1X2 y confianza. Los pronósticos ya archivados no se reescriben.
+- El service worker `predix-shell-v14` incluye el módulo `src/market-ui.js` para actualizar la aplicación instalada.
