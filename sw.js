@@ -1,6 +1,6 @@
 // v5: La interfaz se sirve desde caché y se actualiza en segundo plano. Los feeds nunca se guardan en el
 // service worker; GitHub Pages sirve las copias públicas del proveedor.
-const CACHE='predix-shell-v9';
+const CACHE='predix-shell-v10';
 const STATIC=['./','./index.html','./styles.css','./src/main.js','./src/data.js','./src/model.js','./src/stats.js','./src/calendar.js','./src/nba-details.js','./src/soccer-players.js','./src/prediction-display.js','./src/storage.js','./manifest.webmanifest','./assets/icon-192.png','./assets/icon-512.png','./assets/favicon.svg'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(STATIC)));
