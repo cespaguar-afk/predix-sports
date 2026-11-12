@@ -514,3 +514,99 @@ footer{border-color:#2a3f53;color:#849aac}
  .match-card{padding:13px 12px}
  .confidence-compact{padding:5px 7px}
 }
+
+
+/* PREDIX v2.2 — Midnight Graphite / dark modern sport experience */
+:root{
+  --bg:#070c15;--sidebar:#0a1220;--panel:#0f1b2b;--panel-alt:#142337;
+  --line:#253349;--line-faint:#1b2839;--text:#f0f5fb;--muted:#94a8bd;
+  --lime:#65e1d0;--lime-light:#b4fff2;--lime-dark:#173c40;
+  --blue:#92adff;--warning:#e6b981;--radius:16px
+}
+html{color-scheme:dark}
+body{background:#070c15;color:#edf3fb}
+.main-wrapper{background:radial-gradient(ellipse 750px 340px at 70% -130px,#1d2944 0%,transparent 73%),#070c15}
+.sidebar{background:#0a1321;border-color:#1a2a3c}
+.sidebar .brand-mark{background:linear-gradient(145deg,#62dfcf,#9bd0ff);color:#102536;box-shadow:0 4px 20px #2fb9bb25}
+.sidebar .brand-mark span{color:#25536b}
+.sidebar .nav-link.active{background:#162b3b;border-color:#315369;color:#b8fff2}
+.sidebar .nav-link:hover{background:#172a3c}
+.topbar{background:#0c1623;border-color:#1d2d40}
+.refresh-btn{background:#17293a;border-color:#31506a;color:#d8ecf7}
+.refresh-btn:hover{background:#223950}
+.compact-hero{padding:10px 0 15px}
+.compact-hero .eyebrow{color:#75d8d4}
+.compact-hero h1{font-size:clamp(27px,3.2vw,36px);font-weight:830;letter-spacing:-1.2px}
+.compact-hero p{font-size:12px;max-width:590px}
+.sport-switch{background:#101c2d;border:1px solid #283d52;border-radius:14px;padding:4px;max-width:475px}
+.sport-tab{border-radius:10px;color:#9bafc1;font-size:14px;min-height:45px}
+.sport-tab.active{background:linear-gradient(155deg,#1d4850,#203747);border-color:#408c90;box-shadow:0 2px 12px #0003;color:#ddfffa}
+.date-picker-bar{background:#0f1c2c;border:1px solid #263c51;border-radius:16px;padding:13px 15px}
+.date-picker-label strong{color:#cfe0ee}
+.day-shortcut,.results-shortcut{background:#17283b;border-color:#2c4259;color:#c0d2e0}
+.day-shortcut:hover{background:#213850}
+.day-shortcut.active{background:#124c4e;border-color:#369d99;color:#dcfff8}
+.date-picker-actions input[type=date]{background:#15283e;border-color:#345069}
+.simple-search-row>input{background:#101f30;border-color:#263e54;border-radius:12px;min-height:44px}
+.filters-disclosure{background:#142437;border-color:#2b4157}
+.match-heading{margin-top:24px}
+.match-heading h2{font-size:17px;color:#edf6fc}
+.day-heading{border-color:#243649}
+.day-heading h4{font-size:16px}
+.day-count{background:#1a2d40;color:#acbfce}
+.competition-day-heading b{font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:#abc6d6}
+.match-card{background:linear-gradient(155deg,#121f30,#111d2c);border:1px solid #25384e;border-radius:15px;padding:14px 15px;box-shadow:0 5px 16px #0002;transition:border-color .18s ease,background .18s ease}
+.match-card:hover{background:#182b40;border-color:#4f8793;transform:none}
+.match-card.selected{background:#172d3b;border-color:#4cc8ba;box-shadow:0 0 0 1px #4dc5b92a}
+.team-avatar{background:#1f3448;border-color:#334d61;color:#a8cee3}
+.match-card-top{font-size:10px}
+.match-card-bottom{gap:8px;padding-top:9px}
+.match-card .linkish{font-size:10px;white-space:nowrap}
+.confidence-chip{font-weight:800;border-radius:8px;padding:6px 9px;box-shadow:none}
+.confidence-compact{font-size:10px}
+.confidence-media{background:#153d3f;border-color:#286e69;color:#aef7e7}
+.confidence-baja{background:#3b3128;border-color:#76583b;color:#f6cf9a}
+.confidence-none{background:#263343;border-color:#405367;color:#b1c2d3}
+.confidence-led{width:6px;height:6px}
+.historical-forecast{background:#132b3a;border:1px solid #24505b;border-radius:12px}
+.historical-heading>span{color:#abeee6}
+.historical-value{color:#e1fff8}
+.detail-panel{background:#101d2e;border-color:#263d54}
+.detail-vs{margin:20px 0}
+.detail-team strong{color:#ebf4fc}
+.detail-section{border-color:#283f54}
+.analysis-disclosure,.stats-disclosure{background:#132438;border:1px solid #2a4358;border-radius:12px}
+.analysis-disclosure>summary,.stats-disclosure>summary{color:#d6eaf8}
+.projected-score{background:#162f40}
+.projected-score b{color:#88e8d8}
+.nba-detail-team{background:#13253a;border:1px solid #2a415a;border-radius:13px;padding:14px}
+.nba-detail-team h4{font-size:15px;margin:0 0 9px}
+.nba-team-stat-grid>div{background:#20394d;border-radius:9px}
+.nba-player-scroll{background:#101d2d;border:1px solid #2b4257;border-radius:11px;max-width:100%;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#3c6573 #101d2d}
+.nba-player-table{min-width:710px;border-collapse:separate;border-spacing:0}
+.nba-player-table th,.nba-player-table td{font-size:11px;padding:11px 9px;line-height:1.35;color:#d9eafa;border-bottom:1px solid #273a50}
+.nba-player-table thead th{position:sticky;top:0;background:#243a4d;color:#b5d0e0;z-index:2;text-transform:uppercase;letter-spacing:.04em;font-size:10px}
+.nba-player-table th:first-child,.nba-player-table td:first-child{position:sticky;left:0;z-index:3;min-width:160px;max-width:210px;white-space:normal;overflow-wrap:break-word}
+.nba-player-table thead th:first-child{z-index:5;background:#2b4357;text-align:left}
+.nba-player-table tbody .player-name-cell{background:#1a3044;text-align:left;color:#f0f8ff;font-size:12px;font-weight:750;border-right:1px solid #36536a;box-shadow:5px 0 12px #07131e44}
+.nba-player-table tbody tr:nth-child(even) td{background:#16283b}
+.nba-player-table tbody tr:nth-child(even) .player-name-cell{background:#20374b}
+.nba-player-table tbody tr:hover td{background:#213a50}
+.nba-player-table tbody tr:hover .player-name-cell{background:#29485d}
+@media(max-width:940px){
+ .bottom-nav{background:#0c1928;border-color:#294056;box-shadow:0 -8px 22px #0006}
+ .bottom-nav button{color:#a0b5c9}
+ .bottom-nav button.active{color:#7eecda}
+}
+@media(max-width:700px){
+ .content{padding-top:12px}
+ .compact-hero{padding-top:0}
+ .compact-hero h1{font-size:26px}
+ .date-picker-bar{padding:11px}
+ .match-card{padding:12px}
+ .nba-player-table{min-width:690px}
+ .nba-player-table th:first-child,.nba-player-table td:first-child{min-width:132px;max-width:162px}
+ .nba-player-table tbody .player-name-cell{font-size:11px}
+ body.detail-open .detail-panel.open{background:#08111f}
+ body.detail-open .detail-back-button{background:#1b3648;box-shadow:0 7px 15px #08111f}
+}
