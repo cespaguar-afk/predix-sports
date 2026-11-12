@@ -72,7 +72,9 @@ function snapshotOf(match,pred,now){
       home:x.home,away:x.away,p:num(x.p)})):[],
     over25:num(pred.over25),btts:num(pred.btts),
     markets:Array.isArray(pred.markets)?pred.markets.map(x=>({
-      label:x.label,field:x.field,expected:num(x.expected),threshold:num(x.threshold),over:num(x.over)})):[],
+      label:x.label,field:x.field,expected:num(x.expected),threshold:num(x.threshold),over:num(x.over),
+      expectedHome:num(x.expectedHome),expectedAway:num(x.expectedAway),samples:num(x.samples),
+      sampleHome:num(x.sampleHome),sampleAway:num(x.sampleAway)})):[],
     confidence:pred.confidence||null,
     predictedAt:now.toISOString(),outcome:null};
 }
