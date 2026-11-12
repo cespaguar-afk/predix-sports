@@ -16,7 +16,7 @@ const nowDate=()=>localDate();
 const plusDays=n=>plusCalendarDays(nowDate(),n);
 let toastTimer;
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3000);}
-const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,daysShown:7,chosenDay:null,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
+const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',selected:null,showDetail:false,daysShown:7,chosenDay:null,loading:false,errors:{},updatedAt:null,playerHistory:[],playerCoverage:{},playerIssue:null};
 if(state.data.copadelrey)state.data.copadelrey=reconcileCopaDelRey(state.data.copadelrey);
 const leagueKeys=Object.keys(LEAGUES);
 const predictions=new Map();
@@ -253,7 +253,7 @@ function detailed(m){
   const badge=m.status==='in'?'EN DIRECTO':m.status==='post'?'FINALIZADO':'ANTES DEL PARTIDO';
   const snapped=findSnapshot(m);
   const actual=m.status==='post'?finishedAnalysis(m,snapped):'';
-  return `<div class="detail-top"><div class="eyebrow"><span class="eyebrow-line"></span> INFORME DEL PARTIDO</div><button class="icon-button ${fav?'favorited':''}" data-favorite="${escapeHTML(m.id)}" type="button" title="Añadir a favoritos">${fav?'★':'☆'}</button></div>
+  return `<button class="detail-back-button" type="button" data-close-detail>← Volver al calendario</button><div class="detail-top"><div class="eyebrow"><span class="eyebrow-line"></span> INFORME DEL PARTIDO</div><button class="icon-button ${fav?'favorited':''}" data-favorite="${escapeHTML(m.id)}" type="button" title="Añadir a favoritos">${fav?'★':'☆'}</button></div>
     <div class="detail-vs"><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.home))}</div><strong>${escapeHTML(m.home)}</strong></div><div class="vs">VS</div><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.away))}</div><strong>${escapeHTML(m.away)}</strong></div></div>
     <div class="detail-caption">${LEAGUES[m.league].icon} ${escapeHTML(LEAGUES[m.league].name)} · ${escapeHTML(when)} · <span class="tag-sub">${badge}</span></div>
     ${m.status==='post'?actual:forecastAnalysis(m,p)}
@@ -426,6 +426,8 @@ function renderMatchArea(){
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
   const selected=displayed.find(m=>m.id===state.selected);
   $('#detail-panel').innerHTML=detailed(selected);
+  $('#detail-panel').classList.toggle('open',state.showDetail&&!!selected);
+  document.body.classList.toggle('detail-open',state.showDetail&&!!selected);
   // Los datos individuales sólo se consultan al pulsar el botón de jugadores.
 }
 function renderHistory(){
@@ -510,22 +512,24 @@ async function refresh(){
 function bindEvents(){
   document.addEventListener('click',e=>{
     const nav=e.target.closest('[data-view]');
-    if(nav){state.view=nav.dataset.view;state.daysShown=7;window.location.hash=state.view;render();window.scrollTo({top:0,behavior:'smooth'});return;}
+    if(nav){state.view=nav.dataset.view;state.daysShown=7;state.showDetail=false;document.body.classList.remove('detail-open');window.location.hash=state.view;render();window.scrollTo({top:0,behavior:'smooth'});return;}
     if(e.target.closest('[data-show-all]')){state.period='all';state.chosenDay=null;state.daysShown=7;renderNormal();return;}
     if(e.target.closest('[data-more-days]')){state.daysShown+=7;renderMatchArea();return;}
+    if(e.target.closest('[data-close-detail]')){state.showDetail=false;document.body.classList.remove('detail-open');$('#detail-panel')?.classList.remove('open');return;}
     const players=e.target.closest('[data-load-players]');
     if(players){const selected=allEvents().find(x=>x.id===players.dataset.loadPlayers);requestPlayerDetails(selected);return;}
     const dayShortcut=e.target.closest('[data-day-shortcut]');
-    if(dayShortcut){state.chosenDay=dayShortcut.dataset.dayShortcut==='today'?nowDate():dayShortcut.dataset.dayShortcut==='tomorrow'?plusDays(1):null;state.period='all';state.daysShown=7;renderNormal();return;}
+    if(dayShortcut){state.showDetail=false;state.chosenDay=dayShortcut.dataset.dayShortcut==='today'?nowDate():dayShortcut.dataset.dayShortcut==='tomorrow'?plusDays(1):null;state.period='all';state.daysShown=7;renderNormal();return;}
     const league=e.target.closest('[data-league]');
-    if(league){state.league=league.dataset.league;state.daysShown=7;renderNormal();return;}
+    if(league){state.showDetail=false;state.league=league.dataset.league;state.daysShown=7;renderNormal();return;}
     const match=e.target.closest('[data-match]');
-    if(match){state.selected=match.dataset.match;renderMatchArea();if(innerWidth<701)$('#detail-panel').scrollIntoView({behavior:'smooth',block:'start'});return;}
+    if(match){state.selected=match.dataset.match;state.showDetail=true;renderMatchArea();return;}
     const fav=e.target.closest('[data-favorite]');
     if(fav){toggleFavorite(fav.dataset.favorite);renderMatchArea();toast('Favoritos actualizados');}
   });
   document.addEventListener('change',e=>{if(e.target.id==='period-filter'){state.period=e.target.value;state.chosenDay=null;state.daysShown=7;renderNormal();}
-    if(e.target.id==='date-filter'){state.chosenDay=/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)?e.target.value:null;state.period='all';state.daysShown=7;renderNormal();}});
+    if(e.target.id==='date-filter'){state.showDetail=false;state.chosenDay=/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)?e.target.value:null;state.period='all';state.daysShown=7;renderNormal();}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.showDetail){state.showDetail=false;document.body.classList.remove('detail-open');$('#detail-panel')?.classList.remove('open');}});
   document.addEventListener('input',e=>{if(e.target.id==='search-input'){state.query=e.target.value;state.daysShown=7;renderMatchArea();}});
   $('#refresh-btn').addEventListener('click',refresh);
   window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['inicio','futbol','nba','historial','fuentes'].includes(h)&&h!==state.view){state.view=h;render();}});
