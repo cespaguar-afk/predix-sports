@@ -34,3 +34,25 @@ test('cualquier nombre de jugador se escapa al renderizar',()=>{
   assert.ok(!html.includes('<script>'));
   assert.ok(html.includes('&lt;script&gt;'));
 });
+
+test('nombres NBA siempre visibles como texto, no convertidos a un guion',()=>{
+  const html=renderNbaTeamDetails({teams:[{
+    name:'Boston Celtics',loaded:1,requested:1,providers:['ESPN'],
+    metrics:{rebounds:42,assists:24},players:[
+      {name:'Jayson Tatum',games:3,minutes:35,points:28.7,rebounds:9.1,assists:5.5,steals:1.1,blocks:0.6,turnovers:2.5,fgPct:49,tpPct:38},
+      {name:'Jaylen Brown',games:3,minutes:33,points:24,rebounds:6,assists:3.2,steals:1,blocks:0.3,turnovers:2,fgPct:45,tpPct:36}
+    ]
+  },{name:'Other team',loaded:0,requested:0,providers:[],metrics:{},players:[]}]});
+  assert.match(html,/<th scope="row" class="player-name-cell">Jayson Tatum<\/th>/);
+  assert.match(html,/<th scope="row" class="player-name-cell">Jaylen Brown<\/th>/);
+  assert.ok(!html.includes('<th scope="row" class="player-name-cell">—</th>'));
+  assert.ok(html.includes('<td>28.7</td>'));
+});
+test('los nombres maliciosos se escapan también en la cabecera de fila',()=>{
+  const html=renderNbaTeamDetails({teams:[{
+    name:'Prueba',loaded:1,requested:1,providers:['ESPN'],metrics:{},
+    players:[{name:'<img src=x onerror=alert(1)>',games:1,points:3}]
+  }]});
+  assert.ok(!html.includes('<img src=x'));
+  assert.ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'));
+});
