@@ -20,13 +20,15 @@ const state={data:loadCache(),league:'all',period:'90',query:'',view:'inicio',se
 if(state.data.copadelrey)state.data.copadelrey=reconcileCopaDelRey(state.data.copadelrey);
 const leagueKeys=Object.keys(LEAGUES);
 const predictions=new Map();
-let gradedPredictions=[];
+let gradedPredictions=Object.values(loadSnapshots()).filter(x=>x.outcome);
 let repaintTimer=null;
 const nbaReports=new Map();
 const nbaPending=new Set();
+let dataSaveTimer=null;
+const scheduleDataSave=()=>{clearTimeout(dataSaveTimer);dataSaveTimer=setTimeout(()=>saveCache(state.data),500);};
 const soccerReports=new Map();
 const soccerPending=new Set();
-function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view))renderNormal();},110);}
+function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view))renderNormal();},240);}
 function completeResults(m){
   const rows=state.data[m.league]?.results||[];
   return (m.league==='copadelrey'||m.league==='supercopa')
@@ -52,7 +54,7 @@ function sealAndGrade(){
   gradePredictions(allResults());
   gradedPredictions=Object.values(loadSnapshots()).filter(x=>x.outcome);
   predictions.clear();
-  const future=allFixtures().filter(m=>m.status==='pre'&&m.date>nowDate());
+  const future=allFixtures().filter(m=>m.status==='pre'&&m.date>=nowDate()&&m.date<=plusDays(7));
   capturePredictions(future.map(match=>({match,pred:predFor(match)})));
 }
 function matchesFiltered(){
@@ -263,10 +265,10 @@ function displayMetrics(){
   const upcoming=allFixtures().filter(x=>x.date>=nowDate());
   const saved=Object.values(loadSnapshots());const graded=saved.filter(x=>x.outcome);
   const average=graded.length?graded.reduce((s,x)=>s+x.brier,0)/graded.length:null;
-  const predicted=upcoming.filter(x=>!!predFor(x)).length;
+  const predicted=upcoming.filter(x=>!!findSnapshot(x)).length;
   const items=[
     {label:'PRÓXIMOS PARTIDOS',value:upcoming.length,foot:'Calendarios disponibles',icon:'▦'},
-    {label:'CON PRONÓSTICO',value:predicted,foot:'Modelo estadístico',icon:'◈'},
+    {label:'CON PRONÓSTICO GUARDADO',value:predicted,foot:'Registrados antes del inicio',icon:'◈'},
     {label:'PREDICCIONES EVALUADAS',value:graded.length,foot:'Registradas en este dispositivo',icon:'◷'},
     {label:'ERROR BRIER MEDIO',value:average===null?'—':average.toFixed(3),foot:'Menor es mejor · no equivale a acierto',icon:'◎'}
   ];
@@ -464,7 +466,7 @@ async function refresh(){
   state.errors={};
   $('#refresh-btn').disabled=true;$('#refresh-btn .refresh-icon').textContent='◌';
   if(['inicio','futbol','nba'].includes(state.view)&&$('#notice'))$('#notice').innerHTML=sourceNotice();
-  nbaReports.clear();
+  // Los detalles de jugadores ya consultados se mantienen en memoria.
   // Cada competición se incorpora en cuanto su fuente responde, sin esperar al resto.
   const jobs=leagueKeys.map(async k=>{
     try{
@@ -473,14 +475,13 @@ async function refresh(){
       state.errors[k]=null;
       predictions.clear();
       // Guardar progresivamente: si otra fuente falla, los datos disponibles se conservan.
-      saveCache(state.data);
-      scheduleRepaint();
+      scheduleDataSave();scheduleRepaint();
       // El marcador ESPN es optativo. No debe bloquear la primera renderización.
-      if(k!=='nba'&&k!=='copadelrey'&&LEAGUES[k].folder){
+      if(k!=='nba'&&k!=='copadelrey'&&LEAGUES[k].folder&&state.view==='futbol'&&state.league===k){
         loadEspn(k,{recentOnly:true}).then(live=>{
           if(state.data[k]!==fresh)return;
           state.data[k]={...fresh,fixtures:mergeLive(fresh.fixtures,live.fixtures)};
-          saveCache(state.data);scheduleRepaint();
+          scheduleDataSave();scheduleRepaint();
         }).catch(()=>{});
       }
     }catch(error){
@@ -489,7 +490,7 @@ async function refresh(){
     }
   });
   await Promise.allSettled(jobs);
-  sealAndGrade();saveCache(state.data);
+  sealAndGrade();scheduleDataSave();
   state.loading=false;
   $('#refresh-btn').disabled=false;$('#refresh-btn .refresh-icon').textContent='↻';
   scheduleRepaint();
