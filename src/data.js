@@ -56,7 +56,7 @@ export function normalizeFootball(rows,league,isFixture=false){
   }));
 }
 async function getText(url){
-  const res=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(18000)});
+  const res=await fetch(url,{cache:url.startsWith('./')?'default':'no-store',signal:AbortSignal.timeout(13000)});
   if(!res.ok)throw new Error(`HTTP ${res.status}`);
   return res.text();
 }
@@ -248,9 +248,11 @@ async function loadOfficialNba(){
 /** NBA sin claves: ESPN mensual, copia sincronizada y calendario oficial alternativo. */
 export async function loadNBA(){
   const errors=[];
+  // La copia NBA del sitio se presenta en primer lugar; los marcadores más
+  // recientes se consultan luego sin bloquear la interfaz.
   for(const task of [
-    ()=>loadEspn('nba',{nbaHistory:true}),
     ()=>loadPublishedSnapshot('nba'),
+    ()=>loadEspn('nba',{nbaHistory:true}),
     ()=>loadOfficialNba()
   ]){
     try{
