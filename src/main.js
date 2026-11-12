@@ -2,6 +2,7 @@ import {LEAGUES,loadFootball,loadEspn,loadNBA,loadInternationalOrCup,loadCopaDel
 import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} from './model.js';
 import {teamReport,headToHead} from './stats.js';
 import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
+import {getSoccerPlayers,renderSoccerPlayers} from './soccer-players.js';
 import {localDate,matchDay,plusCalendarDays,dayTitle,groupMatchesByDay} from './calendar.js';
 import {loadCache,saveCache,loadSnapshots,findSnapshot,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
@@ -23,6 +24,8 @@ let gradedPredictions=[];
 let repaintTimer=null;
 const nbaReports=new Map();
 const nbaPending=new Set();
+const soccerReports=new Map();
+const soccerPending=new Set();
 function scheduleRepaint(){clearTimeout(repaintTimer);repaintTimer=setTimeout(()=>{stamp();if(['inicio','futbol','nba'].includes(state.view))renderNormal();},110);}
 function completeResults(m){
   const rows=state.data[m.league]?.results||[];
@@ -209,6 +212,38 @@ function finishedAnalysis(m,snap){
     +(Number.isFinite(snap.brier)?' · Error Brier: '+snap.brier.toFixed(3):' · Pendiente de evaluación')
     +'</p></div>';
 }
+function playerSection(m){
+  const isNBA=m.sport==='nba';
+  const report=isNBA?nbaReports.get(m.id):soccerReports.get(m.id);
+  const pending=isNBA?nbaPending.has(m.id):soccerPending.has(m.id);
+  let body='';
+  if(report?.teams)body=isNBA?renderNbaTeamDetails(report):renderSoccerPlayers(report);
+  else if(report?.error)body='<p class="source-note">'+escapeHTML(report.error)+'</p>';
+  else if(pending)body='<p class="source-note">Consultando datos históricos…</p>';
+  else body='<button type="button" class="simple-btn" data-load-players="'+escapeHTML(m.id)+'">Consultar jugadores</button>';
+  return '<details class="analysis-disclosure player-disclosure"'+(report?' open':'')+'>'
+    +'<summary>👤 Jugadores · estadísticas recientes</summary><div class="analysis-inner">'
+    +'<p class="source-note">Los datos individuales se consultan al abrir esta sección; no se conocen alineaciones futuras.</p>'
+    +body+'</div></details>';
+}
+async function requestPlayerDetails(m){
+  if(!m)return;
+  const nba=m.sport==='nba',reports=nba?nbaReports:soccerReports,pending=nba?nbaPending:soccerPending;
+  if(reports.has(m.id)||pending.has(m.id))return;
+  pending.add(m.id);
+  const panel=$('#detail-panel');
+  if(panel)panel.innerHTML=detailed(m);
+  try{
+    reports.set(m.id,nba
+      ?await loadNbaTeamDetails(m,state.data.nba?.results||[])
+      :await getSoccerPlayers(m,state.playerHistory,LEAGUES[m.league]?.espn));
+  }catch(e){reports.set(m.id,{error:e.message||'No se pudieron consultar los jugadores'});}
+  finally{
+    pending.delete(m.id);
+    const current=allEvents().find(x=>x.id===m.id);
+    if(current?.id===state.selected&&$('#detail-panel'))$('#detail-panel').innerHTML=detailed(current);
+  }
+}
 function detailed(m){
   if(!m)return `<div class="detail-empty"><div class="detail-icon">◈</div><h3>Selecciona un partido</h3><p>Consulta probabilidades y métricas de cada encuentro.</p></div>`;
   const p=predFor(m);const fav=getFavorites().includes(m.id);
@@ -220,9 +255,9 @@ function detailed(m){
     <div class="detail-vs"><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.home))}</div><strong>${escapeHTML(m.home)}</strong></div><div class="vs">VS</div><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.away))}</div><strong>${escapeHTML(m.away)}</strong></div></div>
     <div class="detail-caption">${LEAGUES[m.league].icon} ${escapeHTML(LEAGUES[m.league].name)} · ${escapeHTML(when)} · <span class="tag-sub">${badge}</span></div>
     ${m.status==='post'?actual:forecastAnalysis(m,p)}
-    ${teamProfileHTML(m)}
-    ${m.sport==='nba'?'<div class="detail-section" id="nba-details">'+(nbaReports.get(m.id)?.teams?renderNbaTeamDetails(nbaReports.get(m.id)):nbaReports.get(m.id)?.error?'<h3>Estadísticas individuales NBA</h3><p class="source-note">'+escapeHTML(nbaReports.get(m.id).error)+'</p>':'<h3>Estadísticas individuales NBA</h3><p class="source-note">'+(nbaPending.has(m.id)?'Consultando los últimos partidos y sus fichas individuales…':'Al seleccionar este partido se consultarán sus estadísticas históricas.')+'</p>')+'</div>':''}
-    <div class="detail-section"><h3>Origen de los datos</h3><p class="source-note">${escapeHTML(m.source)}. ${m.liveSource?'Marcador en vivo: '+escapeHTML(m.liveSource)+'. ':''}${m.timeNote?escapeHTML(m.timeNote)+'. ':''}La fecha y el inicio pueden cambiar. Actualiza para consultar información reciente.</p></div>`;
+    <details class="analysis-disclosure"><summary>📊 Estadísticas de ambos equipos</summary><div class="analysis-inner">${teamProfileHTML(m)}</div></details>
+    ${playerSection(m)}
+    <details class="analysis-disclosure"><summary>ⓘ Datos y procedencia</summary><div class="analysis-inner"><p class="source-note">${escapeHTML(m.source)}. ${m.liveSource?'Marcador en vivo: '+escapeHTML(m.liveSource)+'. ':''}${m.timeNote?escapeHTML(m.timeNote)+'. ':''}La fecha y el inicio pueden cambiar. Actualiza para consultar información reciente.</p></div></details>`;
 }
 function displayMetrics(){
   const upcoming=allFixtures().filter(x=>x.date>=nowDate());
@@ -341,7 +376,7 @@ function renderMatchArea(){
   if(!displayed.some(m=>m.id===state.selected))state.selected=displayed[0]?.id||null;
   const selected=displayed.find(m=>m.id===state.selected);
   $('#detail-panel').innerHTML=detailed(selected);
-  if(selected?.sport==='nba')hydrateNbaDetail(selected);
+  // Los datos individuales sólo se consultan al pulsar el botón de jugadores.
 }
 function renderHistory(){
   const records=Object.values(loadSnapshots()).sort((a,b)=>b.date.localeCompare(a.date));
@@ -429,6 +464,8 @@ function bindEvents(){
     if(nav){state.view=nav.dataset.view;state.daysShown=7;window.location.hash=state.view;render();window.scrollTo({top:0,behavior:'smooth'});return;}
     if(e.target.closest('[data-show-all]')){state.period='all';state.chosenDay=null;state.daysShown=7;renderNormal();return;}
     if(e.target.closest('[data-more-days]')){state.daysShown+=7;renderMatchArea();return;}
+    const players=e.target.closest('[data-load-players]');
+    if(players){const selected=allEvents().find(x=>x.id===players.dataset.loadPlayers);requestPlayerDetails(selected);return;}
     const dayShortcut=e.target.closest('[data-day-shortcut]');
     if(dayShortcut){state.chosenDay=dayShortcut.dataset.dayShortcut==='today'?nowDate():dayShortcut.dataset.dayShortcut==='tomorrow'?plusDays(1):null;state.period='all';state.daysShown=7;renderNormal();return;}
     const league=e.target.closest('[data-league]');
