@@ -71,3 +71,91 @@
 .day-shortcut.active{color:#d8ffc3;background:#2d5135;border-color:#a8ea68}
 .date-picker-actions input[type=date]{color-scheme:dark;background:#152b3e;color:#f2f7fa;border:1px solid #42586b;border-radius:10px;padding:9px;font-size:12px;max-width:155px;min-width:0}
 @media(max-width:700px){.date-picker-bar{padding:12px;gap:10px}.date-picker-label strong{font-size:13px}.date-picker-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.day-shortcut,.calendar-label{font-size:11px;padding:10px 8px;text-align:center}.date-picker-actions input[type=date]{width:100%;max-width:none;box-sizing:border-box}.calendar-label{display:none}}
+
+/* Predix Sports v1.6 — interfaz tranquila y mobile-first */
+.compact-hero{display:flex;align-items:center;justify-content:space-between;padding:5px 0 16px;margin:0 0 10px}
+.compact-hero h1{font-size:clamp(23px,3vw,32px);letter-spacing:-.65px;font-weight:850;color:#f1f7f7;margin:6px 0 5px}
+.compact-hero p{font-size:12px;line-height:1.6;color:#9aafbe;margin:0;max-width:560px}
+.content{max-width:1440px;width:100%;margin:0 auto;box-sizing:border-box}
+.sport-switch{margin:12px 0 18px}
+.sport-tab{font-size:15px;min-height:48px}
+.date-picker-bar{margin:0 0 13px;background:#111e2d;border:1px solid #263b4c;padding:12px 14px}
+.date-picker-label strong{font-size:12px;color:#b9cdd8}
+.date-picker-actions input[type=date]{max-width:170px}
+.simple-search-row{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px;margin:0 0 22px}
+.simple-search-row>input{flex:1;min-width:160px;padding:12px 15px;background:#111f2e;border:1px solid #31475c;color:#e8f3f9;border-radius:10px;font-size:13px}
+.simple-search-row>input:focus-visible{outline:2px solid #96cc66}
+.filters-disclosure{flex:0 0 auto;position:relative;z-index:2;border:1px solid #32465a;border-radius:10px;background:#152638}
+.filters-disclosure>summary{list-style:none;cursor:pointer;padding:11px 15px;color:#e5eff4;font-size:12px;font-weight:750}
+.filters-disclosure>summary::-webkit-details-marker{display:none}
+.filters-disclosure[open]{flex-basis:100%;order:2}
+.filters-disclosure .filter-bar{padding:14px;margin:0;display:grid;gap:14px}
+.filters-disclosure .league-filters{gap:6px}
+.filters-disclosure .controls{max-width:230px}
+.match-heading{display:flex;gap:12px;justify-content:space-between;align-items:center;margin:20px 0 15px}
+.match-heading h2{font-size:17px;font-weight:800;margin:0;color:#ebf4f5}
+.match-heading span{font-size:11px;color:#8fa6b5;white-space:nowrap}
+.day-section{background:#0f1b2b;border:1px solid #263748;padding:12px;gap:8px}
+.day-heading{padding-bottom:9px}
+.competition-day{gap:6px;padding:6px 0 9px}
+.competition-day-heading{padding:4px 2px 6px}
+.match-list{gap:13px}
+.match-card{padding:13px 14px;border-radius:10px;background:#172637;border-color:#2d4052;transition:background .13s,border-color .13s;box-shadow:none}
+.match-card:hover{transform:none;background:#213447}
+.match-card.selected{box-shadow:none;border-color:#80bd71;background:#20342f}
+.match-card-top{font-size:10px}
+.match-card-bottom{margin-top:8px}
+.match-card .team-line b{font-size:12px;line-height:1.35}
+.match-card .team-avatar{width:29px;height:29px;font-size:10px}
+.match-card .outcome-big{font-size:20px}
+.match-card .outcome-small{font-size:9px}
+.linkish{font-weight:700;font-size:11px}
+.detail-panel{border-radius:14px}
+.detail-back-button{display:none;background:#1c3242;border:1px solid #34526b;color:#dbeff9;border-radius:9px;cursor:pointer;font-weight:800;font-size:12px;padding:11px 13px;margin-bottom:15px}
+.analysis-disclosure,.stats-disclosure{border:1px solid #293f52;border-radius:11px;background:#142436;margin:12px 0;overflow:hidden}
+.analysis-disclosure>summary,.stats-disclosure>summary{cursor:pointer;list-style:none;padding:16px;font-size:12px;font-weight:800;color:#d8e8f4}
+.analysis-disclosure>summary::-webkit-details-marker,.stats-disclosure>summary::-webkit-details-marker{display:none}
+.analysis-disclosure>summary::after,.stats-disclosure>summary::after{content:'⌄';float:right;color:#a0b0b9;font-size:15px}
+.analysis-disclosure[open]>summary::after,.stats-disclosure[open]>summary::after{content:'⌃'}
+.analysis-inner{padding:0 13px 13px}
+.analysis-inner .detail-section:first-child{margin-top:0}
+.stats-disclosure .metrics{padding:0 12px 12px;margin:0}
+.archive-label{font-weight:800;font-size:12px;margin:17px 0 9px;color:#d2e5d7}
+.archive-probs{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:8px;margin-bottom:12px}
+.archive-prob{display:flex;flex-direction:column;gap:6px;align-items:center;padding:12px 8px;border-radius:9px;background:#1b3442;font-size:11px;color:#b9cbd6}
+.archive-prob b{font-size:19px;color:#d2f0bf}
+.stats-disclosure{margin-top:24px}
+.stats-disclosure>summary{padding:13px 15px}
+.player-disclosure{margin-top:14px}
+.player-headnote{font-size:11px;line-height:1.55;color:#9baebb;margin-bottom:12px}
+.nba-detail-team{margin:12px 0}
+.nba-player-table th,.nba-player-table td{font-size:11px}
+@media(max-width:940px){.content{max-width:none}}
+@media(max-width:700px){
+ .content{padding-top:12px}
+ .compact-hero{padding:0 0 8px}
+ .compact-hero h1{font-size:24px}
+ .compact-hero p{font-size:11px}
+ .sport-switch{gap:8px;margin:10px 0 13px}
+ .sport-tab{min-height:44px;border-radius:10px}
+ .date-picker-bar{padding:12px;gap:10px;margin-bottom:10px}
+ .date-picker-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .simple-search-row{flex-wrap:nowrap;align-items:stretch}
+ .simple-search-row>input{min-width:0;font-size:12px}
+ .filters-disclosure{flex:0 0 auto}
+ .filters-disclosure>summary{font-size:11px;padding:12px}
+ .filters-disclosure[open]{flex-basis:100%}
+ .match-heading{margin:16px 0 12px}
+ .match-heading h2{font-size:15px}
+ .match-card{padding:11px 12px}
+ .match-card-bottom{margin-top:6px}
+ .day-section{padding:10px}
+ body.detail-open{overflow:hidden}
+ .detail-panel{display:none}
+ body.detail-open .detail-panel.open{display:block;position:fixed;inset:0;z-index:45;overflow-y:auto;overscroll-behavior:contain;border-radius:0;padding:18px 15px calc(36px + env(safe-area-inset-bottom));background:#0d1828;min-height:0}
+ body.detail-open .detail-back-button{display:block;position:sticky;top:0;z-index:46;background:#233848;box-shadow:0 7px 15px #0d1828}
+ .detail-panel .detail-team strong{font-size:13px}
+ .analysis-disclosure>summary{padding:14px 12px}
+ .archive-prob{padding:9px 6px}
+ .archive-prob b{font-size:17px}
+}
