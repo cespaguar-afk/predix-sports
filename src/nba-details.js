@@ -7,7 +7,7 @@
 const ESPN='https://site.api.espn.com/apis/site/v2/sports/basketball/nba';
 const NBA_CDN='https://cdn.nba.com/static/json/liveData/boxscore/boxscore_';
 const CACHE_PREFIX='predix.nba.box.v1.';
-const FETCH_TIMEOUT=9000;
+const FETCH_TIMEOUT=6500;
 const memory=new Map();
 const dateLookup=new Map();
 
@@ -219,7 +219,7 @@ async function readBoxscore(match){
 function averagePlayers(games){
   const map=new Map();
   for(const game of games)for(const p of game.players){
-    const key=p.id||clean(p.name);
+    const key=clean(p.name);
     if(!map.has(key))map.set(key,{name:p.name,games:0,metrics:{},fgMade:0,fgAttempted:0,tpMade:0,tpAttempted:0});
     const row=map.get(key);
     row.games++;
@@ -243,7 +243,7 @@ function matchTeam(block,team,short){
   return block.teams.find(x=>sameTeam(x.name,team)
     ||Boolean(short&&clean(x.abbr)===clean(short)));
 }
-export async function loadNbaTeamDetails(match,results,{perTeam=3}={}){
+export async function loadNbaTeamDetails(match,results,{perTeam=4}={}){
   const maximum=Math.max(1,Math.min(5,Number(perTeam)||3));
   const names=[{name:match.home,short:match.homeShort},{name:match.away,short:match.awayShort}];
   const candidates=names.map(({name})=>(results||[]).filter(r=>
@@ -282,8 +282,8 @@ const fmt=value=>typeof value==='number'&&Number.isFinite(value)?String(value):'
 function playerTable(team){
   const top=team.players.slice(0,8);
   if(!top.length)return '<p class="source-note">Sin estadísticas individuales verificables en los partidos consultados.</p>';
-  const headers=['JUGADOR','PJ','PTS','REB','AST','ROB','TAP','PÉRD','TC%'];
-  const data=top.map(p=>[p.name,p.games,p.points,p.rebounds,p.assists,p.steals,p.blocks,p.turnovers,p.fgPct===null?'—':p.fgPct+'%']);
+  const headers=['JUGADOR','PJ','MIN','PTS','REB','AST','ROB','TAP','PÉRD','TC%','3PT%'];
+  const data=top.map(p=>[p.name,p.games,p.minutes,p.points,p.rebounds,p.assists,p.steals,p.blocks,p.turnovers,p.fgPct===null?'—':p.fgPct+'%',p.tpPct===null?'—':p.tpPct+'%']);
   return '<div class="nba-player-scroll"><table class="nba-player-table"><thead><tr>'
     +headers.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'
     +data.map(row=>'<tr>'+row.map((cell,i)=>'<td>'+esc(fmt(cell))+'</td>').join('')+'</tr>').join('')
@@ -308,7 +308,7 @@ export function renderNbaTeamDetails(report){
       +playerTable(t)+'</div>';
   });
   return '<h3>Estadísticas individuales NBA</h3>'
-    +'<p class="source-note">Promedios observados en los últimos partidos anteriores a este encuentro (máximo 3 por equipo); el número PJ indica cuántas apariciones se han registrado para cada jugador. No son estadísticas de toda la temporada ni garantizan que participe en el próximo partido.</p>'
+    +'<p class="source-note">Promedios observados en los últimos partidos anteriores a este encuentro (máximo 4 por equipo); el número PJ indica cuántas apariciones se han registrado para cada jugador. No son estadísticas de toda la temporada ni garantizan que participe en el próximo partido.</p>'
     +'<div class="nba-detail-teams">'+teams.join('')+'</div>'
     +'<p class="disclaimer">Datos históricos de ESPN / NBA CDN sujetos a disponibilidad. No constituyen un pronóstico individual ni se utilizan todavía para ajustar probabilidades.</p>';
 }
