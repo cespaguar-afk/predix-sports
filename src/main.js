@@ -136,11 +136,11 @@ function matchResult(m){
 }
 function eventCard(m){
   const league=LEAGUES[m.league];const b=badgeText(m);
-  const p=predFor(m);const text=m.isoTime?datetimeText(m.isoTime):`${dateText(m.date)} · ${m.time?m.time+'*':'Hora pendiente'}`;
+  const text=m.isoTime?new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date(m.isoTime)):m.time?m.time+'*':'Hora por confirmar';
   return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}">
     <div class="match-card-top"><div class="comp-badge">${league.icon} ${escapeHTML(league.name)}</div><span class="date-text">${escapeHTML(text)}</span></div>
     <div class="match-line"><div class="teams"><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.home))}</span><b>${escapeHTML(m.home)}</b></div><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.away))}</span><b>${escapeHTML(m.away)}</b></div></div><div class="match-outcome">${matchResult(m)}</div></div>
-    <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span><span>${p?`<span class="soft-tag ${p.confidence==='baja'?'low':'medium'}">Confianza ${p.confidence}</span>`:m.status==='post'?'Resultado verificado':'Datos limitados'}</span><span class="linkish">Analizar →</span></div>
+    <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span><span class="linkish">Ver pronóstico →</span></div>
   </button>`;
 }
 function forecastAnalysis(m,p){
@@ -191,8 +191,8 @@ function forecastAnalysis(m,p){
 
   return `<div class="detail-section"><h3>${isSoccer?'Probabilidades 1X2':'Probabilidades de victoria'} <span class="soft-tag low">${p.confidence==='baja'?'BAJA CONFIANZA':'CONFIANZA MEDIA'}</span></h3>${probs}${score}
       ${isSoccer?`<p class="source-note">Marcadores más probables: ${p.scorelines.map(x=>`${x.home}-${x.away} (${fmt(x.p)})`).join(' · ')}</p>`:''}
-    </div>${cards}${suggestions}
-    <div class="detail-section"><h3>Cómo se calculó</h3><p class="source-note">${escapeHTML(p.explanation)}</p><p class="source-note">Partidos recientes considerados: <strong>${p.sampleHome}</strong> del local y <strong>${p.sampleAway}</strong> del visitante. ${p.calibrated?'Ajuste de calibración local activo.':'Sin calibración aprendida todavía (requiere al menos 20 predicciones evaluadas y muestras suficientes por rango).'}</p><div class="disclaimer">${m.status==='in'?'Marcador en directo, pero el pronóstico es PREPARTIDO: no reacciona a goles, faltas, lesiones ni posesiones en vivo. ':''}Estimaciones experimentales no contrastadas para decisiones económicas. No se calculan apuestas de valor sin cuotas fiables.</div></div>`;
+    </div><details class="analysis-disclosure"><summary>📋 Mercados y explicación del pronóstico</summary><div class="analysis-inner">${cards}${suggestions}
+    <div class="detail-section"><h3>Cómo se calculó</h3><p class="source-note">${escapeHTML(p.explanation)}</p><p class="source-note">Partidos recientes considerados: <strong>${p.sampleHome}</strong> del local y <strong>${p.sampleAway}</strong> del visitante. ${p.calibrated?'Ajuste de calibración local activo.':'Sin calibración aprendida todavía (requiere al menos 20 predicciones evaluadas y muestras suficientes por rango).'}</p><div class="disclaimer">${m.status==='in'?'Marcador en directo, pero el pronóstico es PREPARTIDO: no reacciona a goles, faltas, lesiones ni posesiones en vivo. ':''}Estimaciones experimentales no contrastadas para decisiones económicas. No se calculan apuestas de valor sin cuotas fiables.</div></div></div></details>`;
 }
 function finishedAnalysis(m,snap){
   const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
