@@ -610,3 +610,22 @@ body{background:#070c15;color:#edf3fb}
  body.detail-open .detail-panel.open{background:#08111f}
  body.detail-open .detail-back-button{background:#1b3648;box-shadow:0 7px 15px #08111f}
 }
+
+/* NBA player cards v2.3 — names always visible, metrics below; no horizontal scrolling */
+.nba-player-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));gap:11px;margin:10px 0 15px;max-width:100%}
+.nba-player-card{min-width:0;padding:13px;border:1px solid #344e65;border-radius:13px;background:linear-gradient(155deg,#192e42,#132438);box-shadow:0 3px 9px #0002}
+.nba-player-card-head{display:flex;align-items:center;gap:10px;min-width:0;padding:0 0 12px;border-bottom:1px solid #2d455b}
+.nba-player-number{flex-shrink:0;color:#70d9ce;background:#183f45;border-radius:7px;padding:5px;font-weight:850;font-size:11px}
+.nba-player-name{min-width:0;flex:1;margin:0;color:#f6fcff;font-size:13px;font-weight:850;letter-spacing:-.1px;line-height:1.35;overflow-wrap:anywhere;white-space:normal;text-align:left}
+.nba-player-games{flex-shrink:0;color:#acc2d2;font-size:10px;font-weight:700}
+.nba-player-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding-top:12px}
+.nba-player-metric{min-width:0;display:flex;flex-direction:column;gap:3px;padding:8px 7px;border-radius:7px;background:#20384b;text-align:center}
+.nba-player-metric small{font-size:9px;font-weight:780;color:#adc5d5;letter-spacing:.03em}
+.nba-player-metric strong{font-size:13px;font-variant-numeric:tabular-nums;color:#f2fbff}
+@media(max-width:700px){
+ .nba-player-cards{grid-template-columns:1fr;gap:9px}
+ .nba-player-card{padding:12px}
+ .nba-player-card-head{gap:8px}
+ .nba-player-name{font-size:14px}
+ .nba-player-metric{padding:7px}
+}
