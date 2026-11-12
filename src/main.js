@@ -3,7 +3,7 @@ import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} f
 import {teamReport,headToHead} from './stats.js';
 import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
 import {localDate,matchDay,plusCalendarDays,dayTitle,groupMatchesByDay} from './calendar.js';
-import {loadCache,saveCache,loadSnapshots,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
+import {loadCache,saveCache,loadSnapshots,findSnapshot,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
 const $=s=>document.querySelector(s);
 const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -121,7 +121,8 @@ function teamProfileHTML(m){
 function matchResult(m){
   if(m.status==='in'&&m.liveScore)return `<div class="outcome-big lime">${escapeHTML(m.liveScore)}</div><div class="outcome-small">Marcador ESPN</div>`;
   if(m.status==='in'&&Number.isFinite(m.homeScore))return `<div class="outcome-big lime">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Marcador ESPN</div>`;
-  if(m.status==='post')return `<div class="outcome-big">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Resultado final</div>`;
+  if(m.status==='post'){const snap=findSnapshot(m);const pick=snap?.probabilities?Object.entries(snap.probabilities).sort((a,b)=>b[1]-a[1])[0]:null;
+    return `<div class="outcome-big">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">${pick?'Antes: '+(pick[0]==='H'?'1':pick[0]==='D'?'X':'2')+' ('+fmt(pick[1])+')':'Final · sin registro previo'}</div>`;}
   const p=predFor(m);
   if(!p)return `<div class="outcome-big">—</div><div class="outcome-small">Sin predicción</div>`;
   const pick=Object.entries(p.probabilities).sort((a,b)=>b[1]-a[1])[0];
@@ -188,13 +189,33 @@ function forecastAnalysis(m,p){
     </div>${cards}${suggestions}
     <div class="detail-section"><h3>Cómo se calculó</h3><p class="source-note">${escapeHTML(p.explanation)}</p><p class="source-note">Partidos recientes considerados: <strong>${p.sampleHome}</strong> del local y <strong>${p.sampleAway}</strong> del visitante. ${p.calibrated?'Ajuste de calibración local activo.':'Sin calibración aprendida todavía (requiere al menos 20 predicciones evaluadas y muestras suficientes por rango).'}</p><div class="disclaimer">${m.status==='in'?'Marcador en directo, pero el pronóstico es PREPARTIDO: no reacciona a goles, faltas, lesiones ni posesiones en vivo. ':''}Estimaciones experimentales no contrastadas para decisiones económicas. No se calculan apuestas de valor sin cuotas fiables.</div></div>`;
 }
+function finishedAnalysis(m,snap){
+  const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
+  if(!snap?.probabilities)return result+'<p class="source-note">Sin pronóstico anterior guardado en este dispositivo. No se calcula un pronóstico con resultados posteriores.</p></div>';
+  const labels=m.sport==='nba'?{H:'Local',A:'Visitante'}:{H:'Local (1)',D:'Empate (X)',A:'Visitante (2)'};
+  const values=Object.entries(snap.probabilities).filter(([k,v])=>labels[k]&&typeof v==='number')
+    .map(([k,v])=>'<div class="archive-prob"><span>'+labels[k]+'</span><b>'+fmt(v)+'</b></div>').join('');
+  const expected=Number.isFinite(snap.expectedHome)&&Number.isFinite(snap.expectedAway)
+    ?'<p class="source-note">Marcador estimado: '+snap.expectedHome+' – '+snap.expectedAway+'</p>':'';
+  const markets=[
+    ...(Number.isFinite(snap.over25)?[['Más de 2,5 goles',snap.over25]]:[]),
+    ...(Number.isFinite(snap.btts)?[['Ambos marcan',snap.btts]]:[]),
+    ...(snap.markets||[]).filter(x=>Number.isFinite(x.over)).map(x=>[x.label,x.over])
+  ];
+  const secondary=markets.length?'<details class="analysis-disclosure"><summary>Otros pronósticos guardados</summary><div class="analysis-inner">'
+    +markets.map(([title,value])=>'<div class="archive-prob"><span>'+escapeHTML(title)+'</span><b>'+fmt(value)+'</b></div>').join('')+'</div></details>':'';
+  return result+'<div class="archive-label">Predicción realizada antes del encuentro</div><div class="archive-probs">'+values+'</div>'
+    +expected+secondary+'<p class="source-note">Registrada: '+escapeHTML(datetimeText(snap.predictedAt))
+    +(Number.isFinite(snap.brier)?' · Error Brier: '+snap.brier.toFixed(3):' · Pendiente de evaluación')
+    +'</p></div>';
+}
 function detailed(m){
   if(!m)return `<div class="detail-empty"><div class="detail-icon">◈</div><h3>Selecciona un partido</h3><p>Consulta probabilidades y métricas de cada encuentro.</p></div>`;
   const p=predFor(m);const fav=getFavorites().includes(m.id);
   const when=m.isoTime?datetimeText(m.isoTime):`${dateText(m.date)}${m.time?' · '+m.time+'*':''}`;
   const badge=m.status==='in'?'EN DIRECTO':m.status==='post'?'FINALIZADO':'ANTES DEL PARTIDO';
-  const snapped=loadSnapshots()[m.id];
-  const actual=m.status==='post'?`<div class="detail-section"><h3>Resultado real</h3><div class="projected-score"><b>${m.homeScore}</b><span>FINAL</span><b>${m.awayScore}</b></div>${snapped?.outcome?`<p class="source-note">Predicción guardada antes del partido · puntuación Brier: ${snapped.brier?.toFixed(3)}</p>`:'<p class="source-note">No consta predicción guardada antes de este encuentro. No se reconstruye usando datos posteriores.</p>'}</div>`:'';
+  const snapped=findSnapshot(m);
+  const actual=m.status==='post'?finishedAnalysis(m,snapped):'';
   return `<div class="detail-top"><div class="eyebrow"><span class="eyebrow-line"></span> INFORME DEL PARTIDO</div><button class="icon-button ${fav?'favorited':''}" data-favorite="${escapeHTML(m.id)}" type="button" title="Añadir a favoritos">${fav?'★':'☆'}</button></div>
     <div class="detail-vs"><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.home))}</div><strong>${escapeHTML(m.home)}</strong></div><div class="vs">VS</div><div class="detail-team"><div class="team-avatar">${escapeHTML(initials(m.away))}</div><strong>${escapeHTML(m.away)}</strong></div></div>
     <div class="detail-caption">${LEAGUES[m.league].icon} ${escapeHTML(LEAGUES[m.league].name)} · ${escapeHTML(when)} · <span class="tag-sub">${badge}</span></div>
