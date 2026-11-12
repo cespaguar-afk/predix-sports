@@ -100,5 +100,14 @@ jobs:
             echo 'Sin cambios en los datos.'
           else
             git commit -m 'Actualizar datos deportivos públicos'
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then
+                echo 'Datos públicos actualizados correctamente'
+                exit 0
+              fi
+              sleep 3
+            done
+            echo 'No se pudo publicar el feed por conflicto' >&2
+            exit 1
           fi
