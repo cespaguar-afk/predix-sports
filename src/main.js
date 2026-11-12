@@ -3,6 +3,7 @@ import {predictFootball,predictNBA,predictPlayerBookings,brierScore,calibrate} f
 import {teamReport,headToHead} from './stats.js';
 import {loadNbaTeamDetails,renderNbaTeamDetails} from './nba-details.js';
 import {getSoccerPlayers,renderSoccerPlayers} from './soccer-players.js';
+import {archivedOddsHTML} from './prediction-display.js';
 import {localDate,matchDay,plusCalendarDays,dayTitle,groupMatchesByDay} from './calendar.js';
 import {loadCache,saveCache,loadSnapshots,findSnapshot,capturePredictions,gradePredictions,getFavorites,toggleFavorite,exportData,clearHistory} from './storage.js';
 
@@ -126,8 +127,7 @@ function teamProfileHTML(m){
 function matchResult(m){
   if(m.status==='in'&&m.liveScore)return `<div class="outcome-big lime">${escapeHTML(m.liveScore)}</div><div class="outcome-small">Marcador ESPN</div>`;
   if(m.status==='in'&&Number.isFinite(m.homeScore))return `<div class="outcome-big lime">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Marcador ESPN</div>`;
-  if(m.status==='post'){const snap=findSnapshot(m);const pick=snap?.probabilities?Object.entries(snap.probabilities).sort((a,b)=>b[1]-a[1])[0]:null;
-    return `<div class="outcome-big">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">${pick?'Antes: '+(pick[0]==='H'?'1':pick[0]==='D'?'X':'2')+' ('+fmt(pick[1])+')':'Final · sin registro previo'}</div>`;}
+  if(m.status==='post')return `<div class="outcome-big">${m.homeScore} – ${m.awayScore}</div><div class="outcome-small">Resultado final</div>`;
   const p=predFor(m);
   if(!p)return `<div class="outcome-big">—</div><div class="outcome-small">Sin predicción</div>`;
   const pick=Object.entries(p.probabilities).sort((a,b)=>b[1]-a[1])[0];
@@ -140,7 +140,8 @@ function eventCard(m){
   return `<button type="button" class="match-card ${state.selected===m.id?'selected':''}" data-match="${escapeHTML(m.id)}">
     <div class="match-card-top"><div class="comp-badge">${league.icon} ${escapeHTML(league.name)}</div><span class="date-text">${escapeHTML(text)}</span></div>
     <div class="match-line"><div class="teams"><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.home))}</span><b>${escapeHTML(m.home)}</b></div><div class="team-line"><span class="team-avatar">${escapeHTML(initials(m.away))}</span><b>${escapeHTML(m.away)}</b></div></div><div class="match-outcome">${matchResult(m)}</div></div>
-    <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span><span class="linkish">Ver pronóstico →</span></div>
+    ${m.status==='post'?archivedOddsHTML(m,findSnapshot(m),{compact:true}):''}
+    <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span><span class="linkish">${m.status==='post'?'Ver resultado y análisis →':'Ver pronóstico →'}</span></div>
   </button>`;
 }
 function forecastAnalysis(m,p){
@@ -196,10 +197,8 @@ function forecastAnalysis(m,p){
 }
 function finishedAnalysis(m,snap){
   const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
-  if(!snap?.probabilities)return result+'<p class="source-note">Sin pronóstico anterior guardado en este dispositivo. No se calcula un pronóstico con resultados posteriores.</p></div>';
-  const labels=m.sport==='nba'?{H:'Local',A:'Visitante'}:{H:'Local (1)',D:'Empate (X)',A:'Visitante (2)'};
-  const values=Object.entries(snap.probabilities).filter(([k,v])=>labels[k]&&typeof v==='number')
-    .map(([k,v])=>'<div class="archive-prob"><span>'+labels[k]+'</span><b>'+fmt(v)+'</b></div>').join('');
+  if(!snap?.probabilities)return result+archivedOddsHTML(m,null)+'</div>';
+  const previouslySaved=archivedOddsHTML(m,snap);
   const expected=Number.isFinite(snap.expectedHome)&&Number.isFinite(snap.expectedAway)
     ?'<p class="source-note">Marcador estimado: '+snap.expectedHome+' – '+snap.expectedAway+'</p>':'';
   const markets=[
@@ -209,7 +208,7 @@ function finishedAnalysis(m,snap){
   ];
   const secondary=markets.length?'<details class="analysis-disclosure"><summary>Otros pronósticos guardados</summary><div class="analysis-inner">'
     +markets.map(([title,value])=>'<div class="archive-prob"><span>'+escapeHTML(title)+'</span><b>'+fmt(value)+'</b></div>').join('')+'</div></details>':'';
-  return result+'<div class="archive-label">Predicción realizada antes del encuentro</div><div class="archive-probs">'+values+'</div>'
+  return result+previouslySaved
     +expected+secondary+'<p class="source-note">Registrada: '+escapeHTML(datetimeText(snap.predictedAt))
     +(Number.isFinite(snap.brier)?' · Error Brier: '+snap.brier.toFixed(3):' · Pendiente de evaluación')
     +'</p></div>';
