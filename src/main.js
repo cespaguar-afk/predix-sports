@@ -489,8 +489,7 @@ async function refresh(){
           state.data.nba={...previous,results:rows.filter(m=>m.status==='post'),
             fixtures:rows.filter(m=>m.status!=='post'),
             updatedAt:new Date().toISOString(),source:'NBA · archivo público y consulta ESPN'};
-          gradePredictions(state.data.nba.results);
-          gradedPredictions=Object.values(loadSnapshots()).filter(x=>x.outcome);
+          sealAndGrade();
           predictions.clear();scheduleDataSave();scheduleRepaint();
         }).catch(()=>{});
       }
