@@ -5,10 +5,13 @@ const FAV='predix-v1-favorites';
 function read(key,defaultValue){try{return JSON.parse(localStorage.getItem(key))??defaultValue;}catch{return defaultValue;}}
 function write(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}}
 let publicSnapshots={};
+let publicIndex=new Map();
+const matchKey=x=>[x?.league,x?.sport,x?.date,simplify(x?.home),simplify(x?.away)].join(':');
 export const loadSnapshots=()=>read(KEY,{});
 export function getHistoricSnapshot(match){
-  // Priorizamos siempre la predicción local original si existe.
-  return findSnapshot(match,loadSnapshots())||findSnapshot(match,publicSnapshots);
+  // Priorizamos el registro local; la copia pública está indexada para que
+  // cientos de resultados no hagan búsquedas lineales en cada renderizado.
+  return findSnapshot(match,loadSnapshots())||publicIndex.get(matchKey(match))||null;
 }
 export async function loadPublicSnapshots(){
   try{
@@ -17,6 +20,15 @@ export async function loadPublicSnapshots(){
     const payload=await res.json();
     if(payload?.snapshots&&typeof payload.snapshots==='object'){
       publicSnapshots=payload.snapshots;
+      publicIndex=new Map();
+      const conflicting=new Set();
+      for(const item of Object.values(publicSnapshots)){
+        if(!item||!item.probabilities)continue;
+        const key=matchKey(item);
+        if(conflicting.has(key))continue;
+        if(publicIndex.has(key)){publicIndex.delete(key);conflicting.add(key);}
+        else publicIndex.set(key,item);
+      }
       return Object.keys(publicSnapshots).length;
     }
   }catch{}
