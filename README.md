@@ -92,3 +92,16 @@ Los modelos no están calibrados ni han superado validación externa; la etiquet
 Los partidos se muestran **día a día**, con títulos como **Hoy** y **Mañana** según la zona horaria local del navegador. Dentro de cada día de **Fútbol**, los partidos están agrupados por competición (LaLiga, Bundesliga, Ligue 1, Copa del Rey, etc.). En **NBA**, los encuentros se agrupan por el día local, aunque ESPN publique la hora en UTC.
 
 La portada muestra separadamente un resumen de fútbol y otro de NBA para los primeros dos días con encuentros disponibles. Las secciones completas empiezan mostrando siete fechas y permiten pulsar **Mostrar 7 días más** sucesivamente, conservando los filtros de búsqueda, liga y periodo. Se mantiene la carga progresiva para móviles.
+
+
+## Versión 1.6 — Interfaz, jugadores e historial
+
+- Interfaz compacta en **Fútbol** y **NBA**: fecha, búsqueda y partidos son las primeras acciones. Los filtros por competición, estadísticas de equipos, mercados avanzados, fuentes y precisión del modelo siguen disponibles en paneles desplegables.
+- Android: al seleccionar un encuentro se abre su ficha en una vista a pantalla completa con botón de regreso al calendario.
+- **Partidos finalizados:** la ficha muestra el resultado real y, solo cuando ya existía una predicción sellada antes del inicio, las probabilidades originales, el marcador estimado y los mercados guardados. Nunca se fabrica un pronóstico retrospectivo.
+- Historial: los nuevos registros guardan más datos. Los anteriores siguen conservando sus probabilidades originales aunque no tengan estimaciones detalladas.
+- **Fútbol:** bajo demanda, se consultan apariciones y estadísticas individuales que ESPN documente en partidos anteriores, más un historial de amonestaciones local cuando lo haya. No se atribuyen goles, asistencias, minutos ni tarjetas si la fuente no los verifica. La cobertura varía mucho entre competiciones.
+- **NBA:** bajo demanda, hasta cuatro partidos anteriores por equipo para mostrar puntos, rebotes, asistencias, minutos, robos, tapones, pérdidas y porcentajes de tiro de sus jugadores.
+- Rendimiento: copia local de calendarios NBA primero; el directo se consulta después sin bloquear la vista, los archivos alojados en la web aprovechan la caché del navegador, los guardados locales se agrupan y las fichas de jugadores requieren una acción explícita.
+- Privacidad: las predicciones guardadas siguen siendo **locales de este navegador/dispositivo**. El historial no se comparte automáticamente entre Android y un ordenador.
+- Limitación: fuentes ESPN/NBA CDN no garantizadas. Si no responden, se muestra la ausencia de datos; no hay precisión máxima garantizada ni reentrenamiento automático del modelo.
