@@ -478,6 +478,22 @@ async function refresh(){
       predictions.clear();
       // Guardar progresivamente: si otra fuente falla, los datos disponibles se conservan.
       scheduleDataSave();scheduleRepaint();
+      // NBA: se muestra inmediatamente la copia local y se actualizan los
+      // últimos meses de ESPN sin bloquear el calendario ni borrar históricos.
+      if(k==='nba'){
+        loadEspn('nba',{recentOnly:true}).then(live=>{
+          const previous=state.data.nba||fresh;
+          const combined=new Map([...(previous.results||[]),...(previous.fixtures||[]),
+            ...live.results,...live.fixtures].map(m=>[m.id,m]));
+          const rows=[...combined.values()];
+          state.data.nba={...previous,results:rows.filter(m=>m.status==='post'),
+            fixtures:rows.filter(m=>m.status!=='post'),
+            updatedAt:new Date().toISOString(),source:'NBA · archivo público y consulta ESPN'};
+          gradePredictions(state.data.nba.results);
+          gradedPredictions=Object.values(loadSnapshots()).filter(x=>x.outcome);
+          predictions.clear();scheduleDataSave();scheduleRepaint();
+        }).catch(()=>{});
+      }
       // El marcador ESPN es optativo. No debe bloquear la primera renderización.
       if(k!=='nba'&&k!=='copadelrey'&&LEAGUES[k].folder&&state.view==='futbol'&&state.league===k){
         loadEspn(k,{recentOnly:true}).then(live=>{
