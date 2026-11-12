@@ -568,7 +568,8 @@ async function init(){
   if(hash==='partidos'){state.view='futbol';history.replaceState(null,'','#futbol');}
   bindEvents();stamp();render();
   if('serviceWorker' in navigator&&location.protocol!=='file:'){
-    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'})
+      .then(reg=>reg.update().catch(()=>{})).catch(()=>{});
   }
   // El archivo de predicciones se carga sin bloquear el primer renderizado.
   loadPublicSnapshots().then(()=>{if(['inicio','futbol','nba'].includes(state.view))scheduleRepaint();}).catch(()=>{});
