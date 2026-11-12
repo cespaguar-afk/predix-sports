@@ -117,3 +117,13 @@ La portada muestra separadamente un resumen de fútbol y otro de NBA para los pr
 - Las actualizaciones automáticas dependen de que GitHub Actions esté habilitado y se ejecute correctamente. No pueden rellenar predicciones de partidos anteriores a su instalación.
 
 Las probabilidades son experimentales y no garantizan aciertos.
+
+## Versión 2.1 — confianza visible, carga rápida y nuevo diseño
+
+- Interfaz renovada en azul noche con contraste alto, filtros discretos, tarjetas legibles y navegación adaptada a Android.
+- **Confianza en todas las tarjetas**: Media, Baja o Sin evaluar, tanto en próximos encuentros como en partidos finalizados con predicción histórica. El nivel refleja la cobertura de datos del modelo, **no** la probabilidad de acertar. No se inventa la categoría Alta.
+- Los partidos finalizados conservan a la vista el marcador y los porcentajes originales previos, con la confianza que se archivó. Si el archivo anterior no incluía confianza, se indica Sin evaluar.
+- Rendimiento: calendario y estadísticas se actualizan por regiones sin reconstruir todos los controles, se consulta un máximo de tres fuentes deportivas en paralelo, con prioridad a LaLiga/NBA/Copa del Rey, y el historial local de pronósticos se lee una vez por renderizado.
+- Los historiales de jugadores se consultan solamente al pulsar el botón correspondiente. La ficha de análisis no se genera hasta que se abre el partido, para evitar cómputos invisibles al iniciar.
+- La caché de la PWA se actualizó a `predix-shell-v11`, incluyendo el módulo `src/confidence.js`.
+- Estas mejoras no representan una medición de velocidad en Android ni una validación real de precisión predictiva.
