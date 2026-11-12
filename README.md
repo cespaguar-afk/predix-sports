@@ -127,3 +127,11 @@ Las probabilidades son experimentales y no garantizan aciertos.
 - Los historiales de jugadores se consultan solamente al pulsar el botón correspondiente. La ficha de análisis no se genera hasta que se abre el partido, para evitar cómputos invisibles al iniciar.
 - La caché de la PWA se actualizó a `predix-shell-v11`, incluyendo el módulo `src/confidence.js`.
 - Estas mejoras no representan una medición de velocidad en Android ni una validación real de precisión predictiva.
+
+## Versión 2.2 — nombres de jugadores NBA y diseño Midnight Graphite
+
+- Corregido el error que ocultaba los nombres de jugadores de NBA: la tabla usaba una función de formato numérico incluso para la columna de texto, mostrando `—` en vez del nombre.
+- Ahora el nombre se representa como texto escapado y cabecera de fila; queda fijo al desplazar las estadísticas lateralmente en Android.
+- Añadidas comprobaciones de nombres visibles y de escape de HTML malicioso, sin alterar los cálculos de puntos, rebotes o asistencias.
+- Nuevo tema más oscuro, con fondo grafito, tarjetas azul noche, bordes suaves, estados claros y mejor contraste en las tablas NBA.
+- Caché de la PWA incrementada a `predix-shell-v12` para distribuir los cambios a la aplicación instalada.
