@@ -299,17 +299,65 @@ function sourceNotice(){
     +'Algunos datos se actualizan periódicamente y no son necesariamente en directo.</div>';
 }
 function renderNormal(){
-  $('#content').innerHTML=`<section class="intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> INTELIGENCIA DEPORTIVA</div><h1>Predicciones basadas <em>en datos.</em></h1><p>Analiza cada partido con estadísticas recientes, probabilidades transparentes y seguimiento de resultados.</p></div><div class="intro-graphic"><span class="glow-orbit orbit-one"></span><span class="glow-orbit orbit-two"></span><span class="graphic-p">P.</span></div></section>
-    <section class="metrics" id="metrics"></section><section id="notice" aria-live="polite"></section>
-    <section class="sport-switch" role="group" aria-label="Deporte"><button type="button" class="sport-tab ${state.view==='futbol'?'active':''}" data-view="futbol">⚽ Fútbol</button><button type="button" class="sport-tab ${state.view==='nba'?'active':''}" data-view="nba">🏀 NBA</button></section>
-    <section class="section-heading"><div><div class="eyebrow small">${state.view==='inicio'?'EXPLORAR':state.view==='futbol'?'COMPETICIONES':'BALONCESTO'}</div><h2>${state.view==='inicio'?'Encuentros y pronósticos':state.view==='futbol'?'Partidos de fútbol':'Partidos de NBA'} <span class="accent-dot">.</span></h2></div><span class="small-muted" id="match-counter"></span></section>
-    <section class="date-picker-bar" aria-label="Elegir fecha"><div class="date-picker-label"><strong>Partidos por fecha</strong><span>Elige un día para ver todos sus encuentros</span></div><div class="date-picker-actions"><button type="button" class="day-shortcut" data-day-shortcut="today">Hoy</button><button type="button" class="day-shortcut" data-day-shortcut="tomorrow">Mañana</button><label class="calendar-label" for="date-filter">📅 Fecha</label><input id="date-filter" type="date" aria-label="Seleccionar fecha de partidos" /><button type="button" class="day-shortcut" data-day-shortcut="all">Ver todos los días</button></div></section><div class="filter-bar"><div class="league-filters" id="league-filters"></div><div class="controls"><select id="period-filter" aria-label="Periodo"><option value="90">Próximos 90 días</option><option value="30">Próximos 30 días</option><option value="7">Próximos 7 días</option><option value="all">Todos</option><option value="fav">Favoritos</option></select><input type="search" id="search-input" placeholder="Buscar equipo..." aria-label="Buscar equipo" /></div></div>
-    <div class="matches-grid"><div class="match-list" id="match-list"></div><section class="detail-panel" id="detail-panel" aria-live="polite"></section></div>`;
-  $('#league-filters').innerHTML=state.view==='futbol'?`<button type="button" class="filter-pill ${state.league==='all'?'active':''}" data-league="all">◈ Todas las ligas</button>`+leagueKeys.filter(k=>LEAGUES[k].sport==='soccer').map(k=>`<button type="button" class="filter-pill ${state.league===k?'active':''}" data-league="${k}">${LEAGUES[k].icon} ${LEAGUES[k].name}</button>`).join(''):'';
-  $('#period-filter').value=state.period;$('#search-input').value=state.query;
+  const isHome=state.view==='inicio';
+  const name=isHome?'Tus próximos partidos':state.view==='futbol'?'Fútbol':'NBA';
+  const description=isHome?'Consulta los encuentros y las predicciones del día, sin información innecesaria.':state.view==='futbol'?'Elige fecha y competición para analizar cada partido.':'Consulta resultados y estadísticas individuales de baloncesto.';
+  $('#content').innerHTML=`
+    <section class="compact-hero">
+      <div><div class="eyebrow small">PREDIX SPORTS · ANÁLISIS DEPORTIVO</div>
+        <h1>${name}</h1><p>${description}</p></div>
+    </section>
+    <div id="notice" aria-live="polite"></div>
+    <nav class="sport-switch" aria-label="Deporte">
+      <button type="button" class="sport-tab ${state.view==='futbol'?'active':''}" data-view="futbol">⚽ Fútbol</button>
+      <button type="button" class="sport-tab ${state.view==='nba'?'active':''}" data-view="nba">🏀 NBA</button>
+    </nav>
+    <section class="date-picker-bar" aria-label="Elegir fecha">
+      <div class="date-picker-label"><strong>¿Qué día quieres consultar?</strong></div>
+      <div class="date-picker-actions">
+        <button type="button" class="day-shortcut" data-day-shortcut="today">Hoy</button>
+        <button type="button" class="day-shortcut" data-day-shortcut="tomorrow">Mañana</button>
+        <input id="date-filter" type="date" aria-label="Seleccionar día" />
+        <button type="button" class="day-shortcut" data-day-shortcut="all">Todos los días</button>
+      </div>
+    </section>
+    <div class="simple-search-row">
+      <input type="search" id="search-input" aria-label="Buscar por equipo" placeholder="⌕ Buscar equipo..." />
+      <details class="filters-disclosure" id="filters-disclosure">
+        <summary>⚙ Filtros</summary>
+        <div class="filter-bar"><div class="league-filters" id="league-filters"></div>
+          <div class="controls"><select id="period-filter" aria-label="Periodo">
+            <option value="90">Próximos 90 días</option>
+            <option value="30">Próximos 30 días</option>
+            <option value="7">Próximos 7 días</option>
+            <option value="all">Todos · resultados y próximos</option>
+            <option value="fav">Favoritos</option>
+          </select></div>
+        </div>
+      </details>
+    </div>
+    <div class="match-heading"><h2>${state.chosenDay?escapeHTML(dayTitle(state.chosenDay)):'Calendario de encuentros'}</h2><span id="match-counter"></span></div>
+    <div class="matches-grid">
+      <div class="match-list" id="match-list"></div>
+      <section class="detail-panel" id="detail-panel" aria-live="polite"></section>
+    </div>
+    <details class="stats-disclosure"><summary>📈 Resumen y precisión del modelo</summary><div class="metrics" id="metrics"></div></details>`;
+  $('#league-filters').innerHTML=state.view==='futbol'
+    ?`<button type="button" class="filter-pill ${state.league==='all'?'active':''}" data-league="all">Todas</button>`
+      +leagueKeys.filter(k=>LEAGUES[k].sport==='soccer').map(k=>
+        `<button type="button" class="filter-pill ${state.league===k?'active':''}" data-league="${k}">${LEAGUES[k].icon} ${LEAGUES[k].name}</button>`).join('')
+    :'';
+  $('#period-filter').value=state.period;
+  $('#search-input').value=state.query;
   $('#date-filter').value=state.chosenDay||'';
-  document.querySelectorAll('[data-day-shortcut]').forEach(b=>b.classList.toggle('active',b.dataset.dayShortcut==='today'&&state.chosenDay===nowDate()||b.dataset.dayShortcut==='tomorrow'&&state.chosenDay===plusDays(1)||b.dataset.dayShortcut==='all'&&!state.chosenDay));
-  renderMatchArea();displayMetrics();$('#notice').innerHTML=sourceNotice();
+  document.querySelectorAll('[data-day-shortcut]').forEach(b=>{
+    const key=b.dataset.dayShortcut;
+    b.classList.toggle('active',key==='today'&&state.chosenDay===nowDate()
+      ||key==='tomorrow'&&state.chosenDay===plusDays(1)||key==='all'&&!state.chosenDay);
+  });
+  renderMatchArea();
+  displayMetrics();
+  $('#notice').innerHTML=sourceNotice();
 }
 async function hydrateNbaDetail(match){
   if(!match||match.sport!=='nba')return;
