@@ -43,10 +43,10 @@ test('nombres NBA siempre visibles como texto, no convertidos a un guion',()=>{
       {name:'Jaylen Brown',games:3,minutes:33,points:24,rebounds:6,assists:3.2,steals:1,blocks:0.3,turnovers:2,fgPct:45,tpPct:36}
     ]
   },{name:'Other team',loaded:0,requested:0,providers:[],metrics:{},players:[]}]});
-  assert.match(html,/<th scope="row" class="player-name-cell">Jayson Tatum<\/th>/);
-  assert.match(html,/<th scope="row" class="player-name-cell">Jaylen Brown<\/th>/);
-  assert.ok(!html.includes('<th scope="row" class="player-name-cell">—</th>'));
-  assert.ok(html.includes('<td>28.7</td>'));
+  assert.match(html,/<h6 class="nba-player-name">Jayson Tatum<\/h6>/);
+  assert.match(html,/<h6 class="nba-player-name">Jaylen Brown<\/h6>/);
+  assert.ok(!html.includes('<h6 class="nba-player-name">—</h6>'));
+  assert.ok(html.includes('>28.7</strong>'));
 });
 test('los nombres maliciosos se escapan también en la cabecera de fila',()=>{
   const html=renderNbaTeamDetails({teams:[{
@@ -55,4 +55,25 @@ test('los nombres maliciosos se escapan también en la cabecera de fila',()=>{
   }]});
   assert.ok(!html.includes('<img src=x'));
   assert.ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'));
+});
+
+test('ESPN: jugador con nombre dividido o alternativo también tiene nombre visible',()=>{
+ const payload={boxscore:{players:[{team:{displayName:'Boston Celtics'},statistics:[{
+   labels:['PTS','REB'],athletes:[
+     {athlete:{id:'1',firstName:'Jayson',lastName:'Tatum'},stats:['31','10']},
+     {athlete:{id:'2'},displayName:'Jaylen Brown',stats:['24','6']}
+   ]
+ }]}]}};
+ const result=parseEspnBoxscore(payload);
+ assert.deepEqual(result.teams[0].players.map(x=>x.name),['Jayson Tatum','Jaylen Brown']);
+});
+test('las tarjetas NBA muestran el nombre antes de las métricas, sin tabla desplazable',()=>{
+ const result=renderNbaTeamDetails({teams:[{
+  name:'Boston Celtics',loaded:1,requested:1,providers:['ESPN'],metrics:{},
+  players:[{name:'Derrick White',games:2,points:17,rebounds:4,assists:5}]
+ }]});
+ assert.ok(result.includes('<h6 class="nba-player-name">Derrick White</h6>'));
+ assert.ok(result.includes('nba-player-cards'));
+ assert.ok(!result.includes('<table'));
+ assert.ok(result.indexOf('Derrick White')<result.indexOf('>17</strong>'));
 });
