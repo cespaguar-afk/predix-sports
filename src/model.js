@@ -160,7 +160,9 @@ export function predictFootball(fixture, results) {
     ['Yellow','Tarjetas amarillas',3.5],
     ['Fouls','Faltas totales',23.5],
     ['Target','Remates a puerta',7.5],
-    ['Shots','Remates totales',22.5]
+    ['Shots','Remates totales',22.5],
+    ['Corners1H','Córners en primera parte',4.5],
+    ['Corners2H','Córners en segunda parte',4.5]
   ];
   for(const [field,label,threshold] of metrics){
     const hFor=teammateValue(home,fixture.home,field);
@@ -174,7 +176,12 @@ export function predictFootball(fixture, results) {
     const expectedHome=(backoff(hFor.avg,hFor.count,baseline,5) + backoff(aAgainst.avg,aAgainst.count,baseline,5))/2;
     const expectedAway=(backoff(aFor.avg,aFor.count,baseline,5) + backoff(hAgainst.avg,hAgainst.count,baseline,5))/2;
     const expected=expectedHome+expectedAway;
-    markets.push({field,label,expected:round(expected),threshold,over:pOver(threshold,expected),samples:Math.min(hFor.count,aFor.count)});
+    const coverage=Math.min(hFor.count,hAgainst.count,aFor.count,aAgainst.count);
+    markets.push({field,label,expected:round(expected),expectedHome:round(expectedHome),
+      expectedAway:round(expectedAway),threshold,over:pOver(threshold,expected),
+      samples:coverage,sampleHome:Math.min(hFor.count,hAgainst.count),
+      sampleAway:Math.min(aFor.count,aAgainst.count)});
+
   }
   const yellowCards=predictYellowCards(fixture,past);
   const n=Math.min(home.length,away.length);
