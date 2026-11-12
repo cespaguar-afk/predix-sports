@@ -1,0 +1,29 @@
+name: Verificar Predix Sports
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'scripts/**'
+      - 'package.json'
+      - '.github/workflows/verify.yml'
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar modelos, calendario y visualización
+        run: npm test
+      - name: Verificar sintaxis de módulos JavaScript
+        run: |
+          for script in src/*.js scripts/*.mjs; do
+            node --check "$script"
+          done
