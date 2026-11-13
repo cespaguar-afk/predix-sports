@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-13T13:17:52.931Z",
+  "fetchedAt": "2026-11-13T13:29:40.817Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -96382,6 +96382,45 @@
       "markets": [],
       "outcome": null
     },
+    "hypermotion:2026-11-30:Real Oviedo:RC Celta Fortuna": {
+      "id": "hypermotion:2026-11-30:Real Oviedo:RC Celta Fortuna",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-30",
+      "home": "Real Oviedo",
+      "away": "RC Celta Fortuna",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.655,
+        "D": 0.168,
+        "A": 0.177
+      },
+      "expectedHome": 2.73,
+      "expectedAway": 1.4,
+      "over25": 0.7803107871171723,
+      "btts": 0.7043850982991748,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08390878902273813
+        },
+        {
+          "home": 3,
+          "away": 1,
+          "p": 0.07633445810072398
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.061489791551910804
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "laliga:2026-11-29:Valencia CF:CA Osasuna": {
       "id": "laliga:2026-11-29:Valencia CF:CA Osasuna",
       "league": "laliga",
@@ -100045,6 +100084,201 @@
       "markets": [],
       "outcome": null
     },
+    "hypermotion:2026-11-28:Las Palmas:FC Andorra": {
+      "id": "hypermotion:2026-11-28:Las Palmas:FC Andorra",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-28",
+      "home": "Las Palmas",
+      "away": "FC Andorra",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.571,
+        "D": 0.216,
+        "A": 0.212
+      },
+      "expectedHome": 1.98,
+      "expectedAway": 1.12,
+      "over25": 0.5987091639980802,
+      "btts": 0.5813025252635304,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10006563456657269
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09886005355577519
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.08906533400346199
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-11-28:Albacete:Tenerife": {
+      "id": "hypermotion:2026-11-28:Albacete:Tenerife",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-28",
+      "home": "Albacete",
+      "away": "Tenerife",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.502,
+        "D": 0.23,
+        "A": 0.269
+      },
+      "expectedHome": 1.82,
+      "expectedAway": 1.27,
+      "over25": 0.5972651811259606,
+      "btts": 0.6034901492948258,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10515353361355381
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.0956005827393186
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.08250928573034784
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-11-28:Eldense:Girona": {
+      "id": "hypermotion:2026-11-28:Eldense:Girona",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-28",
+      "home": "Eldense",
+      "away": "Girona",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.26,
+        "D": 0.283,
+        "A": 0.457
+      },
+      "expectedHome": 0.91,
+      "expectedAway": 1.31,
+      "over25": 0.3814150169347084,
+      "btts": 0.435530483905865,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.14242547378961942
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12961534338328295
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.10910891752443072
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-11-28:Eibar:Burgos": {
+      "id": "hypermotion:2026-11-28:Eibar:Burgos",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-28",
+      "home": "Eibar",
+      "away": "Burgos",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.408,
+        "D": 0.262,
+        "A": 0.329
+      },
+      "expectedHome": 1.39,
+      "expectedAway": 1.22,
+      "over25": 0.4835272337124086,
+      "btts": 0.5288096173619936,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12476767416515061
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10232928493229153
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08985623775161815
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-11-28:Real Valladolid:Real Sociedad II": {
+      "id": "hypermotion:2026-11-28:Real Valladolid:Real Sociedad II",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-28",
+      "home": "Real Valladolid",
+      "away": "Real Sociedad II",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.679,
+        "D": 0.174,
+        "A": 0.148
+      },
+      "expectedHome": 2.48,
+      "expectedAway": 1.08,
+      "over25": 0.6907623368026662,
+      "btts": 0.6063266328031985,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09443043722648961
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.08711162499314525
+        },
+        {
+          "home": 3,
+          "away": 1,
+          "p": 0.07805111228000838
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "laliga:2026-11-27:Levante UD:R. Racing Club": {
       "id": "laliga:2026-11-27:Levante UD:R. Racing Club",
       "league": "laliga",
@@ -100371,6 +100605,45 @@
           "over": 0.4829693200412647
         }
       ],
+      "outcome": null
+    },
+    "hypermotion:2026-11-27:Leganés:CD Sabadell": {
+      "id": "hypermotion:2026-11-27:Leganés:CD Sabadell",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-11-27",
+      "home": "Leganés",
+      "away": "CD Sabadell",
+      "isoTime": null,
+      "predictedAt": "2026-11-13T13:29:40.817Z",
+      "probabilities": {
+        "H": 0.294,
+        "D": 0.273,
+        "A": 0.433
+      },
+      "expectedHome": 1.06,
+      "expectedAway": 1.35,
+      "over25": 0.4319128501828667,
+      "btts": 0.4834446001821054,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12864217810753836
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.1214020215034264
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.09553308086071582
+        }
+      ],
+      "markets": [],
       "outcome": null
     },
     "nba:espn:401909318": {
