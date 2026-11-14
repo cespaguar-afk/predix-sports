@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-14T01:10:06.162Z",
+  "fetchedAt": "2026-11-14T01:25:04.395Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -108939,7 +108939,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.783065,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861157": {
       "id": "nations:espn:401861157",
@@ -108978,7 +108981,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-5",
+      "brier": 0.326816,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861153": {
       "id": "nations:espn:401861153",
@@ -109017,7 +109023,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.5160020000000001,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861154": {
       "id": "nations:espn:401861154",
@@ -109056,7 +109065,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.418874,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861159": {
       "id": "nations:espn:401861159",
@@ -109095,7 +109107,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "7-0",
+      "brier": 0.615165,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861161": {
       "id": "nations:espn:401861161",
@@ -109134,7 +109149,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.303648,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861158": {
       "id": "nations:espn:401861158",
@@ -109173,7 +109191,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-3",
+      "brier": 0.385202,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861160": {
       "id": "nations:espn:401861160",
@@ -109212,7 +109233,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 0.9280880000000001,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861156": {
       "id": "nations:espn:401861156",
@@ -109251,7 +109275,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "0-0",
+      "brier": 0.9088080000000001,
+      "gradedAt": "2026-11-14T01:25:04.395Z"
     },
     "nations:espn:401861146": {
       "id": "nations:espn:401861146",
