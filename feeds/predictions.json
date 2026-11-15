@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-15T07:12:24.662Z",
+  "fetchedAt": "2026-11-15T07:26:55.053Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -107482,7 +107482,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "108-116",
+      "brier": 0.357858,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "nba:espn:401909981": {
       "id": "nba:espn:401909981",
@@ -107504,7 +107507,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "127-117",
+      "brier": 0.484128,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "nba:espn:401909982": {
       "id": "nba:espn:401909982",
@@ -107526,7 +107532,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "137-117",
+      "brier": 0.5491520000000001,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "nba:espn:401909983": {
       "id": "nba:espn:401909983",
@@ -107548,7 +107557,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "129-110",
+      "brier": 0.341138,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "nba:espn:401909984": {
       "id": "nba:espn:401909984",
@@ -107570,7 +107582,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "106-117",
+      "brier": 0.9660500000000001,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "nba:espn:401909985": {
       "id": "nba:espn:401909985",
@@ -108053,7 +108068,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.388664,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "hypermotion:2026-11-14:Real Sociedad II:Sporting Gijón": {
       "id": "hypermotion:2026-11-14:Real Sociedad II:Sporting Gijón",
@@ -108092,7 +108110,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 0.808413,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "hypermotion:2026-11-14:Almería:FC Andorra": {
       "id": "hypermotion:2026-11-14:Almería:FC Andorra",
@@ -108131,7 +108152,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.12437600000000001,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "hypermotion:2026-11-14:Mallorca:Córdoba": {
       "id": "hypermotion:2026-11-14:Mallorca:Córdoba",
@@ -108170,7 +108194,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "3-3",
+      "brier": 0.8153649999999999,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "hypermotion:2026-11-14:Real Oviedo:Girona": {
       "id": "hypermotion:2026-11-14:Real Oviedo:Girona",
@@ -108209,7 +108236,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-2",
+      "brier": 0.618758,
+      "gradedAt": "2026-11-15T07:26:55.053Z"
     },
     "nba:espn:401909296": {
       "id": "nba:espn:401909296",
