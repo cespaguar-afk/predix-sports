@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-15T01:15:07.819Z",
+  "fetchedAt": "2026-11-15T01:28:30.560Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -108599,7 +108599,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.552632,
+      "gradedAt": "2026-11-15T01:28:30.560Z"
     },
     "nations:espn:401861169": {
       "id": "nations:espn:401861169",
@@ -108638,7 +108641,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.35877800000000004,
+      "gradedAt": "2026-11-15T01:28:30.560Z"
     },
     "nations:espn:401861167": {
       "id": "nations:espn:401861167",
@@ -108677,7 +108683,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-4",
+      "brier": 0.824801,
+      "gradedAt": "2026-11-15T01:28:30.560Z"
     },
     "nations:espn:401861168": {
       "id": "nations:espn:401861168",
@@ -108716,7 +108725,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 1.302126,
+      "gradedAt": "2026-11-15T01:28:30.560Z"
     },
     "nations:espn:401861166": {
       "id": "nations:espn:401861166",
@@ -108755,7 +108767,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-2",
+      "brier": 0.5988659999999999,
+      "gradedAt": "2026-11-15T01:28:30.560Z"
     },
     "hypermotion:2026-11-13:Leganés:Burgos": {
       "id": "hypermotion:2026-11-13:Leganés:Burgos",
