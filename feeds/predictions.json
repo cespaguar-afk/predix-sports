@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-16T08:55:16.501Z",
+  "fetchedAt": "2026-11-16T09:06:15.301Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -106870,7 +106870,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "119-147",
+      "brier": 0.357858,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "nba:espn:401909992": {
       "id": "nba:espn:401909992",
@@ -106892,7 +106895,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "106-113",
+      "brier": 0.36465800000000004,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "nba:espn:401909993": {
       "id": "nba:espn:401909993",
@@ -106914,7 +106920,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "103-125",
+      "brier": 0.39249799999999996,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "nations:espn:401861180": {
       "id": "nations:espn:401861180",
@@ -107343,7 +107352,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.212946,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "hypermotion:2026-11-15:Granada:Las Palmas": {
       "id": "hypermotion:2026-11-15:Granada:Las Palmas",
@@ -107382,7 +107394,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.25845,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "hypermotion:2026-11-15:Eibar:Cádiz": {
       "id": "hypermotion:2026-11-15:Eibar:Cádiz",
@@ -107421,7 +107436,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.928544,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "hypermotion:2026-11-15:Eldense:CD Sabadell": {
       "id": "hypermotion:2026-11-15:Eldense:CD Sabadell",
@@ -107460,7 +107478,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.610293,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "nba:espn:401909980": {
       "id": "nba:espn:401909980",
@@ -107732,7 +107753,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "108-112",
+      "brier": 0.438048,
+      "gradedAt": "2026-11-16T09:06:15.301Z"
     },
     "nations:espn:401861172": {
       "id": "nations:espn:401861172",
