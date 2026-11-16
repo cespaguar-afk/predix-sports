@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-16T19:03:17.365Z",
+  "fetchedAt": "2026-11-16T19:18:02.140Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -106962,7 +106962,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.373514,
+      "gradedAt": "2026-11-16T19:18:02.140Z"
     },
     "nations:espn:401861181": {
       "id": "nations:espn:401861181",
@@ -107001,7 +107004,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 1.0405630000000001,
+      "gradedAt": "2026-11-16T19:18:02.140Z"
     },
     "nations:espn:401861183": {
       "id": "nations:espn:401861183",
@@ -107040,7 +107046,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.582669,
+      "gradedAt": "2026-11-16T19:18:02.140Z"
     },
     "nations:espn:401861182": {
       "id": "nations:espn:401861182",
@@ -107079,7 +107088,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-0",
+      "brier": 0.212402,
+      "gradedAt": "2026-11-16T19:18:02.140Z"
     },
     "nations:espn:401861184": {
       "id": "nations:espn:401861184",
@@ -107118,7 +107130,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.5374639999999999,
+      "gradedAt": "2026-11-16T19:18:02.140Z"
     },
     "nations:espn:401861185": {
       "id": "nations:espn:401861185",
