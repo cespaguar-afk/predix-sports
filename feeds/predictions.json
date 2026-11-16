@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-16T01:32:05.880Z",
+  "fetchedAt": "2026-11-16T01:45:53.867Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -107607,7 +107607,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "131-124",
+      "brier": 0.419528,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nba:espn:401909986": {
       "id": "nba:espn:401909986",
@@ -107629,7 +107632,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "123-131",
+      "brier": 0.449352,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nba:espn:401909987": {
       "id": "nba:espn:401909987",
@@ -107651,7 +107657,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "113-105",
+      "brier": 0.332928,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nba:espn:401909988": {
       "id": "nba:espn:401909988",
@@ -107673,7 +107682,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "102-110",
+      "brier": 0.267912,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nba:espn:401909989": {
       "id": "nba:espn:401909989",
@@ -107695,7 +107707,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "131-94",
+      "brier": 0.329672,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nba:espn:401909990": {
       "id": "nba:espn:401909990",
@@ -107924,7 +107939,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-1",
+      "brier": 0.7873220000000001,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nations:espn:401861178": {
       "id": "nations:espn:401861178",
@@ -107963,7 +107981,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.606746,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nations:espn:401861177": {
       "id": "nations:espn:401861177",
@@ -108002,7 +108023,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.11887400000000002,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "nations:espn:401861175": {
       "id": "nations:espn:401861175",
@@ -108041,7 +108065,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "2-3",
+      "brier": 0.32203299999999996,
+      "gradedAt": "2026-11-16T01:45:53.867Z"
     },
     "hypermotion:2026-11-14:Real Valladolid:Castellón": {
       "id": "hypermotion:2026-11-14:Real Valladolid:Castellón",
