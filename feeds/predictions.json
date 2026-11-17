@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-17T07:29:16.733Z",
+  "fetchedAt": "2026-11-17T07:39:45.531Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -106343,7 +106343,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "105-115",
+      "brier": 0.8528180000000001,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401909995": {
       "id": "nba:espn:401909995",
@@ -106365,7 +106368,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "126-115",
+      "brier": 0.25063199999999997,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401909996": {
       "id": "nba:espn:401909996",
@@ -106387,7 +106393,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "120-136",
+      "brier": 0.41405,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401909997": {
       "id": "nba:espn:401909997",
@@ -106409,7 +106418,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "123-135",
+      "brier": 0.607202,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401909998": {
       "id": "nba:espn:401909998",
@@ -106431,7 +106443,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "128-110",
+      "brier": 0.544968,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401909999": {
       "id": "nba:espn:401909999",
@@ -106453,7 +106468,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "106-98",
+      "brier": 0.354482,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401910000": {
       "id": "nba:espn:401910000",
@@ -106475,7 +106493,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "115-94",
+      "brier": 0.8294720000000001,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401910001": {
       "id": "nba:espn:401910001",
@@ -106497,7 +106518,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "105-117",
+      "brier": 0.682112,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nations:espn:401861196": {
       "id": "nations:espn:401861196",
@@ -106848,7 +106872,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.276606,
+      "gradedAt": "2026-11-17T07:39:45.531Z"
     },
     "nba:espn:401909991": {
       "id": "nba:espn:401909991",
