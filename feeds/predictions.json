@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-17T01:20:30.254Z",
+  "fetchedAt": "2026-11-17T01:33:36.279Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -107172,7 +107172,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "5-0",
+      "brier": 0.6595439999999999,
+      "gradedAt": "2026-11-17T01:33:36.279Z"
     },
     "nations:espn:401861179": {
       "id": "nations:espn:401861179",
@@ -107211,7 +107214,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.718022,
+      "gradedAt": "2026-11-17T01:33:36.279Z"
     },
     "nations:espn:401861188": {
       "id": "nations:espn:401861188",
@@ -107250,7 +107256,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.353762,
+      "gradedAt": "2026-11-17T01:33:36.279Z"
     },
     "nations:espn:401861187": {
       "id": "nations:espn:401861187",
@@ -107289,7 +107298,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-3",
+      "brier": 0.17967799999999998,
+      "gradedAt": "2026-11-17T01:33:36.279Z"
     },
     "nations:espn:401861186": {
       "id": "nations:espn:401861186",
@@ -107328,7 +107340,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-0",
+      "brier": 0.198146,
+      "gradedAt": "2026-11-17T01:33:36.279Z"
     },
     "hypermotion:2026-11-15:Tenerife:Ceuta": {
       "id": "hypermotion:2026-11-15:Tenerife:Ceuta",
