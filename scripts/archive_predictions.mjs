@@ -105,6 +105,9 @@ for(const m of allFixtures){
   expectedHome:pred.expectedHome,expectedAway:pred.expectedAway,
   over25:pred.over25??null,btts:pred.btts??null,
   confidence:pred.confidence,
+  headToHead:pred.headToHead?{count:pred.headToHead.count,weight:pred.headToHead.weight,
+    games:pred.headToHead.games,adjustmentHome:pred.headToHead.adjustmentHome,
+    adjustmentAway:pred.headToHead.adjustmentAway}:null,
   scorelines:(pred.scorelines||[]).slice(0,3),
   markets:(pred.markets||[]).map(x=>({label:x.label,expected:x.expected,threshold:x.threshold,over:x.over})),
   outcome:null};
