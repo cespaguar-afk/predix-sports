@@ -156,6 +156,17 @@ function eventCard(m,snapshots){
     <div class="match-card-bottom"><span class="soft-tag ${b.class}">${b.label}</span>${confidence}<span class="linkish">${m.status==='post'?'Ver análisis →':'Analizar →'}</span></div>
   </button>`;
 }
+function headToHeadSummary(p){
+  const h=p?.headToHead;
+  if(!h)return '';
+  if(!h.count)return '<div class="h2h-model-note"><strong>Enfrentamientos directos</strong><p>Sin antecedentes recientes verificados entre estos dos equipos. El modelo usa solo la forma general disponible.</p></div>';
+  const matches=(h.games||[]).map(x=>'<div class="h2h-match"><span>'+escapeHTML(dateText(x.date))+'</span><strong>'
+    +escapeHTML(x.home)+' '+x.homeScore+'–'+x.awayScore+' '+escapeHTML(x.away)+'</strong></div>').join('');
+  return '<details class="analysis-disclosure h2h-model" open><summary>Últimos enfrentamientos directos · '+h.count+'</summary>'
+    +'<div class="analysis-inner"><p class="source-note">Incluidos en el pronóstico con peso limitado: '+h.weight.toFixed(1)
+    +'%. Se usan únicamente resultados anteriores, recientes y disponibles en las fuentes.</p>'
+    +'<div class="h2h-match-list">'+matches+'</div></div></details>';
+}
 function forecastAnalysis(m,p){
   if(!p)return '<section class="detail-section"><h3>Pronóstico no disponible</h3>'
     +'<p class="source-note">Todavía no hay suficientes partidos anteriores para estimar este encuentro sin inventar cifras.</p>'
@@ -180,7 +191,7 @@ function forecastAnalysis(m,p){
       +'<div class="stat-cell"><span>Puntos totales</span><b>'+p.total+'</b></div>'
       +'<div class="stat-cell"><span>Diferencia local</span><b>'+(p.margin>0?'+':'')+p.margin+'</b></div>'
       +'</div></section>';
-    return top+more+'<details class="analysis-disclosure"><summary>Cómo se calculó</summary>'
+    return top+more+headToHeadSummary(p)+'<details class="analysis-disclosure"><summary>Cómo se calculó</summary>'
       +'<div class="analysis-inner"><p class="source-note">'+escapeHTML(p.explanation)+'</p>'
       +'<p class="source-note">Muestra: '+p.sampleHome+' partidos del local y '+p.sampleAway+' del visitante.</p></div></details>';
   }
@@ -212,7 +223,7 @@ function forecastAnalysis(m,p){
     +(p.calibrated?'Calibración histórica aplicada.':'Sin calibración suficiente de resultados previos.')+'</p>'
     +'<p class="disclaimer">Las probabilidades son experimentales y las estimaciones de córners, faltas y remates son aproximaciones. '
     +'No incluyen árbitros, lesiones ni alineaciones confirmadas. No son garantías de acierto.</p></div></details>';
-  return top+renderMarketForecast(p)+additional+expl;
+  return top+headToHeadSummary(p)+renderMarketForecast(p)+additional+expl;
 }
 function finishedAnalysis(m,snap){
   const result='<div class="detail-section"><h3>Resultado final</h3><div class="projected-score"><b>'+m.homeScore+'</b><span>FINAL</span><b>'+m.awayScore+'</b></div>';
