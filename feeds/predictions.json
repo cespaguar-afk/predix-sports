@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-18T01:25:54.399Z",
+  "fetchedAt": "2026-11-18T01:39:01.178Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -106560,7 +106560,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.15592299999999998,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861194": {
       "id": "nations:espn:401861194",
@@ -106599,7 +106602,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "2-3",
+      "brier": 0.7061220000000001,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861191": {
       "id": "nations:espn:401861191",
@@ -106638,7 +106644,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.622592,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861193": {
       "id": "nations:espn:401861193",
@@ -106677,7 +106686,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.9463820000000001,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861195": {
       "id": "nations:espn:401861195",
@@ -106716,7 +106728,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.800408,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861192": {
       "id": "nations:espn:401861192",
@@ -106755,7 +106770,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-0",
+      "brier": 0.5022909999999999,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861190": {
       "id": "nations:espn:401861190",
@@ -106794,7 +106812,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.7607039999999999,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "nations:espn:401861189": {
       "id": "nations:espn:401861189",
@@ -106833,7 +106854,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "2-3",
+      "brier": 0.29128199999999993,
+      "gradedAt": "2026-11-18T01:39:01.178Z"
     },
     "hypermotion:2026-11-16:Albacete:RC Celta Fortuna": {
       "id": "hypermotion:2026-11-16:Albacete:RC Celta Fortuna",
