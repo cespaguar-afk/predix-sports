@@ -722,3 +722,15 @@ body{background:#080e19}
  .market-card>small{font-size:9px}
 }
 @media(max-width:360px){.market-grid{grid-template-columns:1fr}}
+
+/* Enfrentamientos directos verificados, visibles al abrir el pronóstico */
+.h2h-model{margin:13px 0;background:#15283a;border-color:#2d4a59}
+.h2h-model>summary{color:#c5eee5}
+.h2h-model-note{margin:13px 0;padding:13px;border:1px solid #2b4657;border-radius:12px;background:#17283b}
+.h2h-model-note strong{color:#c9e7f1;font-size:12px}
+.h2h-model-note p{color:#94acbd;font-size:11px;line-height:1.5;margin:6px 0 0}
+.h2h-match-list{display:grid;gap:7px}
+.h2h-match{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;background:#1a3447;border:1px solid #2c4b5e;border-radius:9px}
+.h2h-match span{font-size:11px;color:#9bbccc;white-space:nowrap}
+.h2h-match strong{font-size:11px;line-height:1.4;color:#e5f7ff;text-align:right}
+@media(max-width:700px){.h2h-match{align-items:flex-start}.h2h-match strong{overflow-wrap:anywhere}}
