@@ -38,6 +38,61 @@ function backoff(measured, n, baseline, prior=6) {
   return (measured*n + baseline*prior)/(n+prior);
 }
 
+/** Historial directo disponible, validado y orientado como el próximo partido.
+ * Nunca se incluyen partidos del mismo día/futuros, ni se duplican proveedores.
+ */
+const teamKey=name=>String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .toLowerCase().replace(/\b(fc|cf|cd|ud|sd|club|futbol|football|de|del|la|el|the)\b/g,'')
+  .replace(/[^a-z0-9]/g,'');
+export function recentHeadToHead(fixture,results,limit=5){
+  if(!fixture?.date||!fixture.home||!fixture.away||!Array.isArray(results))return [];
+  const homeKey=teamKey(fixture.home),awayKey=teamKey(fixture.away);
+  if(!homeKey||!awayKey||homeKey===awayKey)return [];
+  const cutoff=Date.parse(fixture.date+'T12:00:00Z');
+  if(!Number.isFinite(cutoff))return [];
+  const minDate=cutoff-(fixture.sport==='nba'?550:850)*86400000;
+  const unique=new Map();
+  for(const r of results){
+    if(!r?.date||r.date>=fixture.date||!valid(r.homeScore)||!valid(r.awayScore))continue;
+    if(r.sport&&fixture.sport&&r.sport!==fixture.sport)continue;
+    const time=Date.parse(r.date+'T12:00:00Z');
+    if(!Number.isFinite(time)||time<minDate)continue;
+    const home=teamKey(r.home),away=teamKey(r.away);
+    const direct=home===homeKey&&away===awayKey;
+    const reverse=home===awayKey&&away===homeKey;
+    if(!direct&&!reverse)continue;
+    const key=r.date+':'+home+':'+away;
+    if(!unique.has(key))unique.set(key,{date:r.date,home:r.home,away:r.away,
+      homeScore:r.homeScore,awayScore:r.awayScore,
+      goalsFor:direct?r.homeScore:r.awayScore,
+      goalsAgainst:direct?r.awayScore:r.homeScore});
+  }
+  return [...unique.values()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,limit);
+}
+/** Influencia deliberadamente pequeña: no confundir 1-5 duelos con forma general.
+ * Nunca se ajusta un pronóstico ya archivado.
+ */
+export function headToHeadAdjustment(fixture,results,expectedHome,expectedAway){
+  const games=recentHeadToHead(fixture,results);
+  if(!games.length)return {expectedHome,expectedAway,headToHead:{count:0,weight:0,games:[],adjustmentHome:0,adjustmentAway:0}};
+  const n=games.length;
+  const weight=Math.min(.12,.15*n/(n+5)); // 1 partido ~2,5%; 5 partidos ~7,5%
+  const recency=games.map((g,i)=>Math.pow(.78,i));
+  const sum=recency.reduce((a,b)=>a+b,0);
+  const avgHome=games.reduce((a,g,i)=>a+g.goalsFor*recency[i],0)/sum;
+  const avgAway=games.reduce((a,g,i)=>a+g.goalsAgainst*recency[i],0)/sum;
+  const nba=fixture.sport==='nba';
+  const maxDelta=nba?3.5:.22;
+  const min=nba?70:.25,max=nba?155:4.5;
+  const nextHome=clamp(expectedHome+clamp((avgHome-expectedHome)*weight,-maxDelta,maxDelta),min,max);
+  const nextAway=clamp(expectedAway+clamp((avgAway-expectedAway)*weight,-maxDelta,maxDelta),min,max);
+  return {expectedHome:nextHome,expectedAway:nextAway,headToHead:{
+    count:n,weight:round(weight*100,1),
+    games:games.map(g=>({date:g.date,home:g.home,away:g.away,homeScore:g.homeScore,awayScore:g.awayScore})),
+    adjustmentHome:round(nextHome-expectedHome,2),adjustmentAway:round(nextAway-expectedAway,2)
+  }};
+}
+
 /** Amarillas de ambos equipos: sólo resultados anteriores con conteos reales. */
 export function predictYellowCards(fixture,results){
   const past=results.filter(r=>r.date<fixture.date && valid(r.homeYellow) && valid(r.awayYellow));
@@ -151,8 +206,10 @@ export function predictFootball(fixture, results) {
   const aa=teammateValue(away,fixture.away,'Score',true);
   const homeAttack=backoff(hf.avg,hf.count,baseTeam), awayDef=backoff(aa.avg,aa.count,baseTeam);
   const awayAttack=backoff(af.avg,af.count,baseTeam), homeDef=backoff(ha.avg,ha.count,baseTeam);
-  const lambdaH=clamp((homeAttack*awayDef/baseTeam)*(baseHome/baseTeam),.25,4.5);
-  const lambdaA=clamp((awayAttack*homeDef/baseTeam)*(baseAway/baseTeam),.25,4.5);
+  const baselineH=clamp((homeAttack*awayDef/baseTeam)*(baseHome/baseTeam),.25,4.5);
+  const baselineA=clamp((awayAttack*homeDef/baseTeam)*(baseAway/baseTeam),.25,4.5);
+  const h2h=headToHeadAdjustment({...fixture,sport:'soccer'},past,baselineH,baselineA);
+  const lambdaH=h2h.expectedHome,lambdaA=h2h.expectedAway;
   const grid=poissonGrid(lambdaH,lambdaA);
   const markets=[];
   const metrics=[
@@ -188,7 +245,8 @@ export function predictFootball(fixture, results) {
   const confidence = n>=8 && past.length>=75 ? 'media' : 'baja';
   return {sport:'soccer',kind:'poisson',probabilities:grid.probabilities,over25:grid.over25,btts:grid.btts,
     scorelines:grid.scorelines,expectedHome:round(lambdaH,2),expectedAway:round(lambdaA,2),markets,yellowCards,
-    sampleHome:home.length,sampleAway:away.length,confidence,explanation:'Poisson con forma reciente, goles a favor/en contra y suavizado hacia la media de la competición. No incluye lesiones ni alineaciones.'};
+    sampleHome:home.length,sampleAway:away.length,confidence,headToHead:h2h.headToHead,
+    explanation:'Poisson con forma reciente, goles a favor/en contra, suavizado hacia la media y ajuste limitado de los últimos enfrentamientos directos disponibles. No incluye lesiones ni alineaciones.'};
 }
 
 /** Historial NBA con eventos ESPN; ventaja de local pequeña y diferencia de puntos reciente. */
@@ -204,16 +262,18 @@ export function predictNBA(fixture, results) {
     return {scored:backoff(f.avg,f.count,pts,5), conceded:backoff(a.avg,a.count,pts,5)};
   }
   const h=rates(home,fixture.home), a=rates(away,fixture.away);
-  const projectedHome=clamp((h.scored+a.conceded)/2+1.2,70,155);
-  const projectedAway=clamp((a.scored+h.conceded)/2-1.2,70,155);
+  const baselineHome=clamp((h.scored+a.conceded)/2+1.2,70,155);
+  const baselineAway=clamp((a.scored+h.conceded)/2-1.2,70,155);
+  const h2h=headToHeadAdjustment({...fixture,sport:'nba'},past,baselineHome,baselineAway);
+  const projectedHome=h2h.expectedHome,projectedAway=h2h.expectedAway;
   const diff=projectedHome-projectedAway;
   // Escala heurística y NO calibrada como una verdadera tasa de victorias.
   const pHome=clamp(1/(1+Math.exp(-diff/12)),.06,.94);
   return {sport:'nba',kind:'heuristic',probabilities:{H:pHome,A:1-pHome},
     expectedHome:round(projectedHome),expectedAway:round(projectedAway),
     total:round(projectedHome+projectedAway),margin:round(diff),sampleHome:home.length,sampleAway:away.length,
-    confidence:Math.min(home.length,away.length)>=10?'media':'baja',
-    explanation:'Estimación heurística basada en puntos recientes a favor/en contra y ventaja local. Probabilidades no calibradas ni validadas; no incluye bajas.'};
+    confidence:Math.min(home.length,away.length)>=10?'media':'baja',headToHead:h2h.headToHead,
+    explanation:'Estimación heurística basada en puntos recientes a favor/en contra, ventaja local y ajuste limitado de enfrentamientos directos anteriores. Probabilidades no calibradas ni validadas; no incluye bajas.'};
 }
 
 export function brierScore(probs, actual, sport='soccer') {
