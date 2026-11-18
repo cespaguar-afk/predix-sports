@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-18T07:27:04.801Z",
+  "fetchedAt": "2026-11-18T07:39:04.855Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -90738,6 +90738,123 @@
       "markets": [],
       "outcome": null
     },
+    "hypermotion:2026-12-09:Castellón:Eibar": {
+      "id": "hypermotion:2026-12-09:Castellón:Eibar",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-09",
+      "home": "Castellón",
+      "away": "Eibar",
+      "isoTime": null,
+      "predictedAt": "2026-11-18T07:39:04.855Z",
+      "probabilities": {
+        "H": 0.672,
+        "D": 0.207,
+        "A": 0.121
+      },
+      "expectedHome": 1.92,
+      "expectedAway": 0.67,
+      "over25": 0.4790062122202138,
+      "btts": 0.4157393450089384,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.14424738860034111
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.13865043666952587
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09627096867404505
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-09:FC Andorra:Mallorca": {
+      "id": "hypermotion:2026-12-09:FC Andorra:Mallorca",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-09",
+      "home": "FC Andorra",
+      "away": "Mallorca",
+      "isoTime": null,
+      "predictedAt": "2026-11-18T07:39:04.855Z",
+      "probabilities": {
+        "H": 0.318,
+        "D": 0.246,
+        "A": 0.437
+      },
+      "expectedHome": 1.31,
+      "expectedAway": 1.58,
+      "over25": 0.5522162654610058,
+      "btts": 0.580260231360438,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11497813686327388
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09081371328805275
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08760424739327113
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-09:Granada:Tenerife": {
+      "id": "hypermotion:2026-12-09:Granada:Tenerife",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-09",
+      "home": "Granada",
+      "away": "Tenerife",
+      "isoTime": null,
+      "predictedAt": "2026-11-18T07:39:04.855Z",
+      "probabilities": {
+        "H": 0.568,
+        "D": 0.236,
+        "A": 0.196
+      },
+      "expectedHome": 1.74,
+      "expectedAway": 0.91,
+      "over25": 0.4942973517649875,
+      "btts": 0.49362153929183095,
+      "confidence": "media",
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.12259659496258499
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11205648915652154
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10647365805046419
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "champions:2026-12-08:Viking:Feyenoord": {
       "id": "champions:2026-12-08:Viking:Feyenoord",
       "league": "champions",
@@ -106233,7 +106350,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "102-111",
+      "brier": 0.438048,
+      "gradedAt": "2026-11-18T07:39:04.855Z"
     },
     "nba:espn:401910003": {
       "id": "nba:espn:401910003",
@@ -106255,7 +106375,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "106-105",
+      "brier": 0.354482,
+      "gradedAt": "2026-11-18T07:39:04.855Z"
     },
     "nba:espn:401910004": {
       "id": "nba:espn:401910004",
@@ -106277,7 +106400,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "93-105",
+      "brier": 0.703298,
+      "gradedAt": "2026-11-18T07:39:04.855Z"
     },
     "nba:espn:401910006": {
       "id": "nba:espn:401910006",
@@ -106299,7 +106425,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "107-132",
+      "brier": 0.6985619999999999,
+      "gradedAt": "2026-11-18T07:39:04.855Z"
     },
     "nba:espn:401910005": {
       "id": "nba:espn:401910005",
@@ -106321,7 +106450,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "118-114",
+      "brier": 0.19220000000000004,
+      "gradedAt": "2026-11-18T07:39:04.855Z"
     },
     "nba:espn:401909994": {
       "id": "nba:espn:401909994",
