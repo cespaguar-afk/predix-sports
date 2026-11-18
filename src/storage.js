@@ -76,6 +76,9 @@ function snapshotOf(match,pred,now){
       expectedHome:num(x.expectedHome),expectedAway:num(x.expectedAway),samples:num(x.samples),
       sampleHome:num(x.sampleHome),sampleAway:num(x.sampleAway)})):[],
     confidence:pred.confidence||null,
+    headToHead:pred.headToHead?{count:pred.headToHead.count,weight:pred.headToHead.weight,
+      games:pred.headToHead.games,adjustmentHome:pred.headToHead.adjustmentHome,
+      adjustmentAway:pred.headToHead.adjustmentAway}:null,
     predictedAt:now.toISOString(),outcome:null};
 }
 export function capturePredictions(fixturePredictions,now=new Date()){
