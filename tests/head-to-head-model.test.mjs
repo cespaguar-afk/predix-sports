@@ -27,8 +27,8 @@ test('direct meetings affect estimated probabilities but with a small bounded co
  assert.equal(without.headToHead.count,0);
  assert.equal(withH2H.headToHead.count,1);
  assert.ok(withH2H.probabilities.H>without.probabilities.H);
- assert.ok(Math.abs(withH2H.expectedHome-without.expectedHome)<=.23);
- assert.ok(Math.abs(withH2H.expectedAway-without.expectedAway)<=.23);
+ assert.ok(Math.abs(withH2H.headToHead.adjustmentHome)<=.22);
+ assert.ok(Math.abs(withH2H.headToHead.adjustmentAway)<=.22);
  assert.ok(withH2H.headToHead.weight<=12);
 });
 test('no future scores leak into a pre-match prediction',()=>{
@@ -56,6 +56,6 @@ test('NBA uses direct games before match and caps contribution to projected poin
  assert.ok(before&&after);
  assert.equal(after.headToHead.count,1);
  assert.equal(after.headToHead.games[0].home,'Celtics');
- assert.ok(Math.abs(after.expectedHome-before.expectedHome)<=4);
- assert.ok(Math.abs(after.expectedAway-before.expectedAway)<=4);
+ assert.ok(Math.abs(after.headToHead.adjustmentHome)<=3.5);
+ assert.ok(Math.abs(after.headToHead.adjustmentAway)<=3.5);
 });
