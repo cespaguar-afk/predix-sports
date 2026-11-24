@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-24T13:26:24.685Z",
+  "fetchedAt": "2026-11-24T13:37:27.541Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -29612,6 +29612,282 @@
       ],
       "outcome": null
     },
+    "nations:espn:401936093": {
+      "id": "nations:espn:401936093",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-30",
+      "home": "Georgia",
+      "away": "Faroe Islands",
+      "isoTime": "2027-03-30T16:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.218,
+        "D": 0.326,
+        "A": 0.457
+      },
+      "expectedHome": 0.65,
+      "expectedAway": 1.08,
+      "over25": 0.24983683907447976,
+      "btts": 0.31447237962668073,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.1921278553359556
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.17787323967808352
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12421929279473592
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936085": {
+      "id": "nations:espn:401936085",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-30",
+      "home": "Croatia",
+      "away": "Republic of Ireland",
+      "isoTime": "2027-03-30T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.189,
+        "D": 0.209,
+        "A": 0.603
+      },
+      "expectedHome": 1.06,
+      "expectedAway": 2.05,
+      "over25": 0.5996597129376591,
+      "btts": 0.5679562371071797,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09936878143120245
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09703603314819413
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.09412354337932978
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936090": {
+      "id": "nations:espn:401936090",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-30",
+      "home": "England",
+      "away": "Norway",
+      "isoTime": "2027-03-30T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.656,
+        "D": 0.166,
+        "A": 0.178
+      },
+      "expectedHome": 2.78,
+      "expectedAway": 1.43,
+      "over25": 0.7912161300163577,
+      "btts": 0.714321268378073,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.0820083898018239
+        },
+        {
+          "home": 3,
+          "away": 1,
+          "p": 0.07590439359191946
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.059068833652723314
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936100": {
+      "id": "nations:espn:401936100",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-30",
+      "home": "Portugal",
+      "away": "Netherlands",
+      "isoTime": "2027-03-30T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.425,
+        "D": 0.195,
+        "A": 0.381
+      },
+      "expectedHome": 2.3,
+      "expectedAway": 2.18,
+      "over25": 0.8236225316809875,
+      "btts": 0.7975833606629349,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 2,
+          "p": 0.07126722664299068
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.06545334068981704
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.06203500149449593
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936094": {
+      "id": "nations:espn:401936094",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-30",
+      "home": "Romania",
+      "away": "Estonia",
+      "isoTime": "2027-03-30T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.189,
+        "D": 0.258,
+        "A": 0.553
+      },
+      "expectedHome": 0.78,
+      "expectedAway": 1.53,
+      "over25": 0.4066066557979193,
+      "btts": 0.42340225200886283,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.15224430948027018
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11817743985342544
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.11675214452609751
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936084": {
+      "id": "nations:espn:401936084",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-30",
+      "home": "Wales",
+      "away": "Slovenia",
+      "isoTime": "2027-03-30T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.182,
+        "D": 0.24,
+        "A": 0.577
+      },
+      "expectedHome": 0.82,
+      "expectedAway": 1.68,
+      "over25": 0.45774351848226086,
+      "btts": 0.4570284405236798,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.13720409773774028
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.11536592536244583
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11311157378468686
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "hypermotion:2027-03-28:Albacete:Almería": {
       "id": "hypermotion:2027-03-28:Albacete:Almería",
       "league": "hypermotion",
@@ -30036,6 +30312,834 @@
           "home": 1,
           "away": 0,
           "p": 0.08263992392541565
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936081": {
+      "id": "nations:espn:401936081",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-28",
+      "home": "North Macedonia",
+      "away": "Cyprus",
+      "isoTime": "2027-03-28T13:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.189,
+        "D": 0.236,
+        "A": 0.575
+      },
+      "expectedHome": 0.88,
+      "expectedAway": 1.73,
+      "over25": 0.485736121372989,
+      "btts": 0.4826040130826578,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.126720119903463
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11175406085515453
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.109912560904542
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936086": {
+      "id": "nations:espn:401936086",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-28",
+      "home": "Serbia",
+      "away": "Hungary",
+      "isoTime": "2027-03-28T16:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.182,
+        "D": 0.268,
+        "A": 0.551
+      },
+      "expectedHome": 0.71,
+      "expectedAway": 1.46,
+      "over25": 0.3678312323683413,
+      "btts": 0.3894306213746888,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.16708303034479796
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.12161638565978937
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11846731413666889
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936097": {
+      "id": "nations:espn:401936097",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-28",
+      "home": "Denmark",
+      "away": "Bosnia-Herzegovina",
+      "isoTime": "2027-03-28T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.412,
+        "D": 0.221,
+        "A": 0.367
+      },
+      "expectedHome": 1.83,
+      "expectedAway": 1.72,
+      "over25": 0.6891779977854324,
+      "btts": 0.6899261974730919,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09022239248840772
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08266657957250209
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.07769685189958134
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936101": {
+      "id": "nations:espn:401936101",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-28",
+      "home": "France",
+      "away": "Spain",
+      "isoTime": "2027-03-28T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.377,
+        "D": 0.227,
+        "A": 0.396
+      },
+      "expectedHome": 1.67,
+      "expectedAway": 1.72,
+      "over25": 0.6573570113767431,
+      "btts": 0.6656618966942089,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09702659543044354
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08322612448538821
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08099125475812576
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936089": {
+      "id": "nations:espn:401936089",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-28",
+      "home": "Germany",
+      "away": "Belgium",
+      "isoTime": "2027-03-28T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.545,
+        "D": 0.227,
+        "A": 0.227
+      },
+      "expectedHome": 1.85,
+      "expectedAway": 1.11,
+      "over25": 0.5676482554953721,
+      "btts": 0.565410357399007,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10654121993411343
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09837714541963481
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.0957554381618678
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936072": {
+      "id": "nations:espn:401936072",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-28",
+      "home": "Israel",
+      "away": "Belarus",
+      "isoTime": "2027-03-28T18:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.249,
+        "D": 0.319,
+        "A": 0.432
+      },
+      "expectedHome": 0.74,
+      "expectedAway": 1.08,
+      "over25": 0.27583526738953806,
+      "btts": 0.3464562616126978,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.1744448657189092
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.16136611701764564
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12961765073866272
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936082": {
+      "id": "nations:espn:401936082",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-27",
+      "home": "Faroe Islands",
+      "away": "Georgia",
+      "isoTime": "2027-03-27T14:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.513,
+        "D": 0.308,
+        "A": 0.179
+      },
+      "expectedHome": 1.2,
+      "expectedAway": 0.58,
+      "over25": 0.26483038045499346,
+      "btts": 0.3082006259562729,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.20209650718322117
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.16813338841260075
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.12146010557828259
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936096": {
+      "id": "nations:espn:401936096",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-27",
+      "home": "Estonia",
+      "away": "Romania",
+      "isoTime": "2027-03-27T17:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.617,
+        "D": 0.234,
+        "A": 0.149
+      },
+      "expectedHome": 1.71,
+      "expectedAway": 0.7,
+      "over25": 0.4314204710732661,
+      "btts": 0.4110693587580895,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.15416801937520236
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.13156586131326384
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10753817926089154
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936091": {
+      "id": "nations:espn:401936091",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-27",
+      "home": "Norway",
+      "away": "England",
+      "isoTime": "2027-03-27T17:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.239,
+        "D": 0.188,
+        "A": 0.574
+      },
+      "expectedHome": 1.6,
+      "expectedAway": 2.5,
+      "over25": 0.7749824472771867,
+      "btts": 0.7315699922349111,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.083061732259845
+        },
+        {
+          "home": 1,
+          "away": 3,
+          "p": 0.06908511610780062
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.06657730593509766
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936103": {
+      "id": "nations:espn:401936103",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-27",
+      "home": "Netherlands",
+      "away": "Portugal",
+      "isoTime": "2027-03-27T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.469,
+        "D": 0.192,
+        "A": 0.339
+      },
+      "expectedHome": 2.42,
+      "expectedAway": 2.06,
+      "over25": 0.8250700265049112,
+      "btts": 0.7957602865958069,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 2,
+          "p": 0.07036503632377572
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.06815990510353158
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.058072931903510774
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936098": {
+      "id": "nations:espn:401936098",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-27",
+      "home": "Republic of Ireland",
+      "away": "Croatia",
+      "isoTime": "2027-03-27T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.673,
+        "D": 0.184,
+        "A": 0.142
+      },
+      "expectedHome": 2.28,
+      "expectedAway": 0.95,
+      "over25": 0.6258743501425779,
+      "btts": 0.5500249708519124,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10296343700338215
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09768088923286533
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.09035266750556895
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936087": {
+      "id": "nations:espn:401936087",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-27",
+      "home": "Slovenia",
+      "away": "Wales",
+      "isoTime": "2027-03-27T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.642,
+        "D": 0.216,
+        "A": 0.141
+      },
+      "expectedHome": 1.87,
+      "expectedAway": 0.74,
+      "over25": 0.48463328790539556,
+      "btts": 0.442741654701674,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.13730726267113066
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.12847809942191726
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10172046798145494
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936083": {
+      "id": "nations:espn:401936083",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-25",
+      "home": "Cyprus",
+      "away": "North Macedonia",
+      "isoTime": "2027-03-25T17:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.642,
+        "D": 0.212,
+        "A": 0.146
+      },
+      "expectedHome": 1.93,
+      "expectedAway": 0.79,
+      "over25": 0.5119753606516054,
+      "btts": 0.46788084184750844,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.1267954460184569
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.12238565875799588
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10048385109932892
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936095": {
+      "id": "nations:espn:401936095",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-25",
+      "home": "Belarus",
+      "away": "Israel",
+      "isoTime": "2027-03-25T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.49,
+        "D": 0.305,
+        "A": 0.206
+      },
+      "expectedHome": 1.2,
+      "expectedAway": 0.67,
+      "over25": 0.2883799677519515,
+      "btts": 0.34083882922523717,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.1852807170397699
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.1540136655079642
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12371177960866193
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936102": {
+      "id": "nations:espn:401936102",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-25",
+      "home": "Belgium",
+      "away": "Germany",
+      "isoTime": "2027-03-25T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.286,
+        "D": 0.242,
+        "A": 0.473
+      },
+      "expectedHome": 1.24,
+      "expectedAway": 1.66,
+      "over25": 0.5535004846349361,
+      "btts": 0.5750047194778606,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11332168069094668
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09402956691198892
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.0915237206916467
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936088": {
+      "id": "nations:espn:401936088",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-25",
+      "home": "Bosnia-Herzegovina",
+      "away": "Denmark",
+      "isoTime": "2027-03-25T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.445,
+        "D": 0.219,
+        "A": 0.336
+      },
+      "expectedHome": 1.92,
+      "expectedAway": 1.65,
+      "over25": 0.6907159567039558,
+      "btts": 0.6885644164545719,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.089455975651385
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08572817181304296
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.07365459797610005
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936099": {
+      "id": "nations:espn:401936099",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-25",
+      "home": "Hungary",
+      "away": "Serbia",
+      "isoTime": "2027-03-25T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.612,
+        "D": 0.244,
+        "A": 0.144
+      },
+      "expectedHome": 1.62,
+      "expectedAway": 0.64,
+      "over25": 0.39256705133772485,
+      "btts": 0.3779518120058504,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.16953047241175834
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.1373196360588741
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10801618854533648
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "nations:espn:401936104": {
+      "id": "nations:espn:401936104",
+      "league": "nations",
+      "sport": "soccer",
+      "date": "2027-03-25",
+      "home": "Spain",
+      "away": "France",
+      "isoTime": "2027-03-25T19:45Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.474,
+        "D": 0.221,
+        "A": 0.305
+      },
+      "expectedHome": 1.91,
+      "expectedAway": 1.5,
+      "over25": 0.6620483825969234,
+      "btts": 0.6617645998031904,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09469799646264519
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09039299834009477
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.07103346546639092
         }
       ],
       "markets": [],
@@ -55496,6 +56600,95 @@
       "markets": [],
       "outcome": null
     },
+    "premier:2027-02-01:Brentford:Man Utd": {
+      "id": "premier:2027-02-01:Brentford:Man Utd",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-02-01",
+      "home": "Brentford",
+      "away": "Man Utd",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.783,
+        "D": 0.131,
+        "A": 0.086
+      },
+      "expectedHome": 2.9,
+      "expectedAway": 0.89,
+      "over25": 0.7297688267375887,
+      "btts": 0.5573885656332073,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.09488894275728144
+        },
+        {
+          "home": 3,
+          "away": 0,
+          "p": 0.0917473627576941
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.0845616719711231
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 10.3,
+          "threshold": 8.5,
+          "over": 0.700977033271512
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4,
+          "threshold": 3.5,
+          "over": 0.5587622472986326
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 22.8,
+          "threshold": 23.5,
+          "over": 0.43042251284430166
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.3,
+          "threshold": 7.5,
+          "over": 0.7057886414240728
+        },
+        {
+          "label": "Remates totales",
+          "expected": 28.9,
+          "threshold": 22.5,
+          "over": 0.8850657359525571
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.9,
+          "threshold": 4.5,
+          "over": 0.5483758072035132
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.4,
+          "threshold": 4.5,
+          "over": 0.6223500181973793
+        }
+      ],
+      "outcome": null
+    },
     "laliga:2027-01-31:Atlético de Madrid:RCD Espanyol de Barcelona": {
       "id": "laliga:2027-01-31:Atlético de Madrid:RCD Espanyol de Barcelona",
       "league": "laliga",
@@ -57209,6 +58402,451 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
+      "outcome": null
+    },
+    "premier:2027-01-31:Bournemouth:Fulham": {
+      "id": "premier:2027-01-31:Bournemouth:Fulham",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-31",
+      "home": "Bournemouth",
+      "away": "Fulham",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.56,
+        "D": 0.26,
+        "A": 0.181
+      },
+      "expectedHome": 1.52,
+      "expectedAway": 0.74,
+      "over25": 0.39118999909339414,
+      "btts": 0.40641880421841514,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.15952896554948667
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.12096880360651442
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11731910445315608
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.7,
+          "threshold": 8.5,
+          "over": 0.6337535632840547
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.1,
+          "threshold": 3.5,
+          "over": 0.5783201859659151
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 23.2,
+          "threshold": 23.5,
+          "over": 0.4612553183037602
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.1,
+          "threshold": 7.5,
+          "over": 0.5590013808591177
+        },
+        {
+          "label": "Remates totales",
+          "expected": 26.6,
+          "threshold": 22.5,
+          "over": 0.7835524492545631
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.8,
+          "threshold": 4.5,
+          "over": 0.5199757610391016
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.9,
+          "threshold": 4.5,
+          "over": 0.5474849239781577
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-31:Coventry:Leeds": {
+      "id": "premier:2027-01-31:Coventry:Leeds",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-31",
+      "home": "Coventry",
+      "away": "Leeds",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.351,
+        "D": 0.25,
+        "A": 0.399
+      },
+      "expectedHome": 1.37,
+      "expectedAway": 1.47,
+      "over25": 0.5400940999328211,
+      "btts": 0.5743615625909033,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11763309290065473
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08666740310835966
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.086066698131957
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 8.5,
+          "threshold": 8.5,
+          "over": 0.47322715933475523
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 3.6,
+          "threshold": 3.5,
+          "over": 0.4788657524056932
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 23.3,
+          "threshold": 23.5,
+          "over": 0.4737702062000442
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.7,
+          "threshold": 7.5,
+          "over": 0.6390804673773002
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.3,
+          "threshold": 22.5,
+          "over": 0.8197723386053828
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 3.5,
+          "threshold": 4.5,
+          "over": 0.2750270603984608
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5,
+          "threshold": 4.5,
+          "over": 0.5543766224037833
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-31:Hull:Crystal Palace": {
+      "id": "premier:2027-01-31:Hull:Crystal Palace",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-31",
+      "home": "Hull",
+      "away": "Crystal Palace",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.675,
+        "D": 0.188,
+        "A": 0.136
+      },
+      "expectedHome": 2.2,
+      "expectedAway": 0.87,
+      "over25": 0.5928009430551695,
+      "btts": 0.518291618473677,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.11182536073825339
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10177789837390505
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09782699898031881
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 10.4,
+          "threshold": 8.5,
+          "over": 0.7125176920953477
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.1,
+          "threshold": 3.5,
+          "over": 0.5897484207486108
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 22.4,
+          "threshold": 23.5,
+          "over": 0.3980708311951606
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.7,
+          "threshold": 7.5,
+          "over": 0.7467093401946092
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.8,
+          "threshold": 22.5,
+          "over": 0.8413764730961109
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.9,
+          "threshold": 4.5,
+          "over": 0.5416961337858514
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.5,
+          "threshold": 4.5,
+          "over": 0.645789617229392
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-31:Spurs:Sunderland": {
+      "id": "premier:2027-01-31:Spurs:Sunderland",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-31",
+      "home": "Spurs",
+      "away": "Sunderland",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.626,
+        "D": 0.254,
+        "A": 0.119
+      },
+      "expectedHome": 1.52,
+      "expectedAway": 0.5,
+      "over25": 0.32764003755974175,
+      "btts": 0.30611350086843786,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.20224148514247278
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.15354138819309204
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.13319411395836672
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.9,
+          "threshold": 8.5,
+          "over": 0.6580151460039586
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.3,
+          "threshold": 3.5,
+          "over": 0.6142772398619576
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 25.9,
+          "threshold": 23.5,
+          "over": 0.6687492937879987
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.2,
+          "threshold": 7.5,
+          "over": 0.580510384988795
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27,
+          "threshold": 22.5,
+          "over": 0.8045637976412736
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.6,
+          "threshold": 4.5,
+          "over": 0.4860862600264845
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.3,
+          "threshold": 4.5,
+          "over": 0.614225326898237
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-31:Man City:Arsenal": {
+      "id": "premier:2027-01-31:Man City:Arsenal",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-31",
+      "home": "Man City",
+      "away": "Arsenal",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.358,
+        "D": 0.271,
+        "A": 0.372
+      },
+      "expectedHome": 1.23,
+      "expectedAway": 1.26,
+      "over25": 0.45320916570029773,
+      "btts": 0.5066376901997697,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1285345506422283
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.10455289338305808
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10209000879799925
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 10.2,
+          "threshold": 8.5,
+          "over": 0.6861637930300266
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.4,
+          "threshold": 3.5,
+          "over": 0.6395546319553507
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.6,
+          "threshold": 23.5,
+          "over": 0.5735869723700608
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.3,
+          "threshold": 7.5,
+          "over": 0.5879105038602258
+        },
+        {
+          "label": "Remates totales",
+          "expected": 26,
+          "threshold": 22.5,
+          "over": 0.7482295320019202
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.9,
+          "threshold": 4.5,
+          "over": 0.5355962925815532
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.3,
+          "threshold": 4.5,
+          "over": 0.611478387325009
+        }
+      ],
       "outcome": null
     },
     "premier:2027-01-30:Aston Villa:Ipswich": {
@@ -60909,6 +62547,103 @@
       "markets": [],
       "outcome": null
     },
+    "premier:2027-01-25:Leeds:Chelsea": {
+      "id": "premier:2027-01-25:Leeds:Chelsea",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-25",
+      "home": "Leeds",
+      "away": "Chelsea",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.622,
+        "D": 0.212,
+        "A": 0.167
+      },
+      "expectedHome": 1.97,
+      "expectedAway": 0.91,
+      "over25": 0.5508141051080913,
+      "btts": 0.5150250015713457,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-21",
+            "home": "Chelsea",
+            "away": "Leeds",
+            "homeScore": 1,
+            "awayScore": 4
+          }
+        ],
+        "adjustmentHome": 0.05,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.11017609318315535
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10878351856085065
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10041258556015631
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 8.9,
+          "threshold": 8.5,
+          "over": 0.5335754912554889
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.6,
+          "threshold": 3.5,
+          "over": 0.6815701096805066
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 23.9,
+          "threshold": 23.5,
+          "over": 0.5215111919009934
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.3,
+          "threshold": 7.5,
+          "over": 0.7051227865221618
+        },
+        {
+          "label": "Remates totales",
+          "expected": 26.8,
+          "threshold": 22.5,
+          "over": 0.7937492512352624
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 3.9,
+          "threshold": 4.5,
+          "over": 0.3441921594961488
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.1,
+          "threshold": 4.5,
+          "over": 0.5694104562591765
+        }
+      ],
+      "outcome": null
+    },
     "laliga:2027-01-24:Athletic Club:Levante UD": {
       "id": "laliga:2027-01-24:Athletic Club:Levante UD",
       "league": "laliga",
@@ -62846,6 +64581,491 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
+      "outcome": null
+    },
+    "premier:2027-01-24:Crystal Palace:Spurs": {
+      "id": "premier:2027-01-24:Crystal Palace:Spurs",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-24",
+      "home": "Crystal Palace",
+      "away": "Spurs",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.178,
+        "D": 0.226,
+        "A": 0.596
+      },
+      "expectedHome": 0.89,
+      "expectedAway": 1.83,
+      "over25": 0.5094933967463099,
+      "btts": 0.4929038887981337,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-31",
+            "home": "Spurs",
+            "away": "Crystal Palace",
+            "homeScore": 2,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.02,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.12126847724765
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.11081487118408828
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.107341339556894
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 11.1,
+          "threshold": 8.5,
+          "over": 0.7790199343717958
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4,
+          "threshold": 3.5,
+          "over": 0.5691593685029861
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.5,
+          "threshold": 23.5,
+          "over": 0.567704988888079
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.4,
+          "threshold": 7.5,
+          "over": 0.7172268172148918
+        },
+        {
+          "label": "Remates totales",
+          "expected": 28.4,
+          "threshold": 22.5,
+          "over": 0.8676853721585824
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.8,
+          "threshold": 4.5,
+          "over": 0.5146619373780026
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 6.4,
+          "threshold": 4.5,
+          "over": 0.7621041068500128
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-24:Everton:Brentford": {
+      "id": "premier:2027-01-24:Everton:Brentford",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-24",
+      "home": "Everton",
+      "away": "Brentford",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.242,
+        "D": 0.244,
+        "A": 0.514
+      },
+      "expectedHome": 1.05,
+      "expectedAway": 1.66,
+      "over25": 0.5087580650636351,
+      "btts": 0.5271092142046099,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-23",
+            "home": "Brentford",
+            "away": "Everton",
+            "homeScore": 4,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.03,
+        "adjustmentAway": 0.06
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11615885952658053
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.11017661049455196
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0961471247961213
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.5,
+          "threshold": 8.5,
+          "over": 0.6071366685368478
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 3.8,
+          "threshold": 3.5,
+          "over": 0.5330968069108057
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 21.3,
+          "threshold": 23.5,
+          "over": 0.30479460003336767
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.4,
+          "threshold": 7.5,
+          "over": 0.5951469815351298
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.4,
+          "threshold": 22.5,
+          "over": 0.8268209499425352
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 5,
+          "threshold": 4.5,
+          "over": 0.554546239407451
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.5,
+          "threshold": 4.5,
+          "over": 0.4716416504008484
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-24:Nott'm Forest:Bournemouth": {
+      "id": "premier:2027-01-24:Nott'm Forest:Bournemouth",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-24",
+      "home": "Nott'm Forest",
+      "away": "Bournemouth",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.232,
+        "D": 0.26,
+        "A": 0.508
+      },
+      "expectedHome": 0.93,
+      "expectedAway": 1.51,
+      "over25": 0.4405518553079443,
+      "btts": 0.4713981140092904,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-21",
+            "home": "Bournemouth",
+            "away": "Nott'm Forest",
+            "homeScore": 2,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.02,
+        "adjustmentAway": 0.01
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.13174938837229833
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12236067075584417
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.09951473202249708
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.2,
+          "threshold": 8.5,
+          "over": 0.5661514099723086
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4,
+          "threshold": 3.5,
+          "over": 0.5644094018201031
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.5,
+          "threshold": 23.5,
+          "over": 0.5708863113516042
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 7.8,
+          "threshold": 7.5,
+          "over": 0.5155954559961236
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.6,
+          "threshold": 22.5,
+          "over": 0.8333703276854081
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.5,
+          "threshold": 4.5,
+          "over": 0.460959863558007
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.7,
+          "threshold": 4.5,
+          "over": 0.5060526822998793
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-24:Sunderland:Coventry": {
+      "id": "premier:2027-01-24:Sunderland:Coventry",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-24",
+      "home": "Sunderland",
+      "away": "Coventry",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.354,
+        "D": 0.268,
+        "A": 0.378
+      },
+      "expectedHome": 1.24,
+      "expectedAway": 1.29,
+      "over25": 0.4652721907336229,
+      "btts": 0.5161116597757349,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-31",
+            "home": "Coventry",
+            "away": "Sunderland",
+            "homeScore": 3,
+            "awayScore": 1
+          }
+        ],
+        "adjustmentHome": -0.01,
+        "adjustmentAway": 0.04
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1272698358987663
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.1024970166975616
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.09836494800338101
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 8.5,
+          "threshold": 8.5,
+          "over": 0.4809379265222953
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 3.8,
+          "threshold": 3.5,
+          "over": 0.523162611025638
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.1,
+          "threshold": 23.5,
+          "over": 0.5349829019067505
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.3,
+          "threshold": 7.5,
+          "over": 0.5850954004485723
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.1,
+          "threshold": 22.5,
+          "over": 0.8101636931833895
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 3.9,
+          "threshold": 4.5,
+          "over": 0.3510063086800377
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.6,
+          "threshold": 4.5,
+          "over": 0.49287517495788347
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-24:Man Utd:Liverpool": {
+      "id": "premier:2027-01-24:Man Utd:Liverpool",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-24",
+      "home": "Man Utd",
+      "away": "Liverpool",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.151,
+        "D": 0.187,
+        "A": 0.663
+      },
+      "expectedHome": 0.99,
+      "expectedAway": 2.28,
+      "over25": 0.6345911187098995,
+      "btts": 0.5650057893139796,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-22",
+            "home": "Liverpool",
+            "away": "Man Utd",
+            "homeScore": 4,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.03,
+        "adjustmentAway": 0.04
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.09851278028934785
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0978340237120452
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08651781615011074
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 11.2,
+          "threshold": 8.5,
+          "over": 0.7834927258598176
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.1,
+          "threshold": 3.5,
+          "over": 0.5843667158509596
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.1,
+          "threshold": 23.5,
+          "over": 0.5348314919050567
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.9,
+          "threshold": 7.5,
+          "over": 0.7700108087638982
+        },
+        {
+          "label": "Remates totales",
+          "expected": 30.4,
+          "threshold": 22.5,
+          "over": 0.9285394376186905
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 5.4,
+          "threshold": 4.5,
+          "over": 0.62616652078971
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.8,
+          "threshold": 4.5,
+          "over": 0.6846934774207499
+        }
+      ],
       "outcome": null
     },
     "premier:2027-01-23:Arsenal:Newcastle": {
@@ -66300,6 +68520,103 @@
       "markets": [],
       "outcome": null
     },
+    "premier:2027-01-18:Brentford:Brighton": {
+      "id": "premier:2027-01-18:Brentford:Brighton",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-18",
+      "home": "Brentford",
+      "away": "Brighton",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.422,
+        "D": 0.264,
+        "A": 0.314
+      },
+      "expectedHome": 1.4,
+      "expectedAway": 1.16,
+      "over25": 0.47145933826854697,
+      "btts": 0.5175114324325928,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-08",
+            "home": "Brighton",
+            "away": "Brentford",
+            "homeScore": 2,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.04,
+        "adjustmentAway": 0.02
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1256310232321327
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.107869132105881
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.09004224276316272
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.4,
+          "threshold": 8.5,
+          "over": 0.5982994081135427
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4,
+          "threshold": 3.5,
+          "over": 0.5659939772919194
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 22.1,
+          "threshold": 23.5,
+          "over": 0.3684403590093899
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.3,
+          "threshold": 7.5,
+          "over": 0.5942793569321217
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.1,
+          "threshold": 22.5,
+          "over": 0.8098275081971187
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.4,
+          "threshold": 4.5,
+          "over": 0.4572349561037332
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5,
+          "threshold": 4.5,
+          "over": 0.5553383213209513
+        }
+      ],
+      "outcome": null
+    },
     "laliga:2027-01-17:Atlético de Madrid:Real Sociedad": {
       "id": "laliga:2027-01-17:Atlético de Madrid:Real Sociedad",
       "league": "laliga",
@@ -68199,6 +70516,200 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
+      "outcome": null
+    },
+    "premier:2027-01-17:Bournemouth:Ipswich": {
+      "id": "premier:2027-01-17:Bournemouth:Ipswich",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-17",
+      "home": "Bournemouth",
+      "away": "Ipswich",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.726,
+        "D": 0.166,
+        "A": 0.109
+      },
+      "expectedHome": 2.42,
+      "expectedAway": 0.83,
+      "over25": 0.6295205307393765,
+      "btts": 0.5122761812284204,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-08",
+            "home": "Ipswich",
+            "away": "Bournemouth",
+            "homeScore": 1,
+            "awayScore": 2
+          }
+        ],
+        "adjustmentHome": -0.01,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.11397975352826066
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.09422493305746855
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09417586523492422
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9,
+          "threshold": 8.5,
+          "over": 0.547324124600017
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.3,
+          "threshold": 3.5,
+          "over": 0.6287002042910432
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.8,
+          "threshold": 23.5,
+          "over": 0.5924287582143544
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.4,
+          "threshold": 7.5,
+          "over": 0.6027881690847673
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.2,
+          "threshold": 22.5,
+          "over": 0.8136847975911383
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.4,
+          "threshold": 4.5,
+          "over": 0.45079639889292633
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.6,
+          "threshold": 4.5,
+          "over": 0.48906861942152857
+        }
+      ],
+      "outcome": null
+    },
+    "premier:2027-01-17:Spurs:Leeds": {
+      "id": "premier:2027-01-17:Spurs:Leeds",
+      "league": "premier",
+      "sport": "soccer",
+      "date": "2027-01-17",
+      "home": "Spurs",
+      "away": "Leeds",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.455,
+        "D": 0.3,
+        "A": 0.245
+      },
+      "expectedHome": 1.2,
+      "expectedAway": 0.8,
+      "over25": 0.32268440723365854,
+      "btts": 0.38407119020686553,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-07",
+            "home": "Leeds",
+            "away": "Spurs",
+            "homeScore": 1,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.03,
+        "adjustmentAway": 0.01
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.16278499027784335
+        },
+        {
+          "home": 0,
+          "away": 0,
+          "p": 0.13565524804989704
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12984515386844112
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.9,
+          "threshold": 8.5,
+          "over": 0.6515647612160425
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4,
+          "threshold": 3.5,
+          "over": 0.5745464836143412
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 25.1,
+          "threshold": 23.5,
+          "over": 0.6140885516355776
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.7,
+          "threshold": 7.5,
+          "over": 0.6348145475884304
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.2,
+          "threshold": 22.5,
+          "over": 0.814373825840242
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.2,
+          "threshold": 4.5,
+          "over": 0.41058044775072655
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.7,
+          "threshold": 4.5,
+          "over": 0.6670236104018561
+        }
+      ],
       "outcome": null
     },
     "premier:2027-01-16:Aston Villa:Man Utd": {
@@ -77687,6 +80198,95 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
+      "outcome": null
+    },
+    "ligue1:2027-01-03:Paris FC:Havre Athletic Club": {
+      "id": "ligue1:2027-01-03:Paris FC:Havre Athletic Club",
+      "league": "ligue1",
+      "sport": "soccer",
+      "date": "2027-01-03",
+      "home": "Paris FC",
+      "away": "Havre Athletic Club",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.85,
+        "D": 0.097,
+        "A": 0.054
+      },
+      "expectedHome": 3.34,
+      "expectedAway": 0.8,
+      "over25": 0.7817890923371341,
+      "btts": 0.530727218865481,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 3,
+          "away": 0,
+          "p": 0.09898479475478429
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.08885459703363036
+        },
+        {
+          "home": 4,
+          "away": 0,
+          "p": 0.0827024424150364
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 8.3,
+          "threshold": 8.5,
+          "over": 0.45516834061184586
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 3.6,
+          "threshold": 3.5,
+          "over": 0.4862690461290575
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 29,
+          "threshold": 23.5,
+          "over": 0.8474997060605572
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.4,
+          "threshold": 7.5,
+          "over": 0.7237266340763622
+        },
+        {
+          "label": "Remates totales",
+          "expected": 26,
+          "threshold": 22.5,
+          "over": 0.7479942037785856
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4,
+          "threshold": 4.5,
+          "over": 0.3615830335648852
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.4,
+          "threshold": 4.5,
+          "over": 0.4472233857595034
+        }
+      ],
       "outcome": null
     },
     "premier:2027-01-02:Brighton:Man Utd": {
@@ -91206,6 +93806,187 @@
       "markets": [],
       "outcome": null
     },
+    "laliga:2026-12-07:Sevilla FC:Málaga CF": {
+      "id": "laliga:2026-12-07:Sevilla FC:Málaga CF",
+      "league": "laliga",
+      "sport": "soccer",
+      "date": "2026-12-07",
+      "home": "Sevilla FC",
+      "away": "Málaga CF",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.52,
+        "D": 0.254,
+        "A": 0.226
+      },
+      "expectedHome": 1.56,
+      "expectedAway": 0.94,
+      "over25": 0.45660517263303596,
+      "btts": 0.48105748114120095,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.12819070092610083
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1201658940250349
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10025997813015984
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 8.8,
+          "threshold": 8.5,
+          "over": 0.5130851946918946
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.8,
+          "threshold": 3.5,
+          "over": 0.7120144823912326
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 25.5,
+          "threshold": 23.5,
+          "over": 0.6468692646107597
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.1,
+          "threshold": 7.5,
+          "over": 0.6872417634677486
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27,
+          "threshold": 22.5,
+          "over": 0.8035442935894622
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4,
+          "threshold": 4.5,
+          "over": 0.3796546148591067
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.7,
+          "threshold": 4.5,
+          "over": 0.5094746713308203
+        }
+      ],
+      "outcome": null
+    },
+    "hypermotion:2026-12-07:Burgos:Cádiz": {
+      "id": "hypermotion:2026-12-07:Burgos:Cádiz",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-07",
+      "home": "Burgos",
+      "away": "Cádiz",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.402,
+        "D": 0.267,
+        "A": 0.33
+      },
+      "expectedHome": 1.34,
+      "expectedAway": 1.19,
+      "over25": 0.46349537919126377,
+      "btts": 0.5132506648175753,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12704717778702004
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10693441537031873
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.09477672786456516
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-07:Córdoba:Las Palmas": {
+      "id": "hypermotion:2026-12-07:Córdoba:Las Palmas",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-07",
+      "home": "Córdoba",
+      "away": "Las Palmas",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.597,
+        "D": 0.208,
+        "A": 0.195
+      },
+      "expectedHome": 2.07,
+      "expectedAway": 1.1,
+      "over25": 0.6127952852363427,
+      "btts": 0.5819753833685072,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09902095768112554
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09576472517280304
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.09024531489593592
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "laliga:2026-12-06:Athletic Club:Real Madrid": {
       "id": "laliga:2026-12-06:Athletic Club:Real Madrid",
       "league": "laliga",
@@ -94587,6 +97368,546 @@
       ],
       "outcome": null
     },
+    "laliga:2026-12-05:R. Racing Club:RC Deportivo": {
+      "id": "laliga:2026-12-05:R. Racing Club:RC Deportivo",
+      "league": "laliga",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "R. Racing Club",
+      "away": "RC Deportivo",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.443,
+        "D": 0.236,
+        "A": 0.322
+      },
+      "expectedHome": 1.7,
+      "expectedAway": 1.41,
+      "over25": 0.6008955191497579,
+      "btts": 0.6179642976518122,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10698311974276249
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.0906843575367117
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.07564910214992841
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 11.2,
+          "threshold": 8.5,
+          "over": 0.7841025146050902
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 5.1,
+          "threshold": 3.5,
+          "over": 0.7494869600036536
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.3,
+          "threshold": 23.5,
+          "over": 0.5506966351000264
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 10.1,
+          "threshold": 7.5,
+          "over": 0.784700413770678
+        },
+        {
+          "label": "Remates totales",
+          "expected": 29.2,
+          "threshold": 22.5,
+          "over": 0.8951728354604555
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 5.1,
+          "threshold": 4.5,
+          "over": 0.5784295781317768
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 6.1,
+          "threshold": 4.5,
+          "over": 0.7250949173940187
+        }
+      ],
+      "outcome": null
+    },
+    "laliga:2026-12-05:Rayo Vallecano:Levante UD": {
+      "id": "laliga:2026-12-05:Rayo Vallecano:Levante UD",
+      "league": "laliga",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "Rayo Vallecano",
+      "away": "Levante UD",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.417,
+        "D": 0.276,
+        "A": 0.307
+      },
+      "expectedHome": 1.3,
+      "expectedAway": 1.07,
+      "over25": 0.42334903810320107,
+      "btts": 0.47877423071247943,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12999080987274364
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.12114843490312642
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.09995460946960447
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.5,
+          "threshold": 8.5,
+          "over": 0.6086868839854297
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.1,
+          "threshold": 3.5,
+          "over": 0.5817729635551391
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24,
+          "threshold": 23.5,
+          "over": 0.5305869472350828
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.7,
+          "threshold": 7.5,
+          "over": 0.6440047075335473
+        },
+        {
+          "label": "Remates totales",
+          "expected": 28.5,
+          "threshold": 22.5,
+          "over": 0.8718424877597185
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.7,
+          "threshold": 4.5,
+          "over": 0.4996825959033532
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.8,
+          "threshold": 4.5,
+          "over": 0.5300835854563968
+        }
+      ],
+      "outcome": null
+    },
+    "laliga:2026-12-05:Villarreal CF:Real Sociedad": {
+      "id": "laliga:2026-12-05:Villarreal CF:Real Sociedad",
+      "league": "laliga",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "Villarreal CF",
+      "away": "Real Sociedad",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.459,
+        "D": 0.228,
+        "A": 0.313
+      },
+      "expectedHome": 1.81,
+      "expectedAway": 1.46,
+      "over25": 0.634476834305873,
+      "btts": 0.6422553766498756,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1004751898261373
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09080178932446602
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.07346623000353723
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 11.6,
+          "threshold": 8.5,
+          "over": 0.8199862360800545
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.7,
+          "threshold": 3.5,
+          "over": 0.687200212484684
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 23.4,
+          "threshold": 23.5,
+          "over": 0.47487336780128053
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.5,
+          "threshold": 7.5,
+          "over": 0.7289792931551586
+        },
+        {
+          "label": "Remates totales",
+          "expected": 29.2,
+          "threshold": 22.5,
+          "over": 0.8959676773023474
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 5.8,
+          "threshold": 4.5,
+          "over": 0.685215594821901
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.9,
+          "threshold": 4.5,
+          "over": 0.695072674208538
+        }
+      ],
+      "outcome": null
+    },
+    "laliga:2026-12-05:FC Barcelona:Celta": {
+      "id": "laliga:2026-12-05:FC Barcelona:Celta",
+      "league": "laliga",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "FC Barcelona",
+      "away": "Celta",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.716,
+        "D": 0.165,
+        "A": 0.119
+      },
+      "expectedHome": 2.49,
+      "expectedAway": 0.92,
+      "over25": 0.6627680778573151,
+      "btts": 0.5526169649997844,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10214669741969848
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09425142149934547
+        },
+        {
+          "home": 3,
+          "away": 0,
+          "p": 0.08479372251948235
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 8.7,
+          "threshold": 8.5,
+          "over": 0.5018556334485875
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 4.4,
+          "threshold": 3.5,
+          "over": 0.6425160170247286
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 24.2,
+          "threshold": 23.5,
+          "over": 0.5399236118289085
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 9.5,
+          "threshold": 7.5,
+          "over": 0.7278059150697422
+        },
+        {
+          "label": "Remates totales",
+          "expected": 27.4,
+          "threshold": 22.5,
+          "over": 0.8265943030035255
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.2,
+          "threshold": 4.5,
+          "over": 0.4079655092312955
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 4.5,
+          "threshold": 4.5,
+          "over": 0.4667496249657692
+        }
+      ],
+      "outcome": null
+    },
+    "hypermotion:2026-12-05:Real Sociedad II:Leganés": {
+      "id": "hypermotion:2026-12-05:Real Sociedad II:Leganés",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "Real Sociedad II",
+      "away": "Leganés",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.331,
+        "D": 0.228,
+        "A": 0.441
+      },
+      "expectedHome": 1.53,
+      "expectedAway": 1.79,
+      "over25": 0.6430566459987717,
+      "btts": 0.65141493933707,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.099297429897865
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08873907472859463
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.07571710537876342
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-05:CD Sabadell:Eibar": {
+      "id": "hypermotion:2026-12-05:CD Sabadell:Eibar",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "CD Sabadell",
+      "away": "Eibar",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.39,
+        "D": 0.294,
+        "A": 0.316
+      },
+      "expectedHome": 1.15,
+      "expectedAway": 1,
+      "over25": 0.36397996690278533,
+      "btts": 0.4321966816344945,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1339936642779738
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.13364219850569858
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.11673451869534184
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-05:FC Andorra:Real Oviedo": {
+      "id": "hypermotion:2026-12-05:FC Andorra:Real Oviedo",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "FC Andorra",
+      "away": "Real Oviedo",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.449,
+        "D": 0.219,
+        "A": 0.332
+      },
+      "expectedHome": 1.91,
+      "expectedAway": 1.62,
+      "over25": 0.6855185163577844,
+      "btts": 0.6840756140018515,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09050662364531795
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08646762459275098
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.07348817683298818
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-05:Tenerife:Eldense": {
+      "id": "hypermotion:2026-12-05:Tenerife:Eldense",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-05",
+      "home": "Tenerife",
+      "away": "Eldense",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.528,
+        "D": 0.262,
+        "A": 0.21
+      },
+      "expectedHome": 1.5,
+      "expectedAway": 0.84,
+      "over25": 0.4143006020233075,
+      "btts": 0.44115913330190243,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.1446334118850086
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12134464146377706
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10848317355727799
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "bundesliga:2026-12-04:FC Bayern München:SC Paderborn 07": {
       "id": "bundesliga:2026-12-04:FC Bayern München:SC Paderborn 07",
       "league": "bundesliga",
@@ -94859,6 +98180,95 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
+      "outcome": null
+    },
+    "laliga:2026-12-04:Deportivo Alavés:RCD Espanyol de Barcelona": {
+      "id": "laliga:2026-12-04:Deportivo Alavés:RCD Espanyol de Barcelona",
+      "league": "laliga",
+      "sport": "soccer",
+      "date": "2026-12-04",
+      "home": "Deportivo Alavés",
+      "away": "RCD Espanyol de Barcelona",
+      "isoTime": null,
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.353,
+        "D": 0.302,
+        "A": 0.346
+      },
+      "expectedHome": 1.04,
+      "expectedAway": 1.03,
+      "over25": 0.34343248838733287,
+      "btts": 0.4167067508558144,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.13514706907304233
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.13117343566864817
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.12944705857443195
+        }
+      ],
+      "markets": [
+        {
+          "label": "Córners totales",
+          "expected": 9.6,
+          "threshold": 8.5,
+          "over": 0.6175066040702074
+        },
+        {
+          "label": "Tarjetas amarillas",
+          "expected": 5.1,
+          "threshold": 3.5,
+          "over": 0.7474411380413248
+        },
+        {
+          "label": "Faltas totales",
+          "expected": 26.9,
+          "threshold": 23.5,
+          "over": 0.736353343652509
+        },
+        {
+          "label": "Remates a puerta",
+          "expected": 8.7,
+          "threshold": 7.5,
+          "over": 0.6338456290960724
+        },
+        {
+          "label": "Remates totales",
+          "expected": 25.4,
+          "threshold": 22.5,
+          "over": 0.7072195642404375
+        },
+        {
+          "label": "Córners en primera parte",
+          "expected": 4.1,
+          "threshold": 4.5,
+          "over": 0.39314994992482366
+        },
+        {
+          "label": "Córners en segunda parte",
+          "expected": 5.5,
+          "threshold": 4.5,
+          "over": 0.6367850565357284
+        }
+      ],
       "outcome": null
     },
     "premier:2026-12-03:Spurs:Fulham": {
@@ -95138,6 +98548,282 @@
       "btts": null,
       "confidence": "media",
       "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936409": {
+      "id": "copadelrey:espn:401936409",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-03",
+      "home": "Atlético Paso",
+      "away": "Sevilla",
+      "isoTime": "2026-12-03T18:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.356,
+        "D": 0.24,
+        "A": 0.403
+      },
+      "expectedHome": 1.47,
+      "expectedAway": 1.58,
+      "over25": 0.5892747198884171,
+      "btts": 0.6125342332326593,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10976826702899455
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0868272742183506
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08090770870254597
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936420": {
+      "id": "copadelrey:espn:401936420",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-03",
+      "home": "Real Ávila",
+      "away": "Getafe",
+      "isoTime": "2026-12-03T18:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.395,
+        "D": 0.246,
+        "A": 0.359
+      },
+      "expectedHome": 1.5,
+      "expectedAway": 1.42,
+      "over25": 0.5594225163483065,
+      "btts": 0.5896753432225015,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11475394138957609
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08620466496167177
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08152901541360652
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936418": {
+      "id": "copadelrey:espn:401936418",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-03",
+      "home": "Amorebieta",
+      "away": "Osasuna",
+      "isoTime": "2026-12-03T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.263,
+        "D": 0.233,
+        "A": 0.505
+      },
+      "expectedHome": 1.22,
+      "expectedAway": 1.78,
+      "over25": 0.5782164759699387,
+      "btts": 0.5872651412288146,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10795169599539473
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09615961677343254
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08814145908442093
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936407": {
+      "id": "copadelrey:espn:401936407",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-03",
+      "home": "Coria",
+      "away": "Málaga",
+      "isoTime": "2026-12-03T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.326,
+        "D": 0.244,
+        "A": 0.429
+      },
+      "expectedHome": 1.35,
+      "expectedAway": 1.58,
+      "over25": 0.5612812575713272,
+      "btts": 0.5883758122844307,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11382785516581131
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09003842969988742
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08435098773826584
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936410": {
+      "id": "copadelrey:espn:401936410",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-03",
+      "home": "Real Jaen CF",
+      "away": "Valencia",
+      "isoTime": "2026-12-03T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.26,
+        "D": 0.218,
+        "A": 0.522
+      },
+      "expectedHome": 1.35,
+      "expectedAway": 1.98,
+      "over25": 0.6471446036025439,
+      "btts": 0.6387169701703658,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09552374120622394
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09473475805683726
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.07078690810313701
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936419": {
+      "id": "copadelrey:espn:401936419",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-03",
+      "home": "Real Zaragoza",
+      "away": "Burgos",
+      "isoTime": "2026-12-03T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.473,
+        "D": 0.239,
+        "A": 0.288
+      },
+      "expectedHome": 1.69,
+      "expectedAway": 1.27,
+      "over25": 0.5675996091530646,
+      "btts": 0.5862830989268639,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11124002577215003
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09399428238371853
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.08764364596932725
+        }
+      ],
       "markets": [],
       "outcome": null
     },
@@ -96137,6 +99823,574 @@
       "markets": [],
       "outcome": null
     },
+    "copadelrey:espn:401936412": {
+      "id": "copadelrey:espn:401936412",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Ceuta",
+      "away": "Cádiz",
+      "isoTime": "2026-12-02T17:30Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.159,
+        "D": 0.196,
+        "A": 0.645
+      },
+      "expectedHome": 0.98,
+      "expectedAway": 2.17,
+      "over25": 0.6076641960580547,
+      "btts": 0.5516139888906788,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-25",
+            "home": "Cádiz",
+            "away": "Ceuta",
+            "homeScore": 3,
+            "awayScore": 1
+          }
+        ],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0.02
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.10136000543575259
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0989017657002284
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.09362046234123123
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936415": {
+      "id": "copadelrey:espn:401936415",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Portugalete",
+      "away": "Deportivo",
+      "isoTime": "2026-12-02T18:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.292,
+        "D": 0.265,
+        "A": 0.444
+      },
+      "expectedHome": 1.1,
+      "expectedAway": 1.42,
+      "over25": 0.4615600635338596,
+      "btts": 0.5060393231787901,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12564245700901097
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.11421468840620579
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08926495848465503
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936423": {
+      "id": "copadelrey:espn:401936423",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Sant Andreu",
+      "away": "Eibar",
+      "isoTime": "2026-12-02T18:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.377,
+        "D": 0.244,
+        "A": 0.379
+      },
+      "expectedHome": 1.49,
+      "expectedAway": 1.49,
+      "over25": 0.5714358440789514,
+      "btts": 0.5993664597032771,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11290914987732464
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0841343649068025
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08388055797460661
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936425": {
+      "id": "copadelrey:espn:401936425",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Almería",
+      "away": "Granada",
+      "isoTime": "2026-12-02T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.342,
+        "D": 0.262,
+        "A": 0.396
+      },
+      "expectedHome": 1.25,
+      "expectedAway": 1.37,
+      "over25": 0.4855335934340853,
+      "btts": 0.5314493455719803,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12482027596544798
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.09980896732682687
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.09142842185628783
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936402": {
+      "id": "copadelrey:espn:401936402",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "CD Sabadell",
+      "away": "Sporting Gijón",
+      "isoTime": "2026-12-02T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.425,
+        "D": 0.283,
+        "A": 0.293
+      },
+      "expectedHome": 1.27,
+      "expectedAway": 1,
+      "over25": 0.3962461732370068,
+      "btts": 0.45494780706078214,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-08-17",
+            "home": "Sporting Gijón",
+            "away": "CD Sabadell",
+            "homeScore": 0,
+            "awayScore": 0
+          }
+        ],
+        "adjustmentHome": -0.03,
+        "adjustmentAway": -0.03
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.13123609332955274
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.13096972085907266
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.10342290711003033
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936405": {
+      "id": "copadelrey:espn:401936405",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Cultural Leonesa",
+      "away": "Castellón",
+      "isoTime": "2026-12-02T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.169,
+        "D": 0.258,
+        "A": 0.572
+      },
+      "expectedHome": 0.7,
+      "expectedAway": 1.52,
+      "over25": 0.38255944280503895,
+      "btts": 0.3919003275038757,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.165638741512375
+        },
+        {
+          "home": 0,
+          "away": 2,
+          "p": 0.12626711753435282
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11513140642495341
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936433": {
+      "id": "copadelrey:espn:401936433",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Eldense",
+      "away": "Tenerife",
+      "isoTime": "2026-12-02T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.26,
+        "D": 0.258,
+        "A": 0.482
+      },
+      "expectedHome": 1.03,
+      "expectedAway": 1.51,
+      "over25": 0.4670982529904988,
+      "btts": 0.5018964199646494,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12270371434192619
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.11865315064642307
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.09255450772790909
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936403": {
+      "id": "copadelrey:espn:401936403",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Mirandés",
+      "away": "Leganés",
+      "isoTime": "2026-12-02T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.404,
+        "D": 0.216,
+        "A": 0.38
+      },
+      "expectedHome": 1.87,
+      "expectedAway": 1.81,
+      "over25": 0.712713714877363,
+      "btts": 0.7086574370522932,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.08501895804732498
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.07968076534621885
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0771400615694023
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936404": {
+      "id": "copadelrey:espn:401936404",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Zamora CF",
+      "away": "Real Valladolid",
+      "isoTime": "2026-12-02T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.4,
+        "D": 0.249,
+        "A": 0.352
+      },
+      "expectedHome": 1.49,
+      "expectedAway": 1.38,
+      "over25": 0.5469481017327383,
+      "btts": 0.579698260654688,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11661133400672828
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08677005205153557
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.08442059750615391
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936416": {
+      "id": "copadelrey:espn:401936416",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Arosa",
+      "away": "Celta Vigo",
+      "isoTime": "2026-12-02T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.312,
+        "D": 0.239,
+        "A": 0.449
+      },
+      "expectedHome": 1.35,
+      "expectedAway": 1.66,
+      "over25": 0.5792222783798334,
+      "btts": 0.5999854346809139,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.110419734563108
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0917219397016529
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08182543422809564
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936421": {
+      "id": "copadelrey:espn:401936421",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Rayo Majadahonda",
+      "away": "Mallorca",
+      "isoTime": "2026-12-02T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.327,
+        "D": 0.275,
+        "A": 0.398
+      },
+      "expectedHome": 1.13,
+      "expectedAway": 1.28,
+      "over25": 0.4334546087772875,
+      "btts": 0.48925046989840754,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12988046883403695
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.11469616038799857
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10149029889964933
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936398": {
+      "id": "copadelrey:espn:401936398",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-02",
+      "home": "Sestao",
+      "away": "Villarreal",
+      "isoTime": "2026-12-02T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.277,
+        "D": 0.203,
+        "A": 0.52
+      },
+      "expectedHome": 1.6,
+      "expectedAway": 2.23,
+      "over25": 0.7351421635818215,
+      "btts": 0.7117604299784754,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0864379127298429
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.07765136794763233
+        },
+        {
+          "home": 2,
+          "away": 2,
+          "p": 0.06910083051937019
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "premier:2026-12-01:Coventry:Ipswich": {
       "id": "premier:2026-12-01:Coventry:Ipswich",
       "league": "premier",
@@ -96370,6 +100624,474 @@
       "btts": null,
       "confidence": "media",
       "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936411": {
+      "id": "copadelrey:espn:401936411",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Antequera CF",
+      "away": "Levante",
+      "isoTime": "2026-12-01T18:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.42,
+        "D": 0.251,
+        "A": 0.329
+      },
+      "expectedHome": 1.5,
+      "expectedAway": 1.3,
+      "over25": 0.531300238957923,
+      "btts": 0.5656977711859378,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11846341644202273
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.09107399362583941
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08899127124471216
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936401": {
+      "id": "copadelrey:espn:401936401",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Reus FC Reddis",
+      "away": "Racing Santander",
+      "isoTime": "2026-12-01T18:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.319,
+        "D": 0.258,
+        "A": 0.423
+      },
+      "expectedHome": 1.22,
+      "expectedAway": 1.45,
+      "over25": 0.4997241739329286,
+      "btts": 0.5402231543404706,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12247005845611308
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.09999555400164012
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0886797734162667
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936417": {
+      "id": "copadelrey:espn:401936417",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Huesca",
+      "away": "Girona",
+      "isoTime": "2026-12-01T18:30Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.363,
+        "D": 0.251,
+        "A": 0.387
+      },
+      "expectedHome": 1.39,
+      "expectedAway": 1.45,
+      "over25": 0.5395023708004723,
+      "btts": 0.5744212147142724,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11784611090094685
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08516123232548455
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.08463030883420612
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936424": {
+      "id": "copadelrey:espn:401936424",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Albacete",
+      "away": "Las Palmas",
+      "isoTime": "2026-12-01T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.347,
+        "D": 0.271,
+        "A": 0.382
+      },
+      "expectedHome": 1.2,
+      "expectedAway": 1.28,
+      "over25": 0.4508394493568008,
+      "btts": 0.5044111105284685,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-08-16",
+            "home": "Las Palmas",
+            "away": "Albacete",
+            "homeScore": 2,
+            "awayScore": 1
+          }
+        ],
+        "adjustmentHome": -0.01,
+        "adjustmentAway": 0.02
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.12866827132339
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.10700038033253417
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10078242601900023
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936422": {
+      "id": "copadelrey:espn:401936422",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Ponferradina",
+      "away": "FC Andorra",
+      "isoTime": "2026-12-01T19:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.448,
+        "D": 0.239,
+        "A": 0.312
+      },
+      "expectedHome": 1.66,
+      "expectedAway": 1.35,
+      "over25": 0.5786405128255284,
+      "btts": 0.5995513251455192,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11051926415849984
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09171438940197424
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.08195823355229474
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936406": {
+      "id": "copadelrey:espn:401936406",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "CD Extremadura",
+      "away": "Real Betis",
+      "isoTime": "2026-12-01T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.374,
+        "D": 0.223,
+        "A": 0.403
+      },
+      "expectedHome": 1.71,
+      "expectedAway": 1.78,
+      "over25": 0.6769758816702132,
+      "btts": 0.6807524736279388,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09290866078227063
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0826231430869041
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.07942168492502867
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936400": {
+      "id": "copadelrey:espn:401936400",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "CE Europa",
+      "away": "Rayo Vallecano",
+      "isoTime": "2026-12-01T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.501,
+        "D": 0.246,
+        "A": 0.253
+      },
+      "expectedHome": 1.64,
+      "expectedAway": 1.09,
+      "over25": 0.512442739834242,
+      "btts": 0.5341747350932904,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11677376786498277
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10725909377599828
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09552919557506542
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936408": {
+      "id": "copadelrey:espn:401936408",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "FC Cartagena",
+      "away": "Elche",
+      "isoTime": "2026-12-01T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.363,
+        "D": 0.239,
+        "A": 0.398
+      },
+      "expectedHome": 1.5,
+      "expectedAway": 1.58,
+      "over25": 0.5954586296385629,
+      "btts": 0.6176049092940444,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10875488039912505
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.08602568008570709
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.08169809171020659
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936397": {
+      "id": "copadelrey:espn:401936397",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Gimnástica Torrelavega",
+      "away": "Alavés",
+      "isoTime": "2026-12-01T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.323,
+        "D": 0.216,
+        "A": 0.461
+      },
+      "expectedHome": 1.64,
+      "expectedAway": 1.98,
+      "over25": 0.7016095473799839,
+      "btts": 0.6953308869809625,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.08677622474469698
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0860594921478952
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.07121125164073187
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "copadelrey:espn:401936399": {
+      "id": "copadelrey:espn:401936399",
+      "league": "copadelrey",
+      "sport": "soccer",
+      "date": "2026-12-01",
+      "home": "Numancia",
+      "away": "Athletic Club",
+      "isoTime": "2026-12-01T20:00Z",
+      "predictedAt": "2026-11-24T13:37:27.541Z",
+      "probabilities": {
+        "H": 0.268,
+        "D": 0.226,
+        "A": 0.506
+      },
+      "expectedHome": 1.3,
+      "expectedAway": 1.86,
+      "over25": 0.6130942233680485,
+      "btts": 0.6153100033343762,
+      "confidence": "baja",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.1023377999626673
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "p": 0.0953677857843868
+        },
+        {
+          "home": 0,
+          "away": 1,
+          "p": 0.07854768298486074
+        }
+      ],
       "markets": [],
       "outcome": null
     },
@@ -101749,7 +106471,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "111-117",
+      "brier": 0.3872,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910037": {
       "id": "nba:espn:401910037",
@@ -101771,7 +106496,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "111-128",
+      "brier": 0.486098,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910038": {
       "id": "nba:espn:401910038",
@@ -101793,7 +106521,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "125-120",
+      "brier": 0.472392,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910039": {
       "id": "nba:espn:401910039",
@@ -101815,7 +106546,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "111-116",
+      "brier": 0.8554320000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910040": {
       "id": "nba:espn:401910040",
@@ -101837,7 +106571,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "142-116",
+      "brier": 0.270848,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910041": {
       "id": "nba:espn:401910041",
@@ -101859,7 +106596,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "122-108",
+      "brier": 0.6050000000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910042": {
       "id": "nba:espn:401910042",
@@ -101881,7 +106621,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "119-123",
+      "brier": 0.41769799999999996,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910043": {
       "id": "nba:espn:401910043",
@@ -101903,7 +106646,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "116-104",
+      "brier": 0.25205,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910044": {
       "id": "nba:espn:401910044",
@@ -101925,7 +106671,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "109-94",
+      "brier": 0.19468800000000003,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910045": {
       "id": "nba:espn:401910045",
@@ -101947,7 +106696,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "107-123",
+      "brier": 0.276768,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-23:Levante UD:Elche CF": {
       "id": "laliga:2026-11-23:Levante UD:Elche CF",
@@ -102029,7 +106781,10 @@
           "over": 0.5949005548365838
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.785288,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-23:Ceuta:Almería": {
       "id": "hypermotion:2026-11-23:Ceuta:Almería",
@@ -102068,7 +106823,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "2-3",
+      "brier": 0.182238,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-23:Brentford:Everton": {
       "id": "premier:2026-11-23:Brentford:Everton",
@@ -102150,7 +106908,10 @@
           "over": 0.5061020319734849
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-0",
+      "brier": 0.49271399999999993,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910031": {
       "id": "nba:espn:401910031",
@@ -102172,7 +106933,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "116-96",
+      "brier": 0.53045,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910032": {
       "id": "nba:espn:401910032",
@@ -102194,7 +106958,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "145-151",
+      "brier": 0.39072799999999996,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910033": {
       "id": "nba:espn:401910033",
@@ -102216,7 +106983,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "114-116",
+      "brier": 0.3362,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910034": {
       "id": "nba:espn:401910034",
@@ -102238,7 +107008,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "113-106",
+      "brier": 0.276768,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910035": {
       "id": "nba:espn:401910035",
@@ -102260,7 +107033,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "88-87",
+      "brier": 0.421362,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-22:FC Barcelona:Villarreal CF": {
       "id": "laliga:2026-11-22:FC Barcelona:Villarreal CF",
@@ -102342,7 +107118,10 @@
           "over": 0.6009122502958515
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-2",
+      "brier": 0.17233099999999998,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-22:R. Racing Club:Real Sociedad": {
       "id": "laliga:2026-11-22:R. Racing Club:Real Sociedad",
@@ -102424,7 +107203,10 @@
           "over": 0.6996233444256701
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-2",
+      "brier": 0.8881040000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-22:CA Osasuna:Málaga CF": {
       "id": "laliga:2026-11-22:CA Osasuna:Málaga CF",
@@ -102506,7 +107288,10 @@
           "over": 0.6441266238731556
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.428792,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-22:Getafe CF:Atlético de Madrid": {
       "id": "laliga:2026-11-22:Getafe CF:Atlético de Madrid",
@@ -102588,7 +107373,10 @@
           "over": 0.5804619327551119
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-3",
+      "brier": 0.29712099999999997,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-22:Córdoba:Real Oviedo": {
       "id": "hypermotion:2026-11-22:Córdoba:Real Oviedo",
@@ -102627,7 +107415,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-0",
+      "brier": 0.27723300000000006,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-22:Sporting Gijón:Las Palmas": {
       "id": "hypermotion:2026-11-22:Sporting Gijón:Las Palmas",
@@ -102666,7 +107457,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-2",
+      "brier": 0.6757939999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-22:Girona:Eibar": {
       "id": "hypermotion:2026-11-22:Girona:Eibar",
@@ -102705,7 +107499,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.340512,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-22:RC Celta Fortuna:Real Valladolid": {
       "id": "hypermotion:2026-11-22:RC Celta Fortuna:Real Valladolid",
@@ -102744,7 +107541,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.9886849999999998,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-22:Burgos:Albacete": {
       "id": "hypermotion:2026-11-22:Burgos:Albacete",
@@ -102783,7 +107583,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.27241400000000004,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-22:Hull:Brighton": {
       "id": "premier:2026-11-22:Hull:Brighton",
@@ -102865,7 +107668,10 @@
           "over": 0.5897623570808362
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 1.0594489999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-22:Liverpool:Man Utd": {
       "id": "premier:2026-11-22:Liverpool:Man Utd",
@@ -102947,7 +107753,10 @@
           "over": 0.547998759039674
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-0",
+      "brier": 0.190682,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-22:FC Augsburg:1. FSV Mainz 05": {
       "id": "bundesliga:2026-11-22:FC Augsburg:1. FSV Mainz 05",
@@ -103029,7 +107838,10 @@
           "over": 0.5496656071448178
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-1",
+      "brier": 0.255366,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-22:SV Werder Bremen:Hamburger SV": {
       "id": "bundesliga:2026-11-22:SV Werder Bremen:Hamburger SV",
@@ -103111,7 +107923,10 @@
           "over": 0.6470119610351135
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-0",
+      "brier": 0.19115499999999996,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-22:Paris FC:Angers SCO": {
       "id": "ligue1:2026-11-22:Paris FC:Angers SCO",
@@ -103193,7 +108008,10 @@
           "over": 0.5209778507272292
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-0",
+      "brier": 0.12230100000000002,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-22:FC Lorient:Stade Rennais FC": {
       "id": "ligue1:2026-11-22:FC Lorient:Stade Rennais FC",
@@ -103275,7 +108093,10 @@
           "over": 0.5257456337497972
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.8971390000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-22:Olympique de Marseille:Le Mans FC": {
       "id": "ligue1:2026-11-22:Olympique de Marseille:Le Mans FC",
@@ -103357,7 +108178,10 @@
           "over": 0.4789752067687375
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "2-3",
+      "brier": 1.312974,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910024": {
       "id": "nba:espn:401910024",
@@ -103379,7 +108203,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "97-96",
+      "brier": 0.35112200000000005,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910025": {
       "id": "nba:espn:401910025",
@@ -103401,7 +108228,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "110-100",
+      "brier": 0.25205,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910026": {
       "id": "nba:espn:401910026",
@@ -103423,7 +108253,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "104-95",
+      "brier": 0.32643200000000006,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910027": {
       "id": "nba:espn:401910027",
@@ -103445,7 +108278,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "114-91",
+      "brier": 0.13728800000000002,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910028": {
       "id": "nba:espn:401910028",
@@ -103467,7 +108303,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "97-96",
+      "brier": 0.783752,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910029": {
       "id": "nba:espn:401910029",
@@ -103489,7 +108328,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "107-97",
+      "brier": 0.504008,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910030": {
       "id": "nba:espn:401910030",
@@ -103511,7 +108353,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "123-113",
+      "brier": 0.488072,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-21:Deportivo Alavés:RC Deportivo": {
       "id": "laliga:2026-11-21:Deportivo Alavés:RC Deportivo",
@@ -103593,7 +108438,10 @@
           "over": 0.6303730397161951
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-1",
+      "brier": 0.7449140000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-21:Rayo Vallecano:Valencia CF": {
       "id": "laliga:2026-11-21:Rayo Vallecano:Valencia CF",
@@ -103675,7 +108523,10 @@
           "over": 0.6229209663005395
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.9593360000000002,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-21:Sevilla FC:Real Betis": {
       "id": "laliga:2026-11-21:Sevilla FC:Real Betis",
@@ -103757,7 +108608,10 @@
           "over": 0.56603316315556
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.8676720000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-21:Real Madrid:Celta": {
       "id": "laliga:2026-11-21:Real Madrid:Celta",
@@ -103839,7 +108693,10 @@
           "over": 0.47963195537867354
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.18612599999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-21:CD Sabadell:Granada": {
       "id": "hypermotion:2026-11-21:CD Sabadell:Granada",
@@ -103878,7 +108735,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.7620660000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-21:Real Sociedad II:Cádiz": {
       "id": "hypermotion:2026-11-21:Real Sociedad II:Cádiz",
@@ -103917,7 +108777,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-3",
+      "brier": 0.639413,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-21:Castellón:Eldense": {
       "id": "hypermotion:2026-11-21:Castellón:Eldense",
@@ -103956,7 +108819,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.08549599999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-21:Tenerife:Mallorca": {
       "id": "hypermotion:2026-11-21:Tenerife:Mallorca",
@@ -103995,7 +108861,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "0-0",
+      "brier": 0.7859929999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Man City:Fulham": {
       "id": "premier:2026-11-21:Man City:Fulham",
@@ -104077,7 +108946,10 @@
           "over": 0.5337304033281429
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.8411060000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Aston Villa:Sunderland": {
       "id": "premier:2026-11-21:Aston Villa:Sunderland",
@@ -104159,7 +109031,10 @@
           "over": 0.4319788818424518
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "0-0",
+      "brier": 1.033346,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Bournemouth:Nott'm Forest": {
       "id": "premier:2026-11-21:Bournemouth:Nott'm Forest",
@@ -104241,7 +109116,10 @@
           "over": 0.4870324703169472
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.26038400000000006,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Chelsea:Leeds": {
       "id": "premier:2026-11-21:Chelsea:Leeds",
@@ -104323,7 +109201,10 @@
           "over": 0.5829367987116433
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-4",
+      "brier": 0.831779,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Coventry:Crystal Palace": {
       "id": "premier:2026-11-21:Coventry:Crystal Palace",
@@ -104405,7 +109286,10 @@
           "over": 0.6052689260310359
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-2",
+      "brier": 0.225113,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Spurs:Ipswich": {
       "id": "premier:2026-11-21:Spurs:Ipswich",
@@ -104487,7 +109371,10 @@
           "over": 0.5937430889573684
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.28815799999999997,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "premier:2026-11-21:Newcastle:Arsenal": {
       "id": "premier:2026-11-21:Newcastle:Arsenal",
@@ -104569,7 +109456,10 @@
           "over": 0.5599486437738844
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 0.7657519999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-21:1. FC Union Berlin:RB Leipzig": {
       "id": "bundesliga:2026-11-21:1. FC Union Berlin:RB Leipzig",
@@ -104651,7 +109541,10 @@
           "over": 0.6147555432865923
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-5",
+      "brier": 0.24563300000000005,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-21:Bayer 04 Leverkusen:SC Paderborn 07": {
       "id": "bundesliga:2026-11-21:Bayer 04 Leverkusen:SC Paderborn 07",
@@ -104733,7 +109626,10 @@
           "over": 0.6315337888086541
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "4-0",
+      "brier": 0.298374,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-21:Borussia Mönchengladbach:Borussia Dortmund": {
       "id": "bundesliga:2026-11-21:Borussia Mönchengladbach:Borussia Dortmund",
@@ -104815,7 +109711,10 @@
           "over": 0.7091298799759997
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.4337539999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-21:Eintracht Frankfurt:TSG Hoffenheim": {
       "id": "bundesliga:2026-11-21:Eintracht Frankfurt:TSG Hoffenheim",
@@ -104897,7 +109796,10 @@
           "over": 0.6904897489819142
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.38478199999999996,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-21:SV 07 Elversberg:SC Freiburg": {
       "id": "bundesliga:2026-11-21:SV 07 Elversberg:SC Freiburg",
@@ -104979,7 +109881,10 @@
           "over": 0.5848000711709268
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.629594,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-21:FC Schalke 04:VfB Stuttgart": {
       "id": "bundesliga:2026-11-21:FC Schalke 04:VfB Stuttgart",
@@ -105061,7 +109966,10 @@
           "over": 0.6981045041353299
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "0-0",
+      "brier": 0.7585460000000002,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-21:OGC Nice:Paris Saint-Germain": {
       "id": "ligue1:2026-11-21:OGC Nice:Paris Saint-Germain",
@@ -105143,7 +110051,10 @@
           "over": 0.5161717618399209
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "2-3",
+      "brier": 0.5099929999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-21:AS Monaco:AJ Auxerre": {
       "id": "ligue1:2026-11-21:AS Monaco:AJ Auxerre",
@@ -105225,7 +110136,10 @@
           "over": 0.6217633878712706
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.963816,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-21:LOSC Lille:Olympique Lyonnais": {
       "id": "ligue1:2026-11-21:LOSC Lille:Olympique Lyonnais",
@@ -105307,7 +110221,10 @@
           "over": 0.5266865147285024
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.8913150000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-21:RC Lens:Toulouse FC": {
       "id": "ligue1:2026-11-21:RC Lens:Toulouse FC",
@@ -105389,7 +110306,10 @@
           "over": 0.47616238402665934
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.842702,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-21:RC Strasbourg Alsace:Stade Brestois 29": {
       "id": "ligue1:2026-11-21:RC Strasbourg Alsace:Stade Brestois 29",
@@ -105471,7 +110391,10 @@
           "over": 0.4534016074626651
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.367976,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909305": {
       "id": "nba:espn:401909305",
@@ -105493,7 +110416,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "111-97",
+      "brier": 0.260642,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909306": {
       "id": "nba:espn:401909306",
@@ -105515,7 +110441,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "111-113",
+      "brier": 0.587528,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909307": {
       "id": "nba:espn:401909307",
@@ -105537,7 +110466,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "128-119",
+      "brier": 0.368082,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909308": {
       "id": "nba:espn:401909308",
@@ -105559,7 +110491,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "102-105",
+      "brier": 0.75645,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909309": {
       "id": "nba:espn:401909309",
@@ -105581,7 +110516,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "94-98",
+      "brier": 0.5745920000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909310": {
       "id": "nba:espn:401909310",
@@ -105603,7 +110541,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "126-120",
+      "brier": 0.20865799999999995,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909311": {
       "id": "nba:espn:401909311",
@@ -105625,7 +110566,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "101-111",
+      "brier": 0.456968,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909312": {
       "id": "nba:espn:401909312",
@@ -105647,7 +110591,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "133-124",
+      "brier": 0.468512,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401909313": {
       "id": "nba:espn:401909313",
@@ -105669,7 +110616,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "106-104",
+      "brier": 0.20224799999999998,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910023": {
       "id": "nba:espn:401910023",
@@ -105691,7 +110641,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "132-129",
+      "brier": 0.24780799999999997,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "laliga:2026-11-20:Athletic Club:RCD Espanyol de Barcelona": {
       "id": "laliga:2026-11-20:Athletic Club:RCD Espanyol de Barcelona",
@@ -105773,7 +110726,10 @@
           "over": 0.6400401395953947
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 1.026842,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "hypermotion:2026-11-20:FC Andorra:Leganés": {
       "id": "hypermotion:2026-11-20:FC Andorra:Leganés",
@@ -105812,7 +110768,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-3",
+      "brier": 1.044413,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "bundesliga:2026-11-20:FC Bayern München:1. FC Köln": {
       "id": "bundesliga:2026-11-20:FC Bayern München:1. FC Köln",
@@ -105894,7 +110853,10 @@
           "over": 0.6943276970266133
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 1.3581679999999998,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "ligue1:2026-11-20:Estac Troyes:Havre Athletic Club": {
       "id": "ligue1:2026-11-20:Estac Troyes:Havre Athletic Club",
@@ -105976,7 +110938,10 @@
           "over": 0.42121539579393974
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-1",
+      "brier": 0.363649,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910019": {
       "id": "nba:espn:401910019",
@@ -105998,7 +110963,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "126-98",
+      "brier": 0.536648,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910020": {
       "id": "nba:espn:401910020",
@@ -106020,7 +110988,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "114-124",
+      "brier": 0.308898,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910021": {
       "id": "nba:espn:401910021",
@@ -106042,7 +111013,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "99-102",
+      "brier": 0.598418,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910022": {
       "id": "nba:espn:401910022",
@@ -106064,7 +111038,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "124-112",
+      "brier": 0.19719199999999998,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910007": {
       "id": "nba:espn:401910007",
@@ -106086,7 +111063,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "121-124",
+      "brier": 0.5832,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910008": {
       "id": "nba:espn:401910008",
@@ -106108,7 +111088,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "104-119",
+      "brier": 0.474338,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910009": {
       "id": "nba:espn:401910009",
@@ -106130,7 +111113,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "137-130",
+      "brier": 0.24780799999999997,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910010": {
       "id": "nba:espn:401910010",
@@ -106152,7 +111138,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "116-121",
+      "brier": 0.6227280000000002,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910011": {
       "id": "nba:espn:401910011",
@@ -106174,7 +111163,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "107-137",
+      "brier": 0.766322,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910012": {
       "id": "nba:espn:401910012",
@@ -106196,7 +111188,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "99-103",
+      "brier": 0.7466419999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910013": {
       "id": "nba:espn:401910013",
@@ -106218,7 +111213,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "109-122",
+      "brier": 0.301088,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910014": {
       "id": "nba:espn:401910014",
@@ -106240,7 +111238,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "112-117",
+      "brier": 0.6543680000000001,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910015": {
       "id": "nba:espn:401910015",
@@ -106262,7 +111263,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "105-101",
+      "brier": 0.559682,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910016": {
       "id": "nba:espn:401910016",
@@ -106284,7 +111288,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "116-94",
+      "brier": 0.472392,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910017": {
       "id": "nba:espn:401910017",
@@ -106306,7 +111313,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "97-109",
+      "brier": 0.9466879999999999,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910018": {
       "id": "nba:espn:401910018",
@@ -106328,7 +111338,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "107-128",
+      "brier": 0.468512,
+      "gradedAt": "2026-11-24T13:37:27.541Z"
     },
     "nba:espn:401910002": {
       "id": "nba:espn:401910002",
