@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-25T13:32:10.584Z",
+  "fetchedAt": "2026-11-25T13:43:02.321Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -106146,7 +106146,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.601571,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Galatasaray:Aston Villa": {
       "id": "champions:2026-11-24:Galatasaray:Aston Villa",
@@ -106185,7 +106188,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.48297300000000004,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Arsenal:B. Dortmund": {
       "id": "champions:2026-11-24:Arsenal:B. Dortmund",
@@ -106224,7 +106230,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "1-1",
+      "brier": 0.954161,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Como:AEK Athens": {
       "id": "champions:2026-11-24:Como:AEK Athens",
@@ -106263,7 +106272,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.025141999999999998,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Feyenoord:Porto": {
       "id": "champions:2026-11-24:Feyenoord:Porto",
@@ -106302,7 +106314,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.510995,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Leipzig:Lens": {
       "id": "champions:2026-11-24:Leipzig:Lens",
@@ -106341,7 +106356,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-1",
+      "brier": 0.16546399999999997,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Man City:Napoli": {
       "id": "champions:2026-11-24:Man City:Napoli",
@@ -106380,7 +106398,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 1.292616,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:Real Madrid:PSV": {
       "id": "champions:2026-11-24:Real Madrid:PSV",
@@ -106419,7 +106440,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "5-1",
+      "brier": 0.213194,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "champions:2026-11-24:S. Bratislava:Real Betis": {
       "id": "champions:2026-11-24:S. Bratislava:Real Betis",
@@ -106458,7 +106482,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-2",
+      "brier": 0.23292600000000002,
+      "gradedAt": "2026-11-25T13:43:02.321Z"
     },
     "nba:espn:401910036": {
       "id": "nba:espn:401910036",
