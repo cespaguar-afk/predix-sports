@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-26T13:30:21.869Z",
+  "fetchedAt": "2026-11-26T13:41:51.868Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -89178,6 +89178,52 @@
       "markets": [],
       "outcome": null
     },
+    "hypermotion:2026-12-14:Eldense:FC Andorra": {
+      "id": "hypermotion:2026-12-14:Eldense:FC Andorra",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-14",
+      "home": "Eldense",
+      "away": "FC Andorra",
+      "isoTime": null,
+      "predictedAt": "2026-11-26T13:41:51.868Z",
+      "probabilities": {
+        "H": 0.5,
+        "D": 0.239,
+        "A": 0.26
+      },
+      "expectedHome": 1.71,
+      "expectedAway": 1.16,
+      "over25": 0.5468134142974945,
+      "btts": 0.562695805702633,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11263136398838228
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.0967903196289388
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09603323852398149
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "laliga:2026-12-13:Atlético de Madrid:Valencia CF": {
       "id": "laliga:2026-12-13:Atlético de Madrid:Valencia CF",
       "league": "laliga",
@@ -92741,6 +92787,190 @@
       "markets": [],
       "outcome": null
     },
+    "hypermotion:2026-12-12:Leganés:Ceuta": {
+      "id": "hypermotion:2026-12-12:Leganés:Ceuta",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-12",
+      "home": "Leganés",
+      "away": "Ceuta",
+      "isoTime": null,
+      "predictedAt": "2026-11-26T13:41:51.868Z",
+      "probabilities": {
+        "H": 0.68,
+        "D": 0.168,
+        "A": 0.153
+      },
+      "expectedHome": 2.62,
+      "expectedAway": 1.19,
+      "over25": 0.733058543968445,
+      "btts": 0.6456610104673636,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09042826454269495
+        },
+        {
+          "home": 3,
+          "away": 1,
+          "p": 0.07898373175394455
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.07587212275516474
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-12:Cádiz:CD Sabadell": {
+      "id": "hypermotion:2026-12-12:Cádiz:CD Sabadell",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-12",
+      "home": "Cádiz",
+      "away": "CD Sabadell",
+      "isoTime": null,
+      "predictedAt": "2026-11-26T13:41:51.868Z",
+      "probabilities": {
+        "H": 0.556,
+        "D": 0.262,
+        "A": 0.183
+      },
+      "expectedHome": 1.5,
+      "expectedAway": 0.74,
+      "over25": 0.38713478059490614,
+      "btts": 0.40468642906764485,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.16034147308882718
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.12036184094235707
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.11792709567791064
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-12:Real Oviedo:Real Sociedad II": {
+      "id": "hypermotion:2026-12-12:Real Oviedo:Real Sociedad II",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-12",
+      "home": "Real Oviedo",
+      "away": "Real Sociedad II",
+      "isoTime": null,
+      "predictedAt": "2026-11-26T13:41:51.868Z",
+      "probabilities": {
+        "H": 0.567,
+        "D": 0.213,
+        "A": 0.219
+      },
+      "expectedHome": 2.03,
+      "expectedAway": 1.19,
+      "over25": 0.6235819561825607,
+      "btts": 0.6040462555156392,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09797639853673523
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.09666768854659259
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.08235519821067987
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
+    "hypermotion:2026-12-12:Las Palmas:RC Celta Fortuna": {
+      "id": "hypermotion:2026-12-12:Las Palmas:RC Celta Fortuna",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-12",
+      "home": "Las Palmas",
+      "away": "RC Celta Fortuna",
+      "isoTime": null,
+      "predictedAt": "2026-11-26T13:41:51.868Z",
+      "probabilities": {
+        "H": 0.589,
+        "D": 0.22,
+        "A": 0.191
+      },
+      "expectedHome": 1.91,
+      "expectedAway": 0.99,
+      "over25": 0.5531741863339412,
+      "btts": 0.534544575700063,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10539808655346213
+        },
+        {
+          "home": 1,
+          "away": 1,
+          "p": 0.10412045321581972
+        },
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10057072313356967
+        }
+      ],
+      "markets": [],
+      "outcome": null
+    },
     "bundesliga:2026-12-11:Hamburger SV:FC Schalke 04": {
       "id": "bundesliga:2026-12-11:Hamburger SV:FC Schalke 04",
       "league": "bundesliga",
@@ -92903,6 +93133,52 @@
           "over": 0.5602442439914886
         }
       ],
+      "outcome": null
+    },
+    "hypermotion:2026-12-11:Almería:Albacete": {
+      "id": "hypermotion:2026-12-11:Almería:Albacete",
+      "league": "hypermotion",
+      "sport": "soccer",
+      "date": "2026-12-11",
+      "home": "Almería",
+      "away": "Albacete",
+      "isoTime": null,
+      "predictedAt": "2026-11-26T13:41:51.868Z",
+      "probabilities": {
+        "H": 0.627,
+        "D": 0.207,
+        "A": 0.166
+      },
+      "expectedHome": 2.03,
+      "expectedAway": 0.94,
+      "over25": 0.5699273316443983,
+      "btts": 0.5288347992384209,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [
+        {
+          "home": 2,
+          "away": 0,
+          "p": 0.10589357950512635
+        },
+        {
+          "home": 1,
+          "away": 0,
+          "p": 0.10426651780540852
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "p": 0.09935236657387937
+        }
+      ],
+      "markets": [],
       "outcome": null
     },
     "laliga:2026-12-09:Rayo Vallecano:Athletic Club": {
@@ -105722,7 +105998,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-4",
+      "brier": 0.31815499999999997,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Slavia Praha:Villarreal": {
       "id": "champions:2026-11-25:Slavia Praha:Villarreal",
@@ -105761,7 +106040,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.9352849999999999,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Atleti:Viking": {
       "id": "champions:2026-11-25:Atleti:Viking",
@@ -105800,7 +106082,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.4408819999999999,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Club Brugge:Liverpool": {
       "id": "champions:2026-11-25:Club Brugge:Liverpool",
@@ -105839,7 +106124,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-3",
+      "brier": 0.9198379999999999,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Inter:Stuttgart": {
       "id": "champions:2026-11-25:Inter:Stuttgart",
@@ -105878,7 +106166,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-0",
+      "brier": 0.354649,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Lille:Bayern München": {
       "id": "champions:2026-11-25:Lille:Bayern München",
@@ -105917,7 +106208,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "2-1",
+      "brier": 0.824041,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Paris:Roma": {
       "id": "champions:2026-11-25:Paris:Roma",
@@ -105956,7 +106250,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 1.3663999999999998,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Shakhtar:Fenerbahçe": {
       "id": "champions:2026-11-25:Shakhtar:Fenerbahçe",
@@ -105995,7 +106292,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "0-1",
+      "brier": 0.9267440000000001,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "champions:2026-11-25:Sporting CP:Man Utd": {
       "id": "champions:2026-11-25:Sporting CP:Man Utd",
@@ -106034,7 +106334,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "2-2",
+      "brier": 1.0408579999999998,
+      "gradedAt": "2026-11-26T13:41:51.868Z"
     },
     "nba:espn:401909314": {
       "id": "nba:espn:401909314",
