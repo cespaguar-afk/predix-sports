@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-26T01:26:37.379Z",
+  "fetchedAt": "2026-11-26T01:41:45.578Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -106107,7 +106107,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "111-104",
+      "brier": 0.40499999999999997,
+      "gradedAt": "2026-11-26T01:41:45.578Z"
     },
     "champions:2026-11-24:Bodø/Glimt:LASK": {
       "id": "champions:2026-11-24:Bodø/Glimt:LASK",
