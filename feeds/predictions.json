@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-28T07:25:34.237Z",
+  "fetchedAt": "2026-11-28T07:36:32.451Z",
   "description": "Pronósticos conservados ANTES del inicio de partidos",
   "snapshots": {
     "laliga:2027-05-30:Athletic Club:Rayo Vallecano": {
@@ -93181,6 +93181,410 @@
       "markets": [],
       "outcome": null
     },
+    "nba:espn:401937107": {
+      "id": "nba:espn:401937107",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Charlotte Hornets",
+      "away": "New York Knicks",
+      "isoTime": "2026-12-11T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.442,
+        "A": 0.558
+      },
+      "expectedHome": 107.5,
+      "expectedAway": 110.4,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937108": {
+      "id": "nba:espn:401937108",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Orlando Magic",
+      "away": "Chicago Bulls",
+      "isoTime": "2026-12-11T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.494,
+        "A": 0.506
+      },
+      "expectedHome": 112.5,
+      "expectedAway": 112.8,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937109": {
+      "id": "nba:espn:401937109",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Washington Wizards",
+      "away": "Indiana Pacers",
+      "isoTime": "2026-12-11T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.551,
+        "A": 0.449
+      },
+      "expectedHome": 114.7,
+      "expectedAway": 112.3,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-12",
+            "home": "Indiana Pacers",
+            "away": "Washington Wizards",
+            "homeScore": 114,
+            "awayScore": 101
+          }
+        ],
+        "adjustmentHome": -0.35,
+        "adjustmentAway": 0.04
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937110": {
+      "id": "nba:espn:401937110",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Brooklyn Nets",
+      "away": "New Orleans Pelicans",
+      "isoTime": "2026-12-11T00:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.554,
+        "A": 0.446
+      },
+      "expectedHome": 116,
+      "expectedAway": 113.4,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-12",
+            "home": "New Orleans Pelicans",
+            "away": "Brooklyn Nets",
+            "homeScore": 111,
+            "awayScore": 145
+          }
+        ],
+        "adjustmentHome": 0.74,
+        "adjustmentAway": -0.06
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937111": {
+      "id": "nba:espn:401937111",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Miami Heat",
+      "away": "Cleveland Cavaliers",
+      "isoTime": "2026-12-11T00:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.614,
+        "A": 0.386
+      },
+      "expectedHome": 119,
+      "expectedAway": 113.4,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-14",
+            "home": "Miami Heat",
+            "away": "Cleveland Cavaliers",
+            "homeScore": 133,
+            "awayScore": 121
+          }
+        ],
+        "adjustmentHome": 0.36,
+        "adjustmentAway": 0.19
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937112": {
+      "id": "nba:espn:401937112",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Milwaukee Bucks",
+      "away": "Toronto Raptors",
+      "isoTime": "2026-12-11T01:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.479,
+        "A": 0.521
+      },
+      "expectedHome": 111.2,
+      "expectedAway": 112.2,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 2,
+        "weight": 4.3,
+        "games": [
+          {
+            "date": "2026-11-24",
+            "home": "Toronto Raptors",
+            "away": "Milwaukee Bucks",
+            "homeScore": 111,
+            "awayScore": 116
+          },
+          {
+            "date": "2026-11-07",
+            "home": "Milwaukee Bucks",
+            "away": "Toronto Raptors",
+            "homeScore": 107,
+            "awayScore": 121
+          }
+        ],
+        "adjustmentHome": 0.04,
+        "adjustmentAway": 0.14
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937113": {
+      "id": "nba:espn:401937113",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Phoenix Suns",
+      "away": "Oklahoma City Thunder",
+      "isoTime": "2026-12-11T02:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.56,
+        "A": 0.44
+      },
+      "expectedHome": 115.3,
+      "expectedAway": 112.4,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-27",
+            "home": "Oklahoma City Thunder",
+            "away": "Phoenix Suns",
+            "homeScore": 125,
+            "awayScore": 114
+          }
+        ],
+        "adjustmentHome": -0.03,
+        "adjustmentAway": 0.32
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937114": {
+      "id": "nba:espn:401937114",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Golden State Warriors",
+      "away": "Denver Nuggets",
+      "isoTime": "2026-12-11T03:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.495,
+        "A": 0.505
+      },
+      "expectedHome": 113,
+      "expectedAway": 113.2,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-27",
+            "home": "Denver Nuggets",
+            "away": "Golden State Warriors",
+            "homeScore": 114,
+            "awayScore": 134
+          }
+        ],
+        "adjustmentHome": 0.54,
+        "adjustmentAway": 0.02
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937115": {
+      "id": "nba:espn:401937115",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Los Angeles Lakers",
+      "away": "Utah Jazz",
+      "isoTime": "2026-12-11T03:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.619,
+        "A": 0.381
+      },
+      "expectedHome": 113.5,
+      "expectedAway": 107.7,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 3,
+        "weight": 5.6,
+        "games": [
+          {
+            "date": "2026-11-24",
+            "home": "Los Angeles Lakers",
+            "away": "Utah Jazz",
+            "homeScore": 109,
+            "awayScore": 94
+          },
+          {
+            "date": "2026-11-19",
+            "home": "Los Angeles Lakers",
+            "away": "Utah Jazz",
+            "homeScore": 97,
+            "awayScore": 109
+          },
+          {
+            "date": "2026-10-25",
+            "home": "Utah Jazz",
+            "away": "Los Angeles Lakers",
+            "homeScore": 123,
+            "awayScore": 132
+          }
+        ],
+        "adjustmentHome": -0.15,
+        "adjustmentAway": -0.08
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937116": {
+      "id": "nba:espn:401937116",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "Sacramento Kings",
+      "away": "Minnesota Timberwolves",
+      "isoTime": "2026-12-11T03:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.414,
+        "A": 0.586
+      },
+      "expectedHome": 109.4,
+      "expectedAway": 113.5,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937117": {
+      "id": "nba:espn:401937117",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-11",
+      "home": "LA Clippers",
+      "away": "Houston Rockets",
+      "isoTime": "2026-12-11T03:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.436,
+        "A": 0.564
+      },
+      "expectedHome": 111.6,
+      "expectedAway": 114.7,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-24",
+            "home": "Houston Rockets",
+            "away": "LA Clippers",
+            "homeScore": 116,
+            "awayScore": 104
+          }
+        ],
+        "adjustmentHome": -0.19,
+        "adjustmentAway": 0.03
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
     "laliga:2026-12-09:Rayo Vallecano:Athletic Club": {
       "id": "laliga:2026-12-09:Rayo Vallecano:Athletic Club",
       "league": "laliga",
@@ -94082,6 +94486,153 @@
       "markets": [],
       "outcome": null
     },
+    "nba:espn:401937103": {
+      "id": "nba:espn:401937103",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-08",
+      "home": "Indiana Pacers",
+      "away": "Miami Heat",
+      "isoTime": "2026-12-08T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.453,
+        "A": 0.547
+      },
+      "expectedHome": 113.6,
+      "expectedAway": 115.9,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-31",
+            "home": "Miami Heat",
+            "away": "Indiana Pacers",
+            "homeScore": 145,
+            "awayScore": 125
+          }
+        ],
+        "adjustmentHome": 0.29,
+        "adjustmentAway": 0.75
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937104": {
+      "id": "nba:espn:401937104",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-08",
+      "home": "Toronto Raptors",
+      "away": "Charlotte Hornets",
+      "isoTime": "2026-12-08T00:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.615,
+        "A": 0.385
+      },
+      "expectedHome": 112.7,
+      "expectedAway": 107.1,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937105": {
+      "id": "nba:espn:401937105",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-08",
+      "home": "Chicago Bulls",
+      "away": "Brooklyn Nets",
+      "isoTime": "2026-12-08T01:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.66,
+        "A": 0.34
+      },
+      "expectedHome": 119.8,
+      "expectedAway": 111.9,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-11-19",
+            "home": "Brooklyn Nets",
+            "away": "Chicago Bulls",
+            "homeScore": 107,
+            "awayScore": 137
+          }
+        ],
+        "adjustmentHome": 0.44,
+        "adjustmentAway": -0.13
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937106": {
+      "id": "nba:espn:401937106",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-08",
+      "home": "New Orleans Pelicans",
+      "away": "Golden State Warriors",
+      "isoTime": "2026-12-08T01:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.519,
+        "A": 0.481
+      },
+      "expectedHome": 111.7,
+      "expectedAway": 110.8,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 2,
+        "weight": 4.3,
+        "games": [
+          {
+            "date": "2026-11-17",
+            "home": "New Orleans Pelicans",
+            "away": "Golden State Warriors",
+            "homeScore": 115,
+            "awayScore": 94
+          },
+          {
+            "date": "2026-11-10",
+            "home": "Golden State Warriors",
+            "away": "New Orleans Pelicans",
+            "homeScore": 138,
+            "awayScore": 87
+          }
+        ],
+        "adjustmentHome": -0.4,
+        "adjustmentAway": 0.11
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
     "laliga:2026-12-07:Sevilla FC:Málaga CF": {
       "id": "laliga:2026-12-07:Sevilla FC:Málaga CF",
       "league": "laliga",
@@ -94260,6 +94811,101 @@
           "p": 0.09024531489593592
         }
       ],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937100": {
+      "id": "nba:espn:401937100",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-07",
+      "home": "Minnesota Timberwolves",
+      "away": "LA Clippers",
+      "isoTime": "2026-12-07T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.668,
+        "A": 0.332
+      },
+      "expectedHome": 115.7,
+      "expectedAway": 107.3,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-31",
+            "home": "Minnesota Timberwolves",
+            "away": "LA Clippers",
+            "homeScore": 127,
+            "awayScore": 101
+          }
+        ],
+        "adjustmentHome": 0.29,
+        "adjustmentAway": -0.16
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937101": {
+      "id": "nba:espn:401937101",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-07",
+      "home": "Oklahoma City Thunder",
+      "away": "Los Angeles Lakers",
+      "isoTime": "2026-12-07T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.516,
+        "A": 0.484
+      },
+      "expectedHome": 112.9,
+      "expectedAway": 112.1,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937102": {
+      "id": "nba:espn:401937102",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-07",
+      "home": "Denver Nuggets",
+      "away": "Sacramento Kings",
+      "isoTime": "2026-12-07T02:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.645,
+        "A": 0.355
+      },
+      "expectedHome": 117.8,
+      "expectedAway": 110.6,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
       "markets": [],
       "outcome": null
     },
@@ -96166,6 +96812,234 @@
           "over": 0.5116268250886672
         }
       ],
+      "outcome": null
+    },
+    "nba:espn:401909452": {
+      "id": "nba:espn:401909452",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-06",
+      "home": "Detroit Pistons",
+      "away": "Boston Celtics",
+      "isoTime": "2026-12-06T00:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.548,
+        "A": 0.452
+      },
+      "expectedHome": 108.8,
+      "expectedAway": 106.5,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-20",
+            "home": "Detroit Pistons",
+            "away": "Boston Celtics",
+            "homeScore": 121,
+            "awayScore": 113
+          }
+        ],
+        "adjustmentHome": 0.31,
+        "adjustmentAway": 0.17
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401909453": {
+      "id": "nba:espn:401909453",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-06",
+      "home": "Portland Trail Blazers",
+      "away": "Memphis Grizzlies",
+      "isoTime": "2026-12-06T03:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.531,
+        "A": 0.469
+      },
+      "expectedHome": 112.9,
+      "expectedAway": 111.4,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-30",
+            "home": "Portland Trail Blazers",
+            "away": "Memphis Grizzlies",
+            "homeScore": 103,
+            "awayScore": 124
+          }
+        ],
+        "adjustmentHome": -0.25,
+        "adjustmentAway": 0.32
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937096": {
+      "id": "nba:espn:401937096",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-06",
+      "home": "Houston Rockets",
+      "away": "Phoenix Suns",
+      "isoTime": "2026-12-06T20:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.581,
+        "A": 0.419
+      },
+      "expectedHome": 115.3,
+      "expectedAway": 111.4,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 2,
+        "weight": 4.3,
+        "games": [
+          {
+            "date": "2026-11-26",
+            "home": "Houston Rockets",
+            "away": "Phoenix Suns",
+            "homeScore": 116,
+            "awayScore": 104
+          },
+          {
+            "date": "2026-11-08",
+            "home": "Phoenix Suns",
+            "away": "Houston Rockets",
+            "homeScore": 102,
+            "awayScore": 99
+          }
+        ],
+        "adjustmentHome": -0.3,
+        "adjustmentAway": -0.37
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937097": {
+      "id": "nba:espn:401937097",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-06",
+      "home": "Utah Jazz",
+      "away": "Milwaukee Bucks",
+      "isoTime": "2026-12-06T22:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.571,
+        "A": 0.429
+      },
+      "expectedHome": 113.7,
+      "expectedAway": 110.2,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937098": {
+      "id": "nba:espn:401937098",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-06",
+      "home": "Cleveland Cavaliers",
+      "away": "Orlando Magic",
+      "isoTime": "2026-12-06T23:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.555,
+        "A": 0.445
+      },
+      "expectedHome": 114.2,
+      "expectedAway": 111.6,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 2,
+        "weight": 4.3,
+        "games": [
+          {
+            "date": "2026-10-13",
+            "home": "Orlando Magic",
+            "away": "Cleveland Cavaliers",
+            "homeScore": 132,
+            "awayScore": 116
+          },
+          {
+            "date": "2026-10-11",
+            "home": "Cleveland Cavaliers",
+            "away": "Orlando Magic",
+            "homeScore": 119,
+            "awayScore": 105
+          }
+        ],
+        "adjustmentHome": 0.14,
+        "adjustmentAway": 0.38
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401937099": {
+      "id": "nba:espn:401937099",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-06",
+      "home": "New York Knicks",
+      "away": "Washington Wizards",
+      "isoTime": "2026-12-06T23:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.633,
+        "A": 0.367
+      },
+      "expectedHome": 114.7,
+      "expectedAway": 108.1,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 1,
+        "weight": 2.5,
+        "games": [
+          {
+            "date": "2026-10-08",
+            "home": "New York Knicks",
+            "away": "Washington Wizards",
+            "homeScore": 109,
+            "awayScore": 111
+          }
+        ],
+        "adjustmentHome": -0.15,
+        "adjustmentAway": 0.07
+      },
+      "scorelines": [],
+      "markets": [],
       "outcome": null
     },
     "premier:2026-12-05:Chelsea:Liverpool": {
@@ -98184,6 +99058,79 @@
       "markets": [],
       "outcome": null
     },
+    "nba:espn:401909450": {
+      "id": "nba:espn:401909450",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-05",
+      "home": "Atlanta Hawks",
+      "away": "Philadelphia 76ers",
+      "isoTime": "2026-12-05T00:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.545,
+        "A": 0.455
+      },
+      "expectedHome": 113,
+      "expectedAway": 110.8,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401909451": {
+      "id": "nba:espn:401909451",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-05",
+      "home": "Dallas Mavericks",
+      "away": "San Antonio Spurs",
+      "isoTime": "2026-12-05T02:30Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.501,
+        "A": 0.499
+      },
+      "expectedHome": 111,
+      "expectedAway": 111,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 2,
+        "weight": 4.3,
+        "games": [
+          {
+            "date": "2026-11-05",
+            "home": "San Antonio Spurs",
+            "away": "Dallas Mavericks",
+            "homeScore": 112,
+            "awayScore": 111
+          },
+          {
+            "date": "2026-10-25",
+            "home": "Dallas Mavericks",
+            "away": "San Antonio Spurs",
+            "homeScore": 106,
+            "awayScore": 122
+          }
+        ],
+        "adjustmentHome": -0.1,
+        "adjustmentAway": 0.24
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
     "bundesliga:2026-12-04:FC Bayern München:SC Paderborn 07": {
       "id": "bundesliga:2026-12-04:FC Bayern München:SC Paderborn 07",
       "league": "bundesliga",
@@ -98348,28 +99295,6 @@
       ],
       "outcome": null
     },
-    "nba:espn:401910085": {
-      "id": "nba:espn:401910085",
-      "league": "nba",
-      "sport": "nba",
-      "date": "2026-12-04",
-      "home": "Atlanta Hawks",
-      "away": "Indiana Pacers",
-      "isoTime": "2026-12-04T00:00Z",
-      "predictedAt": "2026-11-12T14:40:05.929Z",
-      "probabilities": {
-        "H": 0.563,
-        "A": 0.437
-      },
-      "expectedHome": 116.2,
-      "expectedAway": 113.1,
-      "over25": null,
-      "btts": null,
-      "confidence": "media",
-      "scorelines": [],
-      "markets": [],
-      "outcome": null
-    },
     "nba:espn:401910086": {
       "id": "nba:espn:401910086",
       "league": "nba",
@@ -98407,28 +99332,6 @@
       },
       "expectedHome": 115.1,
       "expectedAway": 117.5,
-      "over25": null,
-      "btts": null,
-      "confidence": "media",
-      "scorelines": [],
-      "markets": [],
-      "outcome": null
-    },
-    "nba:espn:401910088": {
-      "id": "nba:espn:401910088",
-      "league": "nba",
-      "sport": "nba",
-      "date": "2026-12-04",
-      "home": "San Antonio Spurs",
-      "away": "Toronto Raptors",
-      "isoTime": "2026-12-04T01:00Z",
-      "predictedAt": "2026-11-12T14:40:05.929Z",
-      "probabilities": {
-        "H": 0.656,
-        "A": 0.344
-      },
-      "expectedHome": 117.2,
-      "expectedAway": 109.5,
       "over25": null,
       "btts": null,
       "confidence": "media",
@@ -98545,6 +99448,79 @@
           "over": 0.6367850565357284
         }
       ],
+      "outcome": null
+    },
+    "nba:espn:401910085": {
+      "id": "nba:espn:401910085",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-03",
+      "home": "Atlanta Hawks",
+      "away": "Indiana Pacers",
+      "isoTime": "2026-12-03T01:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.626,
+        "A": 0.374
+      },
+      "expectedHome": 114.1,
+      "expectedAway": 107.9,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 2,
+        "weight": 4.3,
+        "games": [
+          {
+            "date": "2026-11-03",
+            "home": "Indiana Pacers",
+            "away": "Atlanta Hawks",
+            "homeScore": 104,
+            "awayScore": 108
+          },
+          {
+            "date": "2026-10-10",
+            "home": "Indiana Pacers",
+            "away": "Atlanta Hawks",
+            "homeScore": 117,
+            "awayScore": 119
+          }
+        ],
+        "adjustmentHome": -0.06,
+        "adjustmentAway": 0.08
+      },
+      "scorelines": [],
+      "markets": [],
+      "outcome": null
+    },
+    "nba:espn:401910088": {
+      "id": "nba:espn:401910088",
+      "league": "nba",
+      "sport": "nba",
+      "date": "2026-12-03",
+      "home": "San Antonio Spurs",
+      "away": "Toronto Raptors",
+      "isoTime": "2026-12-03T01:00Z",
+      "predictedAt": "2026-11-28T07:36:32.451Z",
+      "probabilities": {
+        "H": 0.611,
+        "A": 0.389
+      },
+      "expectedHome": 112.8,
+      "expectedAway": 107.3,
+      "over25": null,
+      "btts": null,
+      "confidence": "media",
+      "headToHead": {
+        "count": 0,
+        "weight": 0,
+        "games": [],
+        "adjustmentHome": 0,
+        "adjustmentAway": 0
+      },
+      "scorelines": [],
+      "markets": [],
       "outcome": null
     },
     "premier:2026-12-03:Spurs:Fulham": {
@@ -104933,7 +105909,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "105-108",
+      "brier": 0.80645,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909327": {
       "id": "nba:espn:401909327",
@@ -104955,7 +105934,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "113-98",
+      "brier": 0.165888,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909328": {
       "id": "nba:espn:401909328",
@@ -104977,7 +105959,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "87-111",
+      "brier": 0.6227280000000002,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909329": {
       "id": "nba:espn:401909329",
@@ -104999,7 +105984,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "124-100",
+      "brier": 0.39427199999999996,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909330": {
       "id": "nba:espn:401909330",
@@ -105021,7 +106009,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "86-87",
+      "brier": 0.821762,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909331": {
       "id": "nba:espn:401909331",
@@ -105043,7 +106034,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "109-114",
+      "brier": 0.710432,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909332": {
       "id": "nba:espn:401909332",
@@ -105065,7 +106059,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "109-113",
+      "brier": 0.46272199999999997,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909333": {
       "id": "nba:espn:401909333",
@@ -105087,7 +106084,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "99-96",
+      "brier": 0.337842,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909334": {
       "id": "nba:espn:401909334",
@@ -105109,7 +106109,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "107-120",
+      "brier": 0.39249799999999996,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909335": {
       "id": "nba:espn:401909335",
@@ -105131,7 +106134,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "A",
+      "actual": "104-105",
+      "brier": 0.7466419999999999,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909336": {
       "id": "nba:espn:401909336",
@@ -105153,7 +106159,10 @@
       "confidence": "media",
       "scorelines": [],
       "markets": [],
-      "outcome": null
+      "outcome": "H",
+      "actual": "116-94",
+      "brier": 0.502002,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401910046": {
       "id": "nba:espn:401910046",
@@ -105474,7 +106483,10 @@
           "over": 0.604213305708716
         }
       ],
-      "outcome": null
+      "outcome": "A",
+      "actual": "1-3",
+      "brier": 0.9364030000000001,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "premier:2026-11-27:Nott'm Forest:Chelsea": {
       "id": "premier:2026-11-27:Nott'm Forest:Chelsea",
@@ -105556,7 +106568,10 @@
           "over": 0.5404454087929885
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "3-2",
+      "brier": 0.621299,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "bundesliga:2026-11-27:SV Werder Bremen:Borussia Mönchengladbach": {
       "id": "bundesliga:2026-11-27:SV Werder Bremen:Borussia Mönchengladbach",
@@ -105638,7 +106653,10 @@
           "over": 0.7013778171079259
         }
       ],
-      "outcome": null
+      "outcome": "D",
+      "actual": "3-3",
+      "brier": 1.2379339999999999,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "ligue1:2026-11-27:Stade Brestois 29:Paris FC": {
       "id": "ligue1:2026-11-27:Stade Brestois 29:Paris FC",
@@ -105720,7 +106738,10 @@
           "over": 0.4829693200412647
         }
       ],
-      "outcome": null
+      "outcome": "H",
+      "actual": "1-0",
+      "brier": 0.428184,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "hypermotion:2026-11-27:Leganés:CD Sabadell": {
       "id": "hypermotion:2026-11-27:Leganés:CD Sabadell",
@@ -105759,7 +106780,10 @@
         }
       ],
       "markets": [],
-      "outcome": null
+      "outcome": "D",
+      "actual": "0-0",
+      "brier": 0.8024539999999999,
+      "gradedAt": "2026-11-28T07:36:32.451Z"
     },
     "nba:espn:401909318": {
       "id": "nba:espn:401909318",
